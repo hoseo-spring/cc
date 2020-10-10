@@ -7,12 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import itc.hoseo.cc.domain.Product;
 
-/**
- * Sample JPA Repository
- * https://docs.spring.io/spring-data/jpa/docs/current/reference/html
- * @author pjh04
- *
- */
 public interface ProductRepository extends CrudRepository<Product, Long> {
 	//페이징
 	List<Product> findAll(Pageable page);
