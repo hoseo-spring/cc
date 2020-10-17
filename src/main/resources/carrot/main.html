@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>당근나라</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="shortcut icon" href="img/carrot.ico">
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $("#loaded").load("top.html");
+        });
+    </script>
+    <style>
+
+        .mainimg{
+            width:100vw;
+            position:absolute;
+            top:20vh;
+            left:40vw;
+        }
+        .mainimg td>img{
+            height:700px;
+        }
+
+        .mainimg td:nth-child(1){
+            left:250px;
+            top:300px;
+        }
+
+        .mainimg td>img:nth-child(2){
+            position:relative;
+            left:1000px;
+            top:1300px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="loaded"></div>
+
+<div class="mainbody">
+
+    <table class="mainimg">
+        <tr>
+            <td><img src="img/1.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/2.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/3.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/4.png"></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
