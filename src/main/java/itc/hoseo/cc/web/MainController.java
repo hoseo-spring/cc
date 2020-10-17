@@ -22,10 +22,12 @@ import itc.hoseo.cc.repository.UserRepository;
 public class MainController {
 	@Autowired
 	private ProductRepository productRepo;
-	@Autowired
-	private UserRepository userRepo;
+	
 	@Autowired
 	private CommentRepository commentRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@PostConstruct
 	public void init() {
@@ -35,6 +37,7 @@ public class MainController {
 		userRepo.save(u1);
 		userRepo.save(u2);
 		userRepo.save(u3);
+		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
 				new Date(), null, userRepo.findByNickname("김천재"), "서울",  null, null, null);
@@ -70,10 +73,7 @@ public class MainController {
 		mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition, PageRequest.of(page, 7)));
 		return "list";
 	}
-	@RequestMapping(path = "/mypage", method = RequestMethod.GET) 
-	public String mypageGet(ModelMap mm) {
-		return "mypage";
-	}
+	
 	@RequestMapping(path = "/post", method = RequestMethod.GET) 
 	public String postGet(ModelMap mm) {
 		return "post";
@@ -86,38 +86,7 @@ public class MainController {
 				);
 		return "redirect:list?page=0";
 	}
-	@RequestMapping(path = "/login", method = RequestMethod.GET) 
-	public String loginGet(ModelMap mm) {
-		return "login";
-	}
-	@RequestMapping(path = "/login", method = RequestMethod.POST) 
-	public String loginPost(ModelMap mm, String id, String password) {
-		if(!userRepo.existsById(id)) {
-			return "redirect:loginError";
-		}
-		if(!userRepo.findById(id).get().getPassword().equals(password)) {
-			return "redirect:loginError";
-		}
-		return "redirect:/";
-	}	
-	@RequestMapping(path = "/loginError", method = RequestMethod.GET) 
-	public String loginErrorGet(ModelMap mm) {
-		return "loginError";
-	}
-	@RequestMapping(path = "/register", method = RequestMethod.POST) 
-	public String registerPost(ModelMap mm, String id, String password, String repassword, String nickname) {
-		if(!password.equals(repassword)) {
-			return "redirect:registerError";
-		}
-		userRepo.save(
-				User.builder().id(id).password(password).nickname(nickname).registeredDate(new Date()).build()
-		);
-		return "redirect:/";
-	}
-	@RequestMapping(path = "/registerError", method = RequestMethod.GET) 
-	public String registerErrorGet(ModelMap mm) {
-		return "registerError";
-	}
+	
 	@RequestMapping(path = "/content", method = RequestMethod.GET) 
 	public String contentGet(ModelMap mm, Long product_id) {
 		mm.put("product", productRepo.findById(product_id).get());

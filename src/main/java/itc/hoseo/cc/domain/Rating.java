@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,13 +45,13 @@ public class Rating {
 	private Date reatedDate;
 	
 	// 평점을 매기는 유저
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	List<User> rateUser = new ArrayList<>();
+	@OneToOne
+	private User rateUser;
 	
 	
 	// 평점을 받는 유저
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	List<User> receiveUser = new ArrayList<>();
+	//@ManyToOne
+	//@JoinColumn(name = "userId")
+	@OneToOne
+	private User receiveUser;
 }
