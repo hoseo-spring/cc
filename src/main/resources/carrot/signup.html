@@ -11,17 +11,29 @@
             $("#loaded").load("top.html");
         });
     </script>
+    <style>
+
+    #canvas{
+        height:900px;
+    }
+    .location{
+        border:2px solid #ffbb00;
+        background-color:white;
+        padding:5px;
+
+    }
+    </style>
 </head>
 <body>
     <div id="loaded"></div>
-
+    <canvas id="canvas"></canvas>
     <div class="signupbody">
-    <input type="text" class="id" placeholder="아이디를 입력하세요"><br>
-    <input type="password" class="id" placeholder="비밀번호를 입력하세요"><br>
-    <input type="password" class="id" placeholder="비밀번호를 다시 입력하세요"><br>
-    <input type="text" class="id" placeholder="닉네임을 입력하세요"><br>
+    <input type="text" class="id" onchange="bc(this)" placeholder="아이디를 입력하세요"><br>
+    <input type="password" class="id" onchange="bc(this)" placeholder="비밀번호를 입력하세요"><br>
+    <input type="password" class="id" onchange="bc(this)" placeholder="비밀번호를 다시 입력하세요"><br>
+    <input type="text" class="id" onchange="bc(this)" placeholder="닉네임을 입력하세요"><br>
 
-    <button id = "find-me">위치 인증하기</button><br/>
+    <button id = "find-me" class="location">위치 인증하기</button><br/>
     <p id = "status"></p>
     <a id = "map-link" target="_blank"></a><br>
 
@@ -30,7 +42,14 @@
     <br>
     <input type="submit" class="ok" value="가입하기">
 
+<script src="wave.js"></script>
+<script>
+function bc(obj) {
+  obj.style.borderColor ='#ffbb00';
+}
+</script>
 <script type="text/javascript">
+
 $('document').ready(function() {
   var area0 = ["시/도를 선택하세요","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
   var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];

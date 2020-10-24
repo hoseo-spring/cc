@@ -7,15 +7,55 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="common.css">
     <link rel="shortcut icon" href="img/carrot.ico">
+
+    <link rel="stylesheet" href="static/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="static/fonts/line-icons/style.css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="static/css/animate.min.css">
+
     <script type="text/javascript">
         $(document).ready( function() {
             $("#loaded").load("top.html");
         });
     </script>
+
+    <style>
+         .fulldiv::after {
+  width: 100%;
+  height: 2100px;
+  background-repeat:repeat-y;
+
+  background-size:cover;
+  content: "";
+  background: url("img/back2.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color:rgba(0,0,0,0.5);
+}
+         .mid{
+         position:relative;
+         z-index:5;
+background-color:white;
+width:85%;
+align:center;
+top:-10px;
+float:left;height:2150px;
+left:7vw;
+
+
+         }
+
+    </style>
 </head>
 <body>
-    <div id="loaded"></div>
 
+    <div id="loaded"></div>
+<div class="fulldiv">
+    <div class="mid">
         <select class="region align" name="sido2" id="sido2">
             <option>가격 순</option>
             <option>최신 순</option>
@@ -90,7 +130,7 @@
             <div>
                 <table class="memo">
                     <tr>
-                        <td><h4><b>행성 입주신청</b></h4></td>
+                        <td><h4><b>행성 팔아요</b></h4></td>
                     </tr>
                     <tr>
                         <td>충청남도 논산시</td>
@@ -363,6 +403,7 @@
         </div>
 
     </div>
-
+</div>
+</div>
 </body>
 </html>

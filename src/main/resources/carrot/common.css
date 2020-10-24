@@ -70,6 +70,12 @@
     margin-left:-20%;
     margin-bottom:15px;
     min-width:400px;
+    transition:0.5s;
+}
+.topsearch:focus{
+    box-shadow:inset 2px 2px 4px #d9d9d9,
+    inset -3px -3px 5px #ffffff;
+    transition:0.5s;
 }
 
 .topsearch::placeholder{
@@ -115,6 +121,7 @@ box-shadow:  5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;}
 
 .id, .password{
     padding:10px;
+    z-index:10101010;
     padding-left:20px;
     margin-bottom:15px;
     height:40px;
@@ -123,6 +130,7 @@ box-shadow:  5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;}
     border-radius:5px;
     border-color:#F8ECE0;
     transition:1s;
+    !important;
 }
 
 .id, .password::placeholder{
@@ -159,12 +167,17 @@ box-shadow:  5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;}
     color:white;
 }
 
+.signup{
+    font-color:orange;
+    text-decoration:none;
+}
+
 .sign, .signup{
     font-size:14px;
 }
 
 .signup:visited{
-    color:blue;
+    color:orange;
 }
 
 
@@ -211,7 +224,9 @@ box-shadow:  5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;}
     box-shadow:  20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
      transition:1s;
      float:left;
-     margin-right:100px;
+     position:relative;
+     margin-right:130px;
+     margin-left:-50px;
      margin-bottom:100px;
 }
 
@@ -252,13 +267,13 @@ box-shadow:  20px 20px 65px #a4a4a4, -20px -20px 60px #ffffff;
 .align{
     position:absolute;
     top:15vh;
-    left:80vw;
+    left:70vw;
 }
 
 .no{
     position:absolute;
     top:-12vh;
-    left:53vw;
+    left:45vw;
 }
 
 
@@ -275,11 +290,11 @@ box-shadow:  20px 20px 65px #a4a4a4, -20px -20px 60px #ffffff;
 .detailbody{
     position:absolute;
     top:20vh;
-    left:15vw;
+    left:20vw;
 }
 
 .detb{
-    width:65vw;
+    width:50vw;
     margin-left:50px;
 }
 
@@ -316,34 +331,28 @@ box-shadow:  20px 20px 65px #a4a4a4, -20px -20px 60px #ffffff;
 
 .goods{
     position:relative;
-    width:80%;
+    height:50vh;
     left:3%;
-    top:35px;
     border-radius:50px;
 }
 
 .des{
     position:relative;
-    top:100px;
-    left:110px;
+    top:-100px;
+    left:50px;
     margin-bottom:100px;
     font-size:25px;
     color:gray;
 }
 
-.deshr{
-    position:relative;
-    top:35px;
-    left:-220px;
-    width:1200px;
-}
 
-.des>pre{
+.detailtable td>pre{
     font-family: 'Nanum Gothic Coding', monospace;
     line-height:35px;
-    font-size:30px;
-    margin-left:-150px;
-    top:-200px;
+    font-size:20px;
+    color:black;
+    margin-left:-100px;
+    top:-600px;
 }
 
 
