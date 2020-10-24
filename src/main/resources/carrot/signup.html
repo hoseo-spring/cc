@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b24fe1e43b38d651c39b85291e0e144&libraries=services"></script>
     <link rel="stylesheet" type="text/css" href="common.css">
     <link rel="shortcut icon" href=img/carrot.ico">
     <script type="text/javascript">
@@ -36,6 +37,8 @@
     <button id = "find-me" class="location">위치 인증하기</button><br/>
     <p id = "status"></p>
     <a id = "map-link" target="_blank"></a><br>
+    
+    <div id="map" style="width:500px;height:400px;"></div>
 
     <select class="region" name="sido2" id="sido2"></select>
     <select class="region" name="gugun2" id="gugun2"></select>
@@ -50,7 +53,38 @@ function bc(obj) {
 </script>
 <script type="text/javascript">
 
-$('document').ready(function() {
+function mapping(latitude, longitude) {
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+    	center: new kakao.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+    	level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    
+    var markerPosition = new daum.maps.LatLng(latitude, longitude); 
+    var marker = new daum.maps.Marker({ position:markerPosition });
+    marker.setMap(map);
+    
+    searchAddrFromCoords(map.getCenter(), callback);
+}
+
+var geocoder = new kakao.maps.services.Geocoder();
+
+function callback(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        console.log('지역 명칭 : ' + result[0].address_name);
+        console.log('행정구역 코드 : ' + result[0].code);
+    }
+};
+
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
+
+$('document').ready(function() {	
   var area0 = ["시/도를 선택하세요","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
   var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
   var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
@@ -90,6 +124,8 @@ $('document').ready(function() {
    });
   }
  });
+ 
+ mapping(37.566826, 126.9786567);
 
 
 });
@@ -107,8 +143,10 @@ $('document').ready(function() {
     const longitude = position.coords.longitude;
 
     status.textContent = '';
-    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.href = 'https://map.kakao.com/link/map/내위치,${latitude}/,${longitude}';
     mapLink.textContent = `위도: ${latitude} °, 경도: ${longitude} °`;
+    
+    mapping(latitude, longitude);
   }
 
   function error() {
@@ -125,6 +163,7 @@ $('document').ready(function() {
 }
 
 document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
 </script>
 
 
