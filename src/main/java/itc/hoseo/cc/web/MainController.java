@@ -17,6 +17,7 @@ import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.CommentRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
+import itc.hoseo.cc.service.UserService;
 
 @Controller
 public class MainController {
@@ -29,14 +30,14 @@ public class MainController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private UserService userService;
+	
 	@PostConstruct
 	public void init() {
-		User u1 = User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).build();
-		User u2 = User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).build();
-		User u3 = User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).build();
-		userRepo.save(u1);
-		userRepo.save(u2);
-		userRepo.save(u3);
+		userService.createUser(User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).build());
+		userService.createUser(User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).build());
+		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).build());
 		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
@@ -55,7 +56,7 @@ public class MainController {
 		productRepo.save(p4);
 		productRepo.save(p5);
 		
-		Comment c1 = Comment.builder().content("혹시 양천구에서는 거래 안될까요?").user(u1).product(p1).uploadDate(new Date()).build();
+		Comment c1 = Comment.builder().content("혹시 양천구에서는 거래 안될까요?").user(userRepo.findByNickname("테스트")).product(p1).uploadDate(new Date()).build();
 		commentRepo.save(c1);
 	}
 	
@@ -78,6 +79,7 @@ public class MainController {
 	public String postGet(ModelMap mm) {
 		return "post";
 	}
+	
 	@RequestMapping(path = "/post", method = RequestMethod.POST) 
 	public String postPost(ModelMap mm, String name, String category, int price, String location, String description) {
 		User user = userRepo.findByNickname("테스트"); 
