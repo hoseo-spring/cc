@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,9 +23,17 @@ public class Locations {
 	private String id;
 	
 	// 위도
-	private Float Latitude;
+	private Double latitude;
 	
 	// 경도
-	private Float Hardness;
+	private Double longitude;
 	
+	@OneToOne
+	private User user;
+	
+	// e.g. 시/도
+	private String state;
+	
+	// e.g. 구/군
+	private String city;
 }
