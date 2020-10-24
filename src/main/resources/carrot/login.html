@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css">
+
+    <link rel="stylesheet" href="static/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="static/fonts/line-icons/style.css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="static/css/animate.min.css">
+
+
+    <link rel="shortcut icon" href="img/carrot.ico">
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $("#loaded").load("top.html");
+        });
+    </script>
+    <style>
+
+    #canvas{
+        height:900px;
+    }
+
+    </style>
+</head>
+<body>
+<div id="loaded"></div>
+<canvas id="canvas"></canvas>
+<div class="loginback">
+<div class="loginbody">
+    <center>
+<input type="text" class="id" onchange="bc(this)" placeholder="아이디를 입력하세요"><br>
+<input type="password" class="password" onchange="bc(this)" placeholder="비밀번호를 입력하세요"><br>
+    <p class="sign">회원이 아니신가요?&nbsp;<a href="signup.html" class="signup">회원가입</a></p>
+<input type="submit" class="ok" value="로그인">
+
+    </center>
+</div>
+</div>
+
+<script src="wave.js"></script>
+<script>
+function bc(obj) {
+  obj.style.borderColor ='#ffbb00';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>당근나라</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="shortcut icon" href="img/carrot.ico">
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $("#loaded").load("top.html");
+        });
+    </script>
+    <style>
+
+        .mainimg{
+            width:100vw;
+            position:absolute;
+            top:20vh;
+        }
+        .mainimg td>img{
+            height:700px;
+        }
+
+        .mainimg td:nth-child(1){
+            left:250px;
+            top:300px;
+        }
+
+        .mainimg td>img:nth-child(2){
+            position:relative;
+            left:1000px;
+            top:1300px;
+        }
+
+        .s1{
+            position:relative;
+            background-color:#cce2a3;
+            height:100vh;
+        }
+
+        .s2{
+            position:relative;
+            background-color:#a8c69f;
+            height:100vh;
+        }
+
+        .s3{
+            position:relative;
+            background-color:#99a1a6;
+            height:100vh;
+        }
+
+        .s4{
+            position:relative;
+            background-color:#4a5859;
+            height:100vh;
+        }
+a#totop {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+    text-decoration:none;
+    color:black;
+}
+
+
+
+    </style>
+</head>
+<body>
+<div id="loaded"></div>
+<!--
+<div class="mainbody">
+
+    <table class="mainimg">
+        <tr>
+            <td><img src="img/1.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/2.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/3.png"></td>
+        </tr>
+        <tr>
+            <td><img src="img/4.png"></td>
+        </tr>
+    </table>
+
+</div>
+-->
+
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+<div class="s4"></div>
+<a id="totop" href="#">^TOP</a>
+
+
+<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#totop').fadeIn();
+            } else {
+                $('#totop').fadeOut();
+            }
+        });
+
+        $("#totop").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
