@@ -14,8 +14,8 @@
 				<div class="form-group">
 					<input type="text" id="ownerID" placeholder="판매자ID"
 						autocomplete="off" class="form-control" />
-					<input type="text" id="name" placeholder="구매자ID"
-						autocomplete="off" class="form-control" />
+					<input type="text" id="name" placeholder="구매자ID" readonly
+						autocomplete="off" class="form-control" th:value="${#authentication.name}" />
 					<input type="text" id="productID" placeholder="상품ID"
 						autocomplete="off" class="form-control" />
 				</div>
