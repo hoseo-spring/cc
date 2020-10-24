@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="navbar" class="container-fluid">
+	<div class="row align-items-center">
+		<div class="site-logo col-3">
+			<a href="/">당근나라</a>
+		</div>
+
+		<nav sec:authorize="isAuthenticated()"
+			class="site-navigation col-3">
+			<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+				<li><a href=""></a></li>
+				<li><a href="/list?page=0">모든 물건</a></li>
+				<li><a href="/mypage">내 정보</a></li>
+			</ul>
+		</nav>
+
+		<div
+			class="right-cta-menu text-right d-flex aligin-items-center col-6">
+			<div class="ml-auto">
+				<a sec:authorize="isAuthenticated()" 
+					href="/post" 
+					class="btn btn-outline-white border-width-2 d-none d-lg-inline-block">
+					<span class="mr-2 icon-add"></span>물건 등록하기
+				</a> 
+				<a sec:authorize=" ! isAuthenticated()"
+					href="/login" class="btn btn-primary border-width-2 d-none d-lg-inline-block">
+					<span class="mr-2 icon-lock_outline"></span>로그인
+				</a>
+				<a sec:authorize="isAuthenticated()"
+					href="/logout" class="btn btn-primary border-width-2 d-none d-lg-inline-block">
+					<span class="mr-2 icon-lock_open"></span>로그아웃
+				</a>
+			</div>
+			<a href="#"
+				class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+				class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+		</div>
+
+	</div>
+</div>
+</html>
