@@ -13,7 +13,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	@Bean
@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/mypage").access("hasRole('USER')")
+			.antMatchers("/chat").access("hasRole('USER')")
 			.anyRequest().permitAll()
 			.and()
 			.logout()
