@@ -36,8 +36,7 @@ public class FileUploadController {
 		return "/fileview";
 	}
 //https://blog.naver.com/PostView.nhn?blogId=poem1979&logNo=221663648794&proxyReferer=https:%2F%2Fwww.google.com%2F
-// 사용된 참고 코드
-	
+
 //	@RequestMapping(value = "upload", method = RequestMethod.POST)
 //	public String upload(@RequestParam("file") MultipartFile multipartFile) {
 //		log.info("### upload");
