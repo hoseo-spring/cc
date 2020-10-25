@@ -27,7 +27,7 @@ body:before {
     position: absolute;
     top: 0;
     left: 0;
-    background: #128ff2;
+    background: #ffbb00;
     content: "";
     z-index: 0;
 }
@@ -80,7 +80,7 @@ button {
     white-space: nowrap;
     vertical-align: middle;
     padding: 0.6rem 1rem;
-    border-radius: 2px;
+    border-radius: 2px;.
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     min-height: 38px;
@@ -93,7 +93,7 @@ button.default {
 }
 
 button.primary {
-    background-color: #128ff2;
+    background-color: #69bb66;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -157,11 +157,12 @@ button.accent {
     overflow: auto;
     overflow-y: scroll;
     padding: 0 20px 0px 20px;
-    height: calc(100% - 150px);
+    height: calc(100% - 170px);
 }
 
 #chat-page #messageForm {
     padding: 20px;
+    border-top: 1px solid #eee;
 }
 
 #chat-page ul li {
@@ -177,7 +178,7 @@ button.accent {
 
 #chat-page .event-message {
     width: 100%;
-    text-align: center;
+    text-align: right;
     clear: both;
 }
 
@@ -190,6 +191,9 @@ button.accent {
 #chat-page .chat-message {
     padding-left: 68px;
     position: relative;
+    border: 1px solid #ffbb00;
+    border-radius: 0px 50px 50px 0px;
+    margin-bottom: 10px;
 }
 
 #chat-page .chat-message i {
@@ -231,14 +235,21 @@ button.accent {
 }
 
 .chat-header {
-    text-align: center;
+    text-align: left;
     padding: 15px;
     border-bottom: 1px solid #ececec;
 }
 
-.chat-header h2 {
+.chat-header img{
+	width:70px;
+	height:70px;
+	float:left;
+}
+
+.chat-header h2, .chat-header p {
     margin: 0;
     font-weight: 500;
+    padding-left:100px;
 }
 
 .connecting {
@@ -296,3 +307,46 @@ button.accent {
         font-size: 1.1em;
     }
 }
+
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+.dropdown {
+  float: right;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 100px;
+  text-align: center;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  right: 0;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}

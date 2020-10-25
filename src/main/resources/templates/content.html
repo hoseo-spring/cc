@@ -87,16 +87,13 @@
                 <li class="mb-2"><strong class="text-black">ID: </strong><span th:text="${product.user.id}"></span></li>
                 <li class="mb-2"><strong class="text-black">닉네임: </strong><span th:text="${product.user.nickname}"></span></li>
               </ul>
-              <a href="#" class="btn btn-block btn-primary btn-md">자세히</a>
+              <a href="/mypage" class="btn btn-block btn-primary btn-md">자세히</a>
             </div>
 
             <div class="bg-light p-3 border rounded">
-              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+            <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">연락하기</h3>
               <div class="px-3">
-                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
-                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
-                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
-                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
+				<a href="/chat" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
               </div>
             </div>
 

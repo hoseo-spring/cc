@@ -4,6 +4,7 @@
 <title>chat</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<th:block th:replace="fragments/config :: configFragment"></th:block>
 <link rel="stylesheet" th:href="@{/css/chat.css}">
 </head>
 <body>
@@ -28,9 +29,23 @@
 	</div>
 
 	<div id="chat-page" class="hidden">
+	
 		<div class="chat-container">
 			<div class="chat-header">
-				<h2>Spring WebSocket Chat Demo</h2>
+			<img src="../images/nin.jpg">
+			
+			
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">거래 상태</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">승인</a>
+    <a href="#about">완료</a>
+    <a href="#contact">취소</a>
+  </div>
+</div>
+		
+				<h2>닌텐도 스위치 네온</h2>
+				<p>10,000원</p>
 			</div>
 			<div class="connecting">연결중...</div>
 			<ul id="messageArea">
@@ -39,7 +54,7 @@
 			<form id="messageForm" name="messageForm">
 				<div class="form-group">
 					<div class="input-group clearfix">
-						<input type="text" id="message" placeholder="Type a message..."
+						<input type="text" id="message" placeholder="메세지를 입력하세요"
 							autocomplete="off" class="form-control" />
 						<button type="submit" class="primary">보내기</button>
 					</div>
@@ -48,5 +63,23 @@
 		</div>
 	</div>
 	<script th:src="@{/js/chat.js}"></script>
+	<script>
+		function myFunction() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+		
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
+	</script>
 </body>
 </html>
