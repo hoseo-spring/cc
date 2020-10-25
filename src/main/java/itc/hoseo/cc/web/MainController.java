@@ -104,4 +104,8 @@ public class MainController {
 		return "content";
 	}
 	
+	@RequestMapping(path = "/edit", method = RequestMethod.GET) 
+	public String editGet(ModelMap mm, Long user) {
+		return "edit";
+	}
 }
