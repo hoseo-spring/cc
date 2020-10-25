@@ -250,6 +250,11 @@ figure {
 img {
   vertical-align: middle;
   border-style: none; // Remove the border on images inside links in IE 10-.
+  
+    border-radius: 50px;
+    border: 5px solid white;
+    box-shadow: 3px 3px 8px grey;
+    margin-right: 10px;
 }
 
 svg {

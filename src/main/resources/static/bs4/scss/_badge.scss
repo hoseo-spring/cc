@@ -5,6 +5,8 @@
 
 .badge {
   display: inline-block;
+  background-color: #ffbb00;
+  color:white;
   padding: $badge-padding-y $badge-padding-x;
   @include font-size($badge-font-size);
   font-weight: $badge-font-weight;
