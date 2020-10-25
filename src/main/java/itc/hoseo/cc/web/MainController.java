@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import itc.hoseo.cc.domain.Comment;
 import itc.hoseo.cc.domain.Product;
@@ -79,6 +82,12 @@ public class MainController {
 	public String postGet(ModelMap mm) {
 		return "post";
 	}
+	
+	@RequestMapping(path = "/sign", method = RequestMethod.GET) 
+	public String signGet(ModelMap mm) {
+		return "sign";
+	}
+
 	
 	@RequestMapping(path = "/post", method = RequestMethod.POST) 
 	public String postPost(ModelMap mm, String name, String category, int price, String location, String description) {

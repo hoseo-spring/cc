@@ -54,4 +54,11 @@ public class Rating {
 	//@JoinColumn(name = "userId")
 	@OneToOne
 	private User receiveUser;
+	
+	// 평점 대상 물품
+	@OneToOne
+	private Product rateProduct;
+	
+	@Column(length = 100)
+	private String review;
 }
