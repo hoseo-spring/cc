@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import itc.hoseo.cc.domain.Comment;
 import itc.hoseo.cc.domain.Product;
@@ -80,6 +83,19 @@ public class MainController {
 		return "post";
 	}
 	
+//	// 파일업로드 임시파일
+//	@RequestMapping(path = "/fileadd", method = RequestMethod.GET) 
+//	public String fileupload(ModelMap mm) {
+//		return "fileadd";
+//	}
+//	
+//	@PostMapping(value="/fileadd")
+//	public String saveSell(@RequestParam("img") MultipartFile files, SalesInfoSaveRequestDto dto) {
+//		
+//	}
+
+	
+	
 	@RequestMapping(path = "/post", method = RequestMethod.POST) 
 	public String postPost(ModelMap mm, String name, String category, int price, String location, String description) {
 		User user = userRepo.findByNickname("테스트"); 
@@ -94,4 +110,5 @@ public class MainController {
 		mm.put("product", productRepo.findById(product_id).get());
 		return "content";
 	}
+	
 }
