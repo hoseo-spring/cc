@@ -94,4 +94,9 @@ public class MainController {
 		mm.put("product", productRepo.findById(product_id).get());
 		return "content";
 	}
+	
+	@RequestMapping(path = "/edit", method = RequestMethod.GET) 
+	public String editGet(ModelMap mm, Long user) {
+		return "edit";
+	}
 }
