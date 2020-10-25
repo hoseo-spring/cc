@@ -83,18 +83,11 @@ public class MainController {
 		return "post";
 	}
 	
-//	// 파일업로드 임시파일
-//	@RequestMapping(path = "/fileadd", method = RequestMethod.GET) 
-//	public String fileupload(ModelMap mm) {
-//		return "fileadd";
-//	}
-//	
-//	@PostMapping(value="/fileadd")
-//	public String saveSell(@RequestParam("img") MultipartFile files, SalesInfoSaveRequestDto dto) {
-//		
-//	}
+	@RequestMapping(path = "/sign", method = RequestMethod.GET) 
+	public String signGet(ModelMap mm) {
+		return "sign";
+	}
 
-	
 	
 	@RequestMapping(path = "/post", method = RequestMethod.POST) 
 	public String postPost(ModelMap mm, String name, String category, int price, String location, String description) {

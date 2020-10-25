@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>당근나라</title>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<th:block th:replace="fragments/config :: configFragment"></th:block>
+	</head>
+	<body id="top">
+
+	<div id="overlayer"></div>
+	<div class="loader">
+		<div class="spinner-border text-primary" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+
+	<div class="site-wrap">
+
+		<div class="site-mobile-menu site-navbar-target">
+			<div class="site-mobile-menu-header">
+				<div class="site-mobile-menu-close mt-3">
+					<span class="icon-close2 js-menu-toggle"></span>
+				</div>
+			</div>
+			<div class="site-mobile-menu-body"></div>
+		</div>
+		<!-- .site-mobile-menu -->
+
+
+		<!-- NAVBAR -->
+		<header th:insert="fragments/navbar :: navbar" 
+			class="site-navbar mt-3" ></header>
+
+		<!-- HOME -->
+		<section class="section-hero overlay inner-page bg-image"
+			style="background-image: url('images/hero_1.jpg');" id="home-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<h1 class="text-white font-weight-bold">회원가입</h1>
+
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="site-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3"></div>
+					<div class="col-lg-6 mb-5">
+						<h2 class="mb-4">회원가입</h2>
+						<form action="register" name="register" method="post"
+							class="p-4 border rounded">
+
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="text-black" for="fname">아이디</label> <input
+										type="text" id="fname" class="form-control" name="id"
+										placeholder="아이디">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="text-black" for="fname">비밀번호</label> <input
+										type="password" id="fname" class="form-control"
+										name="password" placeholder="비밀번호">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="text-black" for="fname">비밀번호 재입력</label> <input
+										type="password" id="fname" class="form-control"
+										name="repassword" placeholder="비밀번호 재입력">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="text-black" for="fname">닉네임</label> <input
+										type="text" id="fname" class="form-control" name="nickname"
+										placeholder="닉네임">
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<input type="submit" value="가입하기"
+										class="btn px-4 btn-primary text-white">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-3"></div>
+				</div>
+			</div>
+		</section>
+		</div>
+	</body>
+</html>

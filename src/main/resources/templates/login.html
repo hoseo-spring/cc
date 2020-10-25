@@ -42,62 +42,15 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-7">
-							<h1 class="text-white font-weight-bold">회원가입 / 로그인</h1>
-							<div class="custom-breadcrumbs">
-								<a href="index.html">메인 화면</a> <span class="mx-2 slash">/</span>
-								<span class="text-white"><strong>로그인</strong></span>
-							</div>
+							<h1 class="text-white font-weight-bold">로그인</h1>
 						</div>
 					</div>
 				</div>
 			</section>
-	
 			<section class="site-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 mb-5">
-							<h2 class="mb-4">회원가입</h2>
-							<form action="register" name="register" method="post"
-								class="p-4 border rounded">
-	
-								<div class="row form-group">
-									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="text-black" for="fname">아이디</label> <input
-											type="text" id="fname" class="form-control" name="id"
-											placeholder="아이디">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="text-black" for="fname">비밀번호</label> <input
-											type="password" id="fname" class="form-control"
-											name="password" placeholder="비밀번호">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="text-black" for="fname">비밀번호 재입력</label> <input
-											type="password" id="fname" class="form-control"
-											name="repassword" placeholder="비밀번호 재입력">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="text-black" for="fname">닉네임</label> <input
-											type="text" id="fname" class="form-control" name="nickname"
-											placeholder="닉네임">
-									</div>
-								</div>
-	
-								<div class="row form-group">
-									<div class="col-md-12">
-										<input type="submit" value="가입하기"
-											class="btn px-4 btn-primary text-white">
-									</div>
-								</div>
-	
-							</form>
-						</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3"></div>
 						<div class="col-lg-6">
 							<h2 class="mb-4">로그인</h2>
 							<form action="loginProcess" name="login" method="post"
@@ -120,13 +73,15 @@
 								</div>
 	
 								<div class="row form-group">
-									<div class="col-md-12">
+									<div class="col-md-9"> 회원이 아니신가요? <a th:href="@{/sign}">회원가입</a></div>
+									<div class="col-md-3">
 										<input type="submit" value="로그인"
 											class="btn px-4 btn-primary text-white">
 									</div>
 								</div>
 							</form>
 						</div>
+						<div class="col-lg-3"></div>
 					</div>
 				</div>
 			</section>
