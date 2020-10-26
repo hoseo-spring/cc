@@ -31,13 +31,13 @@
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
     
-
+ 
     <!-- NAVBAR -->
 		<header th:insert="fragments/navbar :: navbar"
 			class="site-navbar mt-3"></header>
 
     <!-- HOME -->
-    <section class="site-section" id="next" style="background-image: url('images/e-commerce2.jpg');">
+    <section class="site-section bg-image" id="next" style="background-image: url('images/back7.jpg');">
       <div class="container">
 
         <div class="row mb-5 justify-content-center">
@@ -64,7 +64,8 @@
                 <span class="icon-room"></span> <span th:text="${p.location}"></span>
               </div>
               <div class="job-listing-meta">
-                <span class="badge badge-danger">Part Time</span>
+                <span class="badge badge-success">판매중</span>
+                <span class="badge badge-default">판매됨</span>
               </div>
             </div>
             
@@ -76,16 +77,17 @@
             <span></span>
           </div>
           <div class="col-md-6 text-center text-md-right">
-            <div class="custom-pagination ml-auto">
-              <a href="#" class="prev">이전</a>
-              <div class="d-inline-block">
-              <a href="#" class="active">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              </div>
-              <a href="#" class="next">다음</a>
-            </div>
+            <nav>
+			  <ul class="pagination">
+			    <li class="page-item"><a class="page-link" href="#">Pre</a></li>
+			    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+			    <li class="page-item"><a class="page-link" href="#">2</a></li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			    <li class="page-item"><a class="page-link" href="#">4</a></li>
+			    <li class="page-item"><a class="page-link" href="#">5</a></li>
+			    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+			  </ul>
+			</nav>
           </div>
         </div>
 
