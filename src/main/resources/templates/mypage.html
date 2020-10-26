@@ -6,7 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <th:block th:replace="fragments/config :: configFragment"></th:block>
+<style>
+.imgtd img {
+	width:64px;
+}
 
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+.tab button.active {
+  
+  border-top:1px solid #ccc;
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+</style>
   </head>
   <body id="top">
 
@@ -53,11 +89,11 @@
  <section class="site-section" id="next-section">
       <div class="container">
 
-<ui class="nav nav-tabs">
-  <li class="tablinks" onclick="openTab(event, 'sold')" id="defaultOpen">판매 내역</li>
-  <li class="tablinks" onclick="openTab(event, 'star')">평점 및 후기</li>
-  <li class="tablinks" onclick="openTab(event, 'chat')">채팅방</li>
-</ui>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'sold')" id="defaultOpen">판매 내역</button>
+  <button class="tablinks" onclick="openTab(event, 'star')">평점 및 후기</button>
+  <button class="tablinks" onclick="openTab(event, 'chat')">채팅방</button>
+</div>
 
 <div id="sold" class="tabcontent">
     <div class="card cards" onclick="location.href = 'detail.html'">
@@ -70,6 +106,7 @@
             </div>
 
 </div>
+
 </div>
 
 
@@ -77,37 +114,46 @@
 
     <table class="reviewtb">
         <tr>
-            <td rowspan="2" class="imgtd"><img src="img/p3.jpg"></td>
+            <td rowspan="3" class="imgtd"><img src="images/p2.jpg"></td>
             <td class="lefttd">강서구 불주먹</td>
         </tr>
         <tr>
-            <td><p class="review">너무 친절해요</p><p class="righttd">2020.10.03</p></td>
+            <td><p class="review">★★★★★</p></td>
+        </tr>
+        <tr>
+            <td><p class="review">너무 친절해요</p></td>
         </tr>
 
         <tr>
-            <td rowspan="2" class="imgtd"><img src="img/p2.jpg"></td>
-            <td class="lefttd">강서구 물주먹</td>
+            <td rowspan="3" class="imgtd"><img src="images/p2.jpg"></td>
+            <td class="lefttd">강서구 불주먹</td>
         </tr>
         <tr>
-            <td><p class="review">너무 친절해요</p><p class="righttd">2020.10.03</p></td>
-        </tr>
-
-        <tr>
-            <td rowspan="2" class="imgtd"><img src="img/p3.jpg"></td>
-            <td class="lefttd">강서구 주먹</td>
+            <td><p class="review">★★★★★</p></td>
         </tr>
         <tr>
-            <td><p class="review">너무 친절해요</p><p class="righttd">2020.10.03</p></td>
-        </tr>
-
-        <tr>
-            <td rowspan="2" class="imgtd"><img src="img/p1.jpg"></td>
-            <td class="lefttd">강서구 돌주먹</td>
+            <td><p class="review">너무 친절해요</p></td>
         </tr>
         <tr>
-            <td><p class="review">너무 친절해요</p><p class="righttd">2020.10.03</p></td>
+            <td rowspan="3" class="imgtd"><img src="images/p3.jpg"></td>
+            <td class="lefttd">강서구 불주먹</td>
         </tr>
-
+        <tr>
+            <td><p class="review">★★★★★</p></td>
+        </tr>
+        <tr>
+            <td><p class="review">너무 친절해요</p></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="imgtd"><img src="images/p1.jpg"></td>
+            <td class="lefttd">강서구 불주먹</td>
+        </tr>
+        <tr>
+            <td><p class="review">★★★★★</p></td>
+        </tr>
+        <tr>
+            <td><p class="review">너무 친절해요</p></td>
+        </tr>
     </table>
     </div>
 <div id="chat" class="tabcontent">

@@ -122,6 +122,17 @@
 	<th:block th:replace="fragments/footer :: footerFragment">
 	</th:block>
   </div>
-
+	<script>
+	$(document).ready(function(){
+		$("#price" ).bind('keyup', function(e){
+			var rgx1 = /\D/g;
+			var rgx2 = /(\d+)(\d{3})/;
+			var num = this.value.replace(rgx1,"");
+			
+			while (rgx2.test(num)) num = num.replace(rgx2, '$1' + ',' + '$2');
+			this.value = num;
+		});
+	});
+	</script>
   </body>
 </html>
