@@ -47,6 +47,28 @@
           </div>
         </div>
         
+        <div class="dropdown" style="float:left; margin-right:20px;">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    정렬 &#5121;
+		  </button>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    <a class="dropdown-item" href="#">가격순</a>
+		    <a class="dropdown-item" href="#">최신순</a>
+		    <a class="dropdown-item" href="#">회원 평점순</a>
+		    <a class="dropdown-item" href="#">인기순</a>
+		    <a class="dropdown-item" href="#">거리순</a>
+		  </div>
+		</div>
+		
+		<div class="input-group-prepend">
+		    <label>
+		    <div class="input-group-text">
+		      <input type="checkbox" checked="checked">&nbsp;거래 완료된 물건 제외
+		      </div></label>
+		    
+		  </div>
+		<br>
+        
         <ul class="job-listings mb-5" th:each="p : ${products}">
           <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
           

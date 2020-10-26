@@ -6,6 +6,96 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <th:block th:replace="fragments/config :: configFragment"></th:block>
 <link rel="stylesheet" th:href="@{/css/chat.css}">
+
+<style> 
+.blind {
+	 position: absolute;
+	 overflow: hidden;
+	 margin: -1px;
+	 padding: 0;
+	 width: 1px;
+	 height: 1px;
+	 border: none;
+	 clip: rect(0, 0, 0, 0);
+}
+ .startRadio {
+	 display: inline-block;
+	 overflow: hidden;
+	 height: 40px;
+}
+ .startRadio:after {
+	 content: "";
+	 display: block;
+	 position: relative;
+	 z-index: 10;
+	 height: 40px;
+	 background: url("/images/star.png") repeat-x 0 0;
+	 background-size: contain;
+	 pointer-events: none;
+}
+ .startRadio__box {
+	 position: relative;
+	 z-index: 1;
+	 float: left;
+	 width: 20px;
+	 height: 40px;
+	 cursor: pointer;
+}
+ .startRadio__box input {
+	 opacity: 0 !important;
+	 height: 0 !important;
+	 width: 0 !important;
+	 position: absolute !important;
+}
+ .startRadio__box input:checked + .startRadio__img {
+	 background-color: #ffbb00;
+}
+ .startRadio__img {
+	 display: block;
+	 position: absolute;
+	 right: 0;
+	 width: 500px;
+	 height: 40px;
+	 pointer-events: none;
+}
+
+.modal4 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content4 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close4 {
+  color: white;
+  float: right;
+  font-size: 20px;
+  background-color:#ffbb00;
+  padding:5px;
+}
+
+.close4:hover,
+.close4:focus {
+  background-color:orange;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<div id="username-page">
@@ -34,15 +124,15 @@
 			<div class="chat-header">
 			<img src="../images/nin.jpg">
 			
-			
-<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">거래 상태</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">승인</a>
-    <a href="#about">완료</a>
-    <a href="#contact">취소</a>
-  </div>
-</div>
+						
+			<div class="dropdown">
+			  <button onclick="myFunction()" class="dropbtn">거래 상태</button>
+			  <div id="myDropdown" class="dropdown-content">
+			    <a href="#home">승인</a>
+			    <a href="#about" id="openstar">완료</a>
+			    <a href="#contact">취소</a>
+			  </div>
+			</div>
 		
 				<h2>닌텐도 스위치 네온</h2>
 				<p>10,000원</p>
@@ -53,6 +143,59 @@
 			</ul>
 			<form id="messageForm" name="messageForm">
 				<div class="form-group">
+				
+				<div id="starmodal" class="modal4">
+				  <div class="modal-content4">
+				
+				<div class="startRadio">
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">0.5</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">1</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">1.5</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">2</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">2.5</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">3</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">3.5</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">4</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">4.5</span></span>
+				    </label>
+				    <label class="startRadio__box">
+				        <input type="radio" name="star" id="">
+				        <span class="startRadio__img"><span class="blind">5</span></span>
+				    </label>
+				</div>
+				   <input type="text" size="50" maxlength="50" placeholder="상대에게 한마디 해주세요! (최대 50자)">
+					    
+					    <span class="close4">후기 등록</span>
+					  </div>
+					
+					</div>
+				
 					<div class="input-group clearfix">
 						<input type="text" id="message" placeholder="메세지를 입력하세요"
 							autocomplete="off" class="form-control" />
@@ -79,6 +222,16 @@
 		      }
 		    }
 		  }
+		}
+		
+		var modal = document.getElementById("starmodal");
+		var btn = document.getElementById("openstar");
+		var span = document.getElementsByClassName("close4")[0];
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+		span.onclick = function() {
+		  modal.style.display = "none";
 		}
 	</script>
 </body>
