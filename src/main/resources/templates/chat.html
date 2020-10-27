@@ -139,8 +139,14 @@
 			</div>
 			<div class="connecting">연결중...</div>
 			<ul id="messageArea">
-				<li class="chat-message" th:if="${chats.size() != 0}" th:each="c : ${chats}">
-					<i style="background-color: rgb(0, 188, 212);">t</i>
+				<li class="chat-message" th:if="${chats.size() != 0}" th:each="c, i : ${chats}">
+					<script th:inline="javascript" th:if="${c.senderId} == ${#authentication.name}">
+						var index = /*[[ ${i.index} ]]*/;
+						var box = document.getElementsByClassName("chat-message")[index];
+						box.style.borderRadius = "50px 0px 0px 50px";
+						box.style.textAlign = "right";
+					</script>
+					<i th:if="${c.senderId} != ${#authentication.name}" style="background-color: rgb(0, 188, 212);" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
 					<span th:text="${c.senderId}"></span>
 					<p th:text="${c.content}"></p>
 				</li>

@@ -12,5 +12,5 @@ public interface ChatRepository extends CrudRepository<ChatMessage, String> {
 	List<ChatMessage> findBySenderId(String senderId);
 	List<ChatMessage> findByReceiverId(String receiverId);
 	List<ChatMessage> findByProductId(String productId);
-	List<ChatMessage> findByProductIdAndReceiverId(String productId, String receiverId);
+	List<ChatMessage> findByWs(String Ws);
 }
