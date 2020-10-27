@@ -1,19 +1,42 @@
 package itc.hoseo.cc.web;
 
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import itc.hoseo.cc.domain.ChatMessage;
+import itc.hoseo.cc.repository.ChatRepository;
+import itc.hoseo.cc.repository.ProductRepository;
+import itc.hoseo.cc.repository.UserRepository;
 
 @Controller
 public class ChatController {
-
+	@Autowired
+	ChatRepository chatRepo;
+	@Autowired
+	ProductRepository productRepo;
+	@Autowired
+	UserRepository userRepo;
+	
 	@MessageMapping("/chat/send/{productId}.{senderId}")
 	@SendTo("/topic/recv/{productId}.{senderId}")
 	public ChatMessage sendMessage(@Payload ChatMessage msg) {
+		msg.setSendDttm(new Date());
+		chatRepo.save(msg);
 		return msg;
 	}
 	
+	@RequestMapping(path = "/chat", method = RequestMethod.GET)
+	public String messageStart(ModelMap mm, String product_id, String receiver_id) {
+		mm.put("product", productRepo.findById(Long.parseLong(product_id)).get());
+		mm.put("chats", chatRepo.findByProductIdAndReceiverId(product_id, receiver_id));
+		return "chat";
+	}
 }

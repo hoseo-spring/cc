@@ -103,12 +103,12 @@
 			<h1 class="title">username을 입력하세요</h1>
 			<form id="usernameForm" name="usernameForm">
 				<div class="form-group">
-					<input type="text" id="ownerID" placeholder="판매자ID"
-						autocomplete="off" class="form-control" />
-					<input type="text" id="name" placeholder="구매자ID" readonly
+					<input type="text" id="ownerID" placeholder="구매자ID" readonly
 						autocomplete="off" class="form-control" th:value="${#authentication.name}" />
-					<input type="text" id="productID" placeholder="상품ID"
-						autocomplete="off" class="form-control" />
+					<input type="text" id="name" placeholder="판매자ID" readonly
+						autocomplete="off" class="form-control" th:value="${param.receiver_id}" />
+					<input type="text" id="productID" placeholder="상품ID" readonly
+						autocomplete="off" class="form-control" th:value="${param.product_id}"/>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="accent username-submit">채팅
@@ -134,11 +134,16 @@
 			  </div>
 			</div>
 		
-				<h2>닌텐도 스위치 네온</h2>
-				<p>10,000원</p>
+				<h2 th:text="${product.name}"></h2>
+				<p th:text="|*{{#numbers.formatInteger(product.price, 0, 'COMMA')}}원|"></p>
 			</div>
 			<div class="connecting">연결중...</div>
 			<ul id="messageArea">
+				<li class="chat-message" th:if="${chats.size() != 0}" th:each="c : ${chats}">
+					<i style="background-color: rgb(0, 188, 212);">t</i>
+					<span th:text="${c.senderId}"></span>
+					<p th:text="${c.content}"></p>
+				</li>
 
 			</ul>
 			<form id="messageForm" name="messageForm">

@@ -93,7 +93,7 @@
             <div class="bg-light p-3 border rounded">
             <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">연락하기</h3>
               <div class="px-3">
-				<a href="/chat" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
+				<a th:href="|/chat?product_id=*{product.id}&receiver_id=*{product.user.id}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
               </div>
             </div>
 
