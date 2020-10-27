@@ -7,21 +7,14 @@
 		</div>
 		<nav class="site-navigation col-3">
 			<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-				<li><a href=""></a></li>
-				<li><a href=""></a></li>
-				<li><a href=""></a></li>
-				<li><a href="/list?page=0">모든 물건</a></li>
+				<li><a href="/list?page=0" style="margin-left:6vw;position:absolute; top:-10px; z-index:1010;">모든 물건</a></li>
 			</ul>
 		</nav>
 		<nav sec:authorize="isAuthenticated()"
 			class="site-navigation col-3">
 			<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-				<li><a href=""></a></li>
-				<li><a href=""></a></li>
-				<li><a href=""></a></li>
-				<li><a href="/list?page=0">&nbsp;</a></li>
-				<li><a href=""></a></li>
-				<li><a href="/mypage">내 정보</a></li>
+			<li><a href="/list?page=0" style="display:none;">모든 물건</a></li>
+				<li><a href="/mypage" style="margin-left:12vw;position:absolute;top:-10px;">내 정보</a></li>
 			</ul>
 		</nav>
 

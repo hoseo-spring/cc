@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b24fe1e43b38d651c39b85291e0e144&libraries=services"></script>
 <style>
   .location{
@@ -190,7 +191,11 @@ li:nth-child(n+4) { display: none; }
                   	파일 등록<input type="file" hidden>
                 </label>
               </div>
-
+              
+              <div class="form-group">
+                <label for="name">닉네임 변경</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="새 닉네임 입력">
+              </div>
               <div class="form-group">
                 <label for="name">비밀번호 변경</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="새 비밀번호 입력">
@@ -203,7 +208,7 @@ li:nth-child(n+4) { display: none; }
               <div class="form-group">
                 <label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label>
                 <br>
-			<input type="button" id="modalbt" value="지역 인증하기">
+			<input type="button" id="modalbt" value="지역 인증하기1">
                 <div id="modalw" class="modal1">
 
 			  <div class="modal-content1">
@@ -220,19 +225,19 @@ li:nth-child(n+4) { display: none; }
 					
 			      <div>여기에 지도가 뜸</div>
 			      <div>
-			      <!-- '인증된 주소'가 추가되면서 모달 창이 닫히는걸 하려했는데 잘 안됨  -->
-					  <span onclick="newElement()" class="addBtn">추가 및 닫기</span>
+					  <span onclick="newElement(); count_input(); modal.style.display = 'none';" class="addBtn">추가 및 닫기</span>
 					</div>
 			    </div>
 			  </div>
 			</div>
-                
+                      <form name='my_form'>
 			<ul id="locaul">
-			  <li class="lii">주소1</li>
-			  <li class="lii">주소2</li>
-			</ul>
+			<li class="lii" id="lii">w</li>
+			</ul></form>
               </div>
+               
           </div>
+
           <div class="col-3">
                 <input type="button" class="btn btn-block btn-primary btn-md" value="완료">
               </div>
@@ -246,7 +251,23 @@ li:nth-child(n+4) { display: none; }
 	</th:block>
   </div>
 <script>
-	
+function count_input(){
+var ele = document.getElementById('locaul');
+var eleCount = ele.childElementCount;
+
+if (eleCount==3){
+	$("#modalbt").hide();}
+	else
+		{
+		$("#modalbt").show();	
+		}}
+
+
+
+
+
+
+
 var myNodelist = document.getElementsByClassName("lii");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
@@ -254,6 +275,10 @@ for (i = 0; i < myNodelist.length; i++) {
   var txt = document.createTextNode("\u00D7");
   span.className = "close1";
   span.appendChild(txt);
+  
+  //$(".close1").click(count_input);		????
+  //span.on('click', '.close1', handleClick); 안대애
+  
   myNodelist[i].appendChild(span);
 }
 
@@ -289,7 +314,7 @@ function newElement() {
   for (i = 0; i < close1.length; i++) {
     close1[i].onclick = function() {
       var div = this.parentElement;
-      div.style.display = "none";
+      div.remove();
     }
   }
 }
@@ -308,6 +333,9 @@ function newElement() {
 		  var element = document.getElementById("checkthis");
 		  element.classList.add("checklocation");
 		}
+	
+	
+	
 	
 </script>
   </body>
