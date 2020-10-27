@@ -1,5 +1,6 @@
 package itc.hoseo.cc.web;
 
+import java.awt.print.Pageable;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +21,8 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserRepository userRepo;
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public String registerPost(ModelMap mm, String id, String password, String repassword, String nickname) {
@@ -32,5 +35,13 @@ public class LoginController {
 	@RequestMapping(path = "/registerError", method = RequestMethod.GET)
 	public String registerErrorGet(ModelMap mm) {
 		return "registerError";
+	}
+	
+
+	@RequestMapping(path = "/edit",  method = RequestMethod.POST)
+	public String updatUser(ModelMap mm, String id, String nickname, String password, String repassword) {
+		mm.put("users", userRepo.findAll());
+		mm.put("users", userRepo.findById(id).get());
+		return "Mypage";
 	}
 }
