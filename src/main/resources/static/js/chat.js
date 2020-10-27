@@ -37,7 +37,7 @@ function connect(event) {
 
 
 function onConnected() {
-	var channel = username;
+	var channel = ownerId;
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/recv/'+ productId + '.' + channel, onMessageReceived);
@@ -64,9 +64,10 @@ function sendMessage(event) {
         var chatMessage = {
             productId: productId,
             senderId : ownerId ? ownerId : username,
+            receiverId : username,
             content: messageInput.value
         };
-        stompClient.send("/app/chat/send/" + productId + "." + username, {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/chat/send/" + productId + "." + ownerId, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
