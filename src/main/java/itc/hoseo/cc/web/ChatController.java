@@ -29,6 +29,7 @@ public class ChatController {
 	@SendTo("/topic/recv/{productId}.{senderId}")
 	public ChatMessage sendMessage(@Payload ChatMessage msg) {
 		msg.setSendDttm(new Date());
+		msg.setWs(msg.getProductId()+"."+msg.getReceiverId());
 		chatRepo.save(msg);
 		return msg;
 	}
@@ -36,7 +37,7 @@ public class ChatController {
 	@RequestMapping(path = "/chat", method = RequestMethod.GET)
 	public String messageStart(ModelMap mm, String product_id, String receiver_id) {
 		mm.put("product", productRepo.findById(Long.parseLong(product_id)).get());
-		mm.put("chats", chatRepo.findByProductIdAndReceiverId(product_id, receiver_id));
+		mm.put("chats", chatRepo.findByWs(product_id+"."+receiver_id));
 		return "chat";
 	}
 }

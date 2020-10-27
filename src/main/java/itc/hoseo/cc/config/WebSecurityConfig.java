@@ -42,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.failureUrl("/login?error")				
 				.permitAll()
 			.and().csrf().disable();
+
+	    http.headers().frameOptions().disable();
 			
 	}
 }
