@@ -113,7 +113,7 @@
 						autocomplete="off" class="form-control" th:value="${param.product_id}"/>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="accent username-submit">채팅
+					<button type="submit" class="accent username-submit">채팅	
 						시작하기</button>
 				</div>
 			</form>
@@ -152,6 +152,7 @@
 					<i th:if="${c.senderId} != ${#authentication.name}" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
 					<span th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></span>
 					<p th:text="${c.content}"></p>
+					<p th:text="${#dates.format(c.sendDttm,'yyyy-MM-dd HH:mm')}" style="color:gray; font-size:8px;"></p>
 					<script th:inline="javascript" th:if="${c.senderId} != ${#authentication.name}">
 						var colors = [
 						    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
