@@ -1,5 +1,6 @@
 package itc.hoseo.cc.web;
 
+import java.security.Principal;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -104,8 +105,9 @@ public class MainController {
 		return "content";
 	}
 	
-	@RequestMapping(path = "/edit", method = RequestMethod.GET) 
-	public String editGet(ModelMap mm, Long user) {
+	@RequestMapping(path="/edit",  method = RequestMethod.GET)
+	public String editGet(ModelMap mm, Principal principal) {
+		mm.put("user", userRepo.findById(principal.getName()).get());
 		return "edit";
 	}
 }
