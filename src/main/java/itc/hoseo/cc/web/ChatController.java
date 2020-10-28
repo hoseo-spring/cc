@@ -35,9 +35,9 @@ public class ChatController {
 	}
 	
 	@RequestMapping(path = "/chat", method = RequestMethod.GET)
-	public String messageStart(ModelMap mm, String product_id, String receiver_id) {
+	public String messageStart(ModelMap mm, String product_id, String seller_id, String opponent_id) {
 		mm.put("product", productRepo.findById(Long.parseLong(product_id)).get());
-		mm.put("chats", chatRepo.findByWs(product_id+"."+receiver_id));
+		mm.put("chats", chatRepo.findByWs(product_id+"."+seller_id));
 		return "chat";
 	}
 }
