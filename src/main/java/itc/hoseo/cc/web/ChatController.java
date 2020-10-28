@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import itc.hoseo.cc.domain.ChatMessage;
+import itc.hoseo.cc.domain.Comment;
 import itc.hoseo.cc.repository.ChatRepository;
+import itc.hoseo.cc.repository.CommentRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
 
@@ -24,6 +26,8 @@ public class ChatController {
 	ProductRepository productRepo;
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	CommentRepository commentRepo;
 	
 	@MessageMapping("/chat/send/{productId}.{senderId}")
 	@SendTo("/topic/recv/{productId}.{senderId}")
@@ -39,5 +43,13 @@ public class ChatController {
 		mm.put("product", productRepo.findById(Long.parseLong(product_id)).get());
 		mm.put("chats", chatRepo.findByWs(product_id+"."+seller_id));
 		return "chat";
+	}
+	
+	@RequestMapping(path = "/comment", method = RequestMethod.POST)
+	public String sendComment(ModelMap mm, String rate, String content, String sendUserId, String receiveUserId, String productId, String sellerId) {
+		commentRepo.save(
+					Comment.builder().rate(Double.parseDouble(rate)).content(content).sendUserId(sendUserId).receiveUserId(receiveUserId).productId(productId).uploadDate(new Date()).build()
+				);
+		return "redirect:/chat?product_id="+productId+"&seller_id="+sellerId+"&opponent_id="+receiveUserId;
 	}
 }
