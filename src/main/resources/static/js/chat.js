@@ -9,9 +9,10 @@ var connectingElement = document.querySelector('.connecting');
 
 
 var productId = null;
-var ownerId = null;
+var sellerId = null;
+var myId = null;
+var opponentId = null;
 var stompClient = null;
-var username = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -19,11 +20,12 @@ var colors = [
 ];
 
 function connect(event) {
-    username = document.querySelector('#name').value.trim();
 	productId = document.querySelector('#productID').value.trim();
-	ownerId = document.querySelector('#ownerID').value.trim();
+	sellerId = document.querySelector('#sellerID').value.trim();
+    myId = document.querySelector('#myID').value.trim();
+    opponentId = document.querySelector('#opponentID').value.trim();
 	
-    if(username) {
+    if(myId) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -37,7 +39,7 @@ function connect(event) {
 
 
 function onConnected() {
-	var channel = ownerId;
+	var channel = sellerId;
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/recv/'+ productId + '.' + channel, onMessageReceived);
@@ -63,11 +65,11 @@ function sendMessage(event) {
     if(messageContent && stompClient) {
         var chatMessage = {
             productId: productId,
-            senderId : ownerId ? ownerId : username,
-            receiverId : username,
+            senderId : myId,
+            receiverId : opponentId,
             content: messageInput.value
         };
-        stompClient.send("/app/chat/send/" + productId + "." + ownerId, {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/chat/send/" + productId + "." + sellerId, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -80,19 +82,25 @@ function onMessageReceived(payload) {
     var messageElement = document.createElement('li');
 
     messageElement.classList.add('chat-message');
+    
+    if(message.senderId == myId) {
+    	messageElement.style.borderRadius = "50px 0px 0px 50px";
+    	messageElement.style.textAlign = "right";
+    	messageElement.style.borderColor = "#69bb66";
+    } else {
+    	var avatarElement = document.createElement('i');
+        var avatarText = document.createTextNode(message.senderId[0]);
+        avatarElement.appendChild(avatarText);
+        avatarElement.style['background-color'] = getAvatarColor(message.senderId);
 
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(message.senderId[0]);
-    avatarElement.appendChild(avatarText);
-    avatarElement.style['background-color'] = getAvatarColor(message.senderId);
-
-    messageElement.appendChild(avatarElement);
-
-    var usernameElement = document.createElement('span');
-    var usernameText = document.createTextNode(message.senderId);
-    usernameElement.appendChild(usernameText);
-    messageElement.appendChild(usernameElement);
-
+        messageElement.appendChild(avatarElement);
+        
+        var usernameElement = document.createElement('span');
+        var usernameText = document.createTextNode(message.senderId);
+        usernameElement.appendChild(usernameText);
+        messageElement.appendChild(usernameElement);
+    }
+    
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);

@@ -103,10 +103,12 @@
 			<h1 class="title">username을 입력하세요</h1>
 			<form id="usernameForm" name="usernameForm">
 				<div class="form-group">
-					<input type="text" id="ownerID" placeholder="구매자ID" readonly
+					<input type="text" id="myID" placeholder="본인ID" readonly
 						autocomplete="off" class="form-control" th:value="${#authentication.name}" />
-					<input type="text" id="name" placeholder="판매자ID" readonly
-						autocomplete="off" class="form-control" th:value="${param.receiver_id}" />
+					<input type="text" id="opponentID" placeholder="상대ID" readonly
+						autocomplete="off" class="form-control" th:value="${param.opponent_id}" />
+					<input type="text" id="sellerID" placeholder="판매자ID" readonly
+						autocomplete="off" class="form-control" th:value="${param.seller_id}" />
 					<input type="text" id="productID" placeholder="상품ID" readonly
 						autocomplete="off" class="form-control" th:value="${param.product_id}"/>
 				</div>
@@ -139,16 +141,36 @@
 			</div>
 			<div class="connecting">연결중...</div>
 			<ul id="messageArea">
-				<li class="chat-message" th:if="${chats.size() != 0}" th:each="c, i : ${chats}">
+				<li class="chat-message" th:if="${chats.size() != null}" th:each="c, i : ${chats}">
 					<script th:inline="javascript" th:if="${c.senderId} == ${#authentication.name}">
 						var index = /*[[ ${i.index} ]]*/;
 						var box = document.getElementsByClassName("chat-message")[index];
 						box.style.borderRadius = "50px 0px 0px 50px";
 						box.style.textAlign = "right";
+						box.style.borderColor = "#69bb66";
 					</script>
-					<i th:if="${c.senderId} != ${#authentication.name}" style="background-color: rgb(0, 188, 212);" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
-					<span th:text="${c.senderId}"></span>
+					<i th:if="${c.senderId} != ${#authentication.name}" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
+					<span th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></span>
 					<p th:text="${c.content}"></p>
+					<script th:inline="javascript" th:if="${c.senderId} != ${#authentication.name}">
+						var colors = [
+						    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
+						    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+						];
+						function setColor(messageSender) {
+							var hash = 0;
+						    for (var i = 0; i < messageSender.length; i++) {
+						        hash = 31 * hash + messageSender.charCodeAt(i);
+						    }
+						    var index = Math.abs(hash % colors.length);
+						    var c = colors[index];
+							$('.chat-avatar').css({
+							    "background-color": c
+							});
+						}
+						var senderId = /*[[ ${c.senderId} ]]*/;
+						setColor(senderId);
+					</script>
 				</li>
 
 			</ul>
