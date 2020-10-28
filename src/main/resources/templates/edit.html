@@ -166,45 +166,28 @@ li:nth-child(n+4) { display: none; }
     <section class="site-section">
       <div class="container">
         <div class="p-4 p-md-5 border rounded">
-        <div class="row align-items-center mb-5">
-          <div class="col-lg-8 mb-4 mb-lg-0">
-            <div class="d-flex align-items-center">
-              <div>
-                <h2>내 정보 수정하기</h2>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-6">
-              </div>
-              
-            </div>
-          </div>
-        </div>
+
         <div class="row mb-5">
           <div class="col-lg-12">
-              
+            <form method="post" name="edit" action="/mypage">
               <div class="form-group">
                 <label for="company-website-tw d-block">프로필 사진 업로드</label> <br>
                 <label class="btn btn-primary btn-md btn-file">
                   	파일 등록<input type="file" hidden>
                 </label>
               </div>
-              
               <div class="form-group">
                 <label for="name">닉네임 변경</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="새 닉네임 입력">
+                <input type="text" class="form-control" id="nickname" name="nickname" th:value="|${user.nickname}|" >
               </div>
               <div class="form-group">
-                <label for="name">비밀번호 변경</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="새 비밀번호 입력">
+                <label for="name">비밀번호 변경 시 입력</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="새 비밀번호 입력">
               </div>
               <div class="form-group">
                 <label for="name">비밀번호 확인</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="비밀번호 다시 입력">
+                <input type="password" class="form-control" id="repassword" name="repassword" placeholder="비밀번호 다시 입력">
               </div>
-              
               <div class="form-group">
                 <label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label>
                 <br>
@@ -230,18 +213,18 @@ li:nth-child(n+4) { display: none; }
 			    </div>
 			  </div>
 			</div>
-                      <form name='my_form'>
+            <!--           <form name='my_form'>
 			<ul id="locaul">
 			<li class="lii" id="lii">w</li>
 			</ul></form>
-              </div>
+              </div> -->
                
           </div>
 
           <div class="col-3">
-                <input type="button" class="btn btn-block btn-primary btn-md" value="완료">
+                <input type="submit" class="btn btn-block btn-primary btn-md" value="완료">
               </div>
-        </div>
+        </div></form>
         </div>
       </div>
     </section>

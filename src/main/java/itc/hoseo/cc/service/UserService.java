@@ -1,6 +1,9 @@
 package itc.hoseo.cc.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,5 +33,20 @@ public class UserService {
 		userDetailsManager.createUser(userDetails);
 		userRepo.save(user);
 		return true;
+	}
+	
+	public Optional<User> findById(String id){
+		Optional<User> user = userRepo.findById(id);
+		return user;
+	}
+	
+	@Transactional
+    public void updateUser(User user, String id) {
+		Optional<User> u = userRepo.findById(id);
+		if (u.isPresent()) {
+			u.get().setNickname(u.get().getNickname());
+			u.get().setPassword(u.get().getPassword());
+			userRepo.save(user);
+		}
 	}
 }

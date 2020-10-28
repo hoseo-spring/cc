@@ -1,5 +1,6 @@
 package itc.hoseo.cc.web;
 
+import java.security.Principal;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -7,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,8 +89,12 @@ public class MainController {
 	public String signGet(ModelMap mm) {
 		return "sign";
 	}
-
 	
+	@RequestMapping(path="/edit",  method = RequestMethod.GET)
+	public String editGet(ModelMap mm, Principal principal) {
+		mm.put("user", userRepo.findById(principal.getName()).get());
+		return "edit";
+	}
 	@RequestMapping(path = "/post", method = RequestMethod.POST) 
 	public String postPost(ModelMap mm, String name, String category, int price, String location, String description) {
 		User user = userRepo.findByNickname("테스트"); 
@@ -104,8 +110,5 @@ public class MainController {
 		return "content";
 	}
 	
-	@RequestMapping(path = "/edit", method = RequestMethod.GET) 
-	public String editGet(ModelMap mm, Long user) {
-		return "edit";
-	}
+
 }
