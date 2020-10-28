@@ -40,6 +40,6 @@ public class MypageController {
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.POST)
 	public String editPost(Model mm, @Valid User user, String id) {
-		return "/edit"+ userRepo.save(user).getId();
+		return "/mypage";
 	}
 }
