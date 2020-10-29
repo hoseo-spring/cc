@@ -9,6 +9,8 @@ import itc.hoseo.cc.domain.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
 	
+	List<User> findById(String id, Pageable page);
+	
 	User findByNickname(String nickname);
 	//페이징
 	List<User> findAll(Pageable page);
