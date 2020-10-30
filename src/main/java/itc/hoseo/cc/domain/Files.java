@@ -1,25 +1,31 @@
 package itc.hoseo.cc.domain;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Builder
+@Data
 @NoArgsConstructor
 @Entity
 @AllArgsConstructor
-public class UploadFile {
+@ConfigurationProperties(prefix = "file")
+public class Files {
 	
 	@Id	
-	@GeneratedValue
-	@Column(name="upload_file")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="file_id")
 	private Long Id;
 	
 	@Column
@@ -27,5 +33,8 @@ public class UploadFile {
 	
 	@Column
 	private String fileType;
+	
+	@Column
+	private Long size;
 
 }
