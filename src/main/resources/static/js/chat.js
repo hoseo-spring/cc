@@ -39,8 +39,8 @@ function connect(event) {
 
 
 function onConnected() {
-	// var channel = (sellerId != myId) ? sellerId : opponentId;
-	var channel = sellerId;
+	var channel = (sellerId != myId) ? myId : opponentId;
+	// var channel = sellerId;
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/recv/'+ productId + '.' + channel, onMessageReceived);
@@ -63,6 +63,7 @@ function onError(error) {
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
+    var channel = (sellerId != myId) ? myId : opponentId;
     if(messageContent && stompClient) {
         var chatMessage = {
             productId: productId,
@@ -70,7 +71,7 @@ function sendMessage(event) {
             receiverId : opponentId,
             content: messageInput.value
         };
-        stompClient.send("/app/chat/send/" + productId + "." + sellerId, {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/chat/send/" + productId + "." + channel, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();

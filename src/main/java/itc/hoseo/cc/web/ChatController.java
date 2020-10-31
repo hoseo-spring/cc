@@ -1,5 +1,6 @@
 package itc.hoseo.cc.web;
 
+import java.security.Principal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import itc.hoseo.cc.domain.ChatMessage;
 import itc.hoseo.cc.domain.Comment;
+import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.ChatRepository;
 import itc.hoseo.cc.repository.CommentRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
+import itc.hoseo.cc.service.SpringSecurityUserContext;
 
 @Controller
 public class ChatController {
+	@Autowired
+	SpringSecurityUserContext userContext;
 	@Autowired
 	ChatRepository chatRepo;
 	@Autowired
@@ -33,15 +38,25 @@ public class ChatController {
 	@SendTo("/topic/recv/{productId}.{senderId}")
 	public ChatMessage sendMessage(@Payload ChatMessage msg) {
 		msg.setSendDttm(new Date());
-		msg.setWs(msg.getProductId()+"."+msg.getReceiverId());
+		msg.setProductName(productRepo.findById(Long.parseLong(msg.getProductId())).get().getName());
+		msg.setSellerId(productRepo.findById(Long.parseLong(msg.getProductId())).get().getUser().getId());
+		if(msg.getSellerId().equals(msg.getSenderId())) {
+			msg.setWs(msg.getProductId()+"."+msg.getReceiverId());
+		} else {
+			msg.setWs(msg.getProductId()+"."+msg.getSenderId());
+		}
 		chatRepo.save(msg);
 		return msg;
 	}
 	
 	@RequestMapping(path = "/chat", method = RequestMethod.GET)
-	public String messageStart(ModelMap mm, String product_id, String seller_id, String opponent_id) {
+	public String messageStart(ModelMap mm, Principal principal, String product_id, String seller_id, String opponent_id) {
 		mm.put("product", productRepo.findById(Long.parseLong(product_id)).get());
-		mm.put("chats", chatRepo.findByWs(product_id+"."+seller_id));
+		if(seller_id.equals(principal.getName())) {
+			mm.put("chats", chatRepo.findByWs(product_id+"."+opponent_id));
+		} else {
+			mm.put("chats", chatRepo.findByWs(product_id+"."+principal.getName()));
+		}
 		return "chat";
 	}
 	

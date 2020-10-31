@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -24,4 +26,9 @@ public class ChatMessage {
 	private Date sendDttm;
 	private String content;
 	private String ws;
+	
+	private String type;
+	
+	private String productName;
+	private String sellerId;
 }
