@@ -1,5 +1,6 @@
 package itc.hoseo.cc.web;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.thymeleaf.expression.Lists;
 
 import itc.hoseo.cc.domain.Product;
 import itc.hoseo.cc.domain.UploadFile;
@@ -39,7 +41,6 @@ public class MainController {
 		userService.createUser(User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).build());
 		userService.createUser(User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).build());
 		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("test2").password("1234").nickname("기매미").registeredDate(new Date()).build());
 		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
@@ -81,5 +82,10 @@ public class MainController {
 
 	
 
-
+	
+	@RequestMapping(path="/edit",  method = RequestMethod.GET)
+	public String editGet(ModelMap mm, Principal principal) {
+		mm.put("user", userRepo.findById(principal.getName()).get());
+		return "edit";
+	}
 }
