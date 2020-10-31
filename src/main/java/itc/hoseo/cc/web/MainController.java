@@ -82,10 +82,5 @@ public class MainController {
 
 	
 
-	
-	@RequestMapping(path="/edit",  method = RequestMethod.GET)
-	public String editGet(ModelMap mm, Principal principal) {
-		mm.put("user", userRepo.findById(principal.getName()).get());
-		return "edit";
-	}
+
 }
