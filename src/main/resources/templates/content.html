@@ -74,7 +74,9 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="mb-5">
+              <a target="_blank" href="images/job_single_img_1.jpg">
               <figure class="mb-5"><img src="images/job_single_img_1.jpg" alt="Image" class="img-fluid rounded"></figure>
+              </a>
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>물건 정보</h3>
               <p th:text="| *{product.category} / *{product.location} / *{product.price}원|"></p>
               <p th:text="${product.description}"></p>
