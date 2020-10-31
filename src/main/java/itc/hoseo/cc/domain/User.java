@@ -8,7 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +44,10 @@ public class User {
 	@Column(length = 20, nullable = false)
 	private String nickname;
 	
+	@OneToMany
+	@JoinColumn(name="user_profile")
+	private List<UploadFile> images;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
@@ -49,4 +55,5 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	List<Product> products = new ArrayList<>();
+	
 }
