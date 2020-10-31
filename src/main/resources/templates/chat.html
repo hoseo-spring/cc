@@ -144,7 +144,7 @@
 			</div>
 			<div class="connecting">연결중...</div>
 			<ul id="messageArea">
-				<li class="chat-message" th:if="${chats.size() != null}" th:each="c, i : ${chats}">
+				<li class="chat-message" th:if="${chats.size() != 0}" th:each="c, i : ${chats}">
 					<script th:inline="javascript" th:if="${c.senderId} == ${#authentication.name}">
 						var index = /*[[ ${i.index} ]]*/;
 						var box = document.getElementsByClassName("chat-message")[index];
