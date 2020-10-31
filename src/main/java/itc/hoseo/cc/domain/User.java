@@ -45,7 +45,7 @@ public class User {
 	private String nickname;
 	
 	@OneToMany
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_profile")
 	private List<UploadFile> images;
 	
 	@Temporal(TemporalType.TIMESTAMP)
