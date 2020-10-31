@@ -113,7 +113,7 @@
 						autocomplete="off" class="form-control" th:value="${param.product_id}"/>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="accent username-submit">채팅
+					<button type="submit" class="accent username-submit">채팅	
 						시작하기</button>
 				</div>
 			</form>
@@ -125,8 +125,11 @@
 		<div class="chat-container">
 			<div class="chat-header">
 			<img src="../images/nin.jpg">
+			<div class="dropdown">
+			  <button onclick="asking()" id="openstar" class="primary">거래 완료</button>
+			</div>
 			
-						
+<!--						
 			<div class="dropdown">
 			  <button onclick="myFunction()" class="dropbtn">거래 상태</button>
 			  <div id="myDropdown" class="dropdown-content">
@@ -135,7 +138,7 @@
 			    <a href="#contact">취소</a>
 			  </div>
 			</div>
-		
+-->
 				<h2 th:text="${product.name}"></h2>
 				<p th:text="|*{{#numbers.formatInteger(product.price, 0, 'COMMA')}}원|"></p>
 			</div>
@@ -152,6 +155,7 @@
 					<i th:if="${c.senderId} != ${#authentication.name}" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
 					<span th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></span>
 					<p th:text="${c.content}"></p>
+					<p th:text="${#dates.format(c.sendDttm,'yyyy-MM-dd HH:mm')}" style="color:gray; font-size:8px;"></p>
 					<script th:inline="javascript" th:if="${c.senderId} != ${#authentication.name}">
 						var colors = [
 						    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -174,7 +178,7 @@
 				</li>
 
 			</ul>
-			<form id="messageForm" name="messageForm">
+			<form id="messageForm" name="messageForm" action="/comment" method="post">
 				<div class="form-group">
 				
 				<div id="starmodal" class="modal4">
@@ -182,49 +186,48 @@
 				
 				<div class="startRadio">
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="0.5">
 				        <span class="startRadio__img"><span class="blind">0.5</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="1">
 				        <span class="startRadio__img"><span class="blind">1</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="1.5">
 				        <span class="startRadio__img"><span class="blind">1.5</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="2">
 				        <span class="startRadio__img"><span class="blind">2</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="2.5">
 				        <span class="startRadio__img"><span class="blind">2.5</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="3">
 				        <span class="startRadio__img"><span class="blind">3</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="3.5">
 				        <span class="startRadio__img"><span class="blind">3.5</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="4">
 				        <span class="startRadio__img"><span class="blind">4</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="4.5">
 				        <span class="startRadio__img"><span class="blind">4.5</span></span>
 				    </label>
 				    <label class="startRadio__box">
-				        <input type="radio" name="star" id="">
+				        <input type="radio" name="star" id="" value="5">
 				        <span class="startRadio__img"><span class="blind">5</span></span>
 				    </label>
 				</div>
-				   <input type="text" size="50" maxlength="50" placeholder="상대에게 한마디 해주세요! (최대 50자)">
-					    
-					    <span class="close4">후기 등록</span>
+				   <input type="text" name="content" size="50" maxlength="50" placeholder="거래자가 어땠나요? 거래 후기를 남겨주세요! (최대 50자)">
+					    <span class="close4" onclick="messageSubmit()">후기 등록</span>
 					  </div>
 					
 					</div>
@@ -235,6 +238,10 @@
 						<button type="submit" class="primary">보내기</button>
 					</div>
 				</div>
+				<input type="hidden" name="sendUserId" th:value="${#authentication.name}" />
+				<input type="hidden" name="receiveUserId" th:value="${param.opponent_id}" />
+				<input type="hidden" name="productId" th:value="${param.product_id}" />
+				<input type="hidden" name="sellerId" th:value="${param.seller_id}" />
 			</form>
 		</div>
 	</div>
@@ -257,14 +264,17 @@
 		  }
 		}
 		
-		var modal = document.getElementById("starmodal");
-		var btn = document.getElementById("openstar");
-		var span = document.getElementsByClassName("close4")[0];
-		btn.onclick = function() {
-		  modal.style.display = "block";
+		function asking() {
+			if(confirm("상품 거래가 끝났나요? 두 사람 모두 거래 완료를 누르면 서로에게 평점, 후기를 작성합니다.")) {
+				var modal = document.getElementById("starmodal");
+				var btn = document.getElementById("openstar");
+				var span = document.getElementsByClassName("close4")[0];
+				modal.style.display = "block";
+			}
 		}
-		span.onclick = function() {
-		  modal.style.display = "none";
+		
+		function messageSubmit() {
+			document.messageForm.submit();
 		}
 	</script>
 </body>

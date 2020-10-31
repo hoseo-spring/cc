@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,19 +33,22 @@ public class Comment {
 	@Column(name = "commentId")
 	private Long id;
 	
-	@Column(length = 500)
+	@Column(length = 50)
 	private String content;
+	
+	// 평점
+	private Double rate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
 	private Date uploadDate;
 	
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
+	// 후기를 쓴 유저
+	private String sendUserId;
 	
-	@ManyToOne
-	@JoinColumn(name = "productId")
-	private Product product;
+	// 후기의 대상이 되는 유저
+	private String receiveUserId;
+
+	private String productId;
 }

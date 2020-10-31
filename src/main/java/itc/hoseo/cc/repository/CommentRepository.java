@@ -6,11 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 import itc.hoseo.cc.domain.Comment;
+import itc.hoseo.cc.domain.Product;
 import itc.hoseo.cc.domain.User;
 
 
 public interface CommentRepository extends CrudRepository<Comment, Long> {
-	List<Comment> findByUser(User user, Pageable page);
-	List<Comment> findByProduct(User user, Pageable page);
+	List<Comment> findBySendUserId(String sendUserId, Pageable page);
+	List<Comment> findByProductIdAndReceiveUserId(String productId, String receiveUserId, Pageable page);
 }
 

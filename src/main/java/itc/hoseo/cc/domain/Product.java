@@ -72,7 +72,4 @@ public class Product {
 	
 	@Column
 	private String image;
-	
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-	private List<Comment> comments = new ArrayList<>();	
 }

@@ -39,6 +39,7 @@ function connect(event) {
 
 
 function onConnected() {
+	// var channel = (sellerId != myId) ? sellerId : opponentId;
 	var channel = sellerId;
 
     // Subscribe to the Public Topic
@@ -104,8 +105,21 @@ function onMessageReceived(payload) {
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
+    
+    var dateElement = document.createElement('p');
+    var dateConvert = function(date) {
+    	var yyyymmdd = date.substring(0,10);
+    	var hh = Number(date.substring(11,13)) + 9;
+    	var mm = date.substring(14,16);
+    	return yyyymmdd + " " + hh + ":" + mm;
+    }
+    var dateText = document.createTextNode(dateConvert(message.sendDttm));
+    dateElement.appendChild(dateText);
+    dateElement.style.color = "gray";
+    dateElement.style.fontSize = "8px";
 
     messageElement.appendChild(textElement);
+    messageElement.appendChild(dateElement);
 
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
