@@ -742,6 +742,7 @@ h1, h2, h3, h4 {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 150px;
       flex: 0 0 150px;
+      height:149px;
       border-right: 1px solid #eee; }
       @media (max-width: 575.98px) {
         .job-listings .job-listing .job-listing-logo {
