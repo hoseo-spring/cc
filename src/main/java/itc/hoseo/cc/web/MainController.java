@@ -41,6 +41,7 @@ public class MainController {
 		userService.createUser(User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).build());
 		userService.createUser(User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).build());
 		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).build());
+		userService.createUser(User.builder().id("test2").password("1234").nickname("기매미").registeredDate(new Date()).build());
 		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
