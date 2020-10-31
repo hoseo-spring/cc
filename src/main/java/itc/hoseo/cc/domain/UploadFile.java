@@ -19,13 +19,16 @@ public class UploadFile {
 	
 	@Id	
 	@GeneratedValue
-	@Column(name="upload_file")
-	private Long Id;
+	@Column(name="upload_file_id")
+	private Long id;
 	
 	@Column
 	private String fileName;
 	
 	@Column
 	private String fileType;
+	
+	@Column
+	private String storedFileName;
 
 }
