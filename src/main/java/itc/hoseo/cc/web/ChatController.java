@@ -46,9 +46,9 @@ public class ChatController {
 	}
 	
 	@RequestMapping(path = "/comment", method = RequestMethod.POST)
-	public String sendComment(ModelMap mm, String rate, String content, String sendUserId, String receiveUserId, String productId, String sellerId) {
+	public String sendComment(ModelMap mm, String star, String content, String sendUserId, String receiveUserId, String productId, String sellerId) {
 		commentRepo.save(
-					Comment.builder().rate(Double.parseDouble(rate)).content(content).sendUserId(sendUserId).receiveUserId(receiveUserId).productId(productId).uploadDate(new Date()).build()
+					Comment.builder().rate(Double.parseDouble(star)).content(content).sendUserId(sendUserId).receiveUserId(receiveUserId).productId(productId).uploadDate(new Date()).build()
 				);
 		return "redirect:/chat?product_id="+productId+"&seller_id="+sellerId+"&opponent_id="+receiveUserId;
 	}

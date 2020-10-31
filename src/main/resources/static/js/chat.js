@@ -39,6 +39,7 @@ function connect(event) {
 
 
 function onConnected() {
+	// var channel = (sellerId != myId) ? sellerId : opponentId;
 	var channel = sellerId;
 
     // Subscribe to the Public Topic
