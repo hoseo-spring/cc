@@ -1,200 +1,225 @@
 <!Doctype html>
-  <head>
-    <title>당근나라</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b24fe1e43b38d651c39b85291e0e144&libraries=services"></script>
-    <th:block th:replace="fragments/config :: configFragment"></th:block>
-  </head>
-  <body id="top">
+<head>
+<title>당근나라</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b24fe1e43b38d651c39b85291e0e144&libraries=services"></script>
+<th:block th:replace="fragments/config :: configFragment"></th:block>
+</head>
+<body id="top">
 
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-    
+	<div id="overlayer"></div>
+	<div class="loader">
+		<div class="spinner-border text-primary" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
 
-   <div class="site-wrap">
 
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div> <!-- .site-mobile-menu -->
-    
-	<!-- NAVBAR -->
+	<div class="site-wrap">
+
+		<div class="site-mobile-menu site-navbar-target">
+			<div class="site-mobile-menu-header">
+				<div class="site-mobile-menu-close mt-3">
+					<span class="icon-close2 js-menu-toggle"></span>
+				</div>
+			</div>
+			<div class="site-mobile-menu-body"></div>
+		</div>
+		<!-- .site-mobile-menu -->
+
+		<!-- NAVBAR -->
 		<header th:insert="fragments/navbar :: navbar"
 			class="site-navbar mt-3"></header>
 
-    <!-- HOME -->
-    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">내 정보 수정하기</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    
-    <section class="site-section">
-      <div class="container">
-        <div class="p-4 p-md-5 border rounded">
-
-        <div class="row mb-5">
-          <div class="col-lg-12">
-              <form method="post" action="/mypage" name="edit">
-              <div class="form-group">
-                <label for="company-website-tw d-block">프로필 사진 업로드</label> <br>
-                <label class="btn btn-primary btn-md btn-file">
-                  	사진 등록<input type="file" hidden>
-                </label>
-              </div>
-              
-              <div class="form-group">
-                <label for="name">닉네임 변경</label>
-                <input type="text" class="form-control" id="name" name="name" th:value="|${user.nickname}|">
-              </div>
-              <div class="form-group">
-                <label for="name">비밀번호 변경</label>
-                <input type="password" class="form-control" id="name" name="name" placeholder="새 비밀번호 입력">
-              </div>
-              <div class="form-group">
-                <label for="name">비밀번호 확인</label>
-                <input type="password" class="form-control" id="name" name="name" placeholder="비밀번호 다시 입력">
-              </div>
-              
-              <div class="form-group">
-                <label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label>
-                <br>
-			<input type="button" id="modalbt" value="지역 인증하기">
-                <div id="modalw" class="modal1">
-
-			  <div class="modal-content1">
-			    <div class="modal-header1">
-			      <span class="close2">&times;</span>
-			      <h2>지역을 인증하세요</h2>
-			    </div>
-			    <div class="modal-body1">
-			    <button onclick="myFunction()">인증하기</button>
-			
-					<div id="checkthis">
-				      	<p id="addthis">주소: </p>
+		<!-- HOME -->
+		<section class="section-hero overlay inner-page bg-image"
+			style="background-image: url('images/hero_1.jpg');" id="home-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<h1 class="text-white font-weight-bold">내 정보 수정하기</h1>
 					</div>
-					
-			      <div>여기에 지도가 뜸</div>
-			      <div>
-					  <span onclick="newElement(); count_input(); modal.style.display = 'none';" class="addBtn">추가 및 닫기</span>
-					</div>
-			    </div>
-			  </div>
+				</div>
 			</div>
-                      <form name='my_form'>
-			<ul id="locaul">
-			<li class="lii" id="lii">w</li>
-			</ul></form>
-              </div>
-               
-          </div>
+		</section>
 
-          <div class="col-3">
-                <input type="submit" class="btn btn-block btn-primary btn-md" value="완료">
-              </div></form>
-        </div>
-        </div>
-      </div>
-    </section>
 
-	 <!-- footer -->
-	<th:block th:replace="fragments/footer :: footerFragment">
-	</th:block>
-  </div>
-<script>
-function count_input(){
-var ele = document.getElementById('locaul');
-var eleCount = ele.childElementCount;
+		<section class="site-section">
+			<div class="container">
+				<div class="p-4 p-md-5 border rounded">
 
-if (eleCount==3){
-	$("#modalbt").hide();}
-	else
-		{
-		$("#modalbt").show();	
-		}}
+					<div class="row mb-5">
+						<div class="col-lg-12">
+							<form method="post" action="edit" name="edit" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="company-website-tw d-block">프로필 사진 업로드</label> <br>
+									<label class="btn btn-primary btn-md btn-file"> 사진 등록
+										<input type="file" name="img">
+									</label>
+								</div>
 
-var myNodelist = document.getElementsByClassName("lii");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("span");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close1";
-  span.appendChild(txt);
-  
-  //$(".close1").click(count_input);		????
-  //span.on('click', '.close1', handleClick); 안대애
-  
-  myNodelist[i].appendChild(span);
-}
+								<div class="form-group">
+							 		<label for="name">닉네임 변경</label> 
+									<input type="text" class="form-control" id="nickname" name="nickname" th:value="|${user.nickname}|">
+								</div>
+								<div class="form-group">
+									<label for="name">비밀번호 변경</label> 
+									<input type="password" class="form-control" id="password" name="password" onchange="isSame()" placeholder="새 비밀번호 입력">
+								</div>
+								<div class="form-group">
+									<label for="name">비밀번호 확인</label> 
+									<input type="password" class="form-control" id="repassword" name="repassword" onchange="isSame()" placeholder="비밀번호 다시 입력">
+									<span id="alert-success" style="display:none; color:#00FF00; font-weight: bold; ">비밀번호가 일치합니다.</span>
+   							 		<span id="alert-danger" style="display:none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+								</div>
+								 
+								<div class="form-group">
+									<label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label> <br>
+									<input type="button" id="modalbt" value="지역 인증하기1">
+									<div id="modalw" class="modal1">
 
-var close1 = document.getElementsByClassName("close1");
-var i;
-for (i = 0; i < close1.length; i++) {
-  close1[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
+										<div class="modal-content1">
+											<div class="modal-header1">
+												<span class="close2">&times;</span>
+												<h2>지역을 인증하세요</h2>
+											</div>
+											<div class="modal-body1">
+												<button onclick="myFunction()">인증하기</button>
 
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("addthis").innerHTML;
-  var t = document.createTextNode(inputValue);
-	
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("'인증하기' 버튼을 눌러주세요!");
-  } else {
-    document.getElementById("locaul").appendChild(li);
-  }
-  
-  document.getElementById("addthis").value = "";
+												<div id="checkthis">
+													<p id="addthis">주소:</p>
+												</div>
 
-  var span = document.createElement("span");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close1";
-  span.appendChild(txt);
-  li.appendChild(span);
+												<div>여기에 지도가 뜸</div>
+												<div>
+													<span
+														onclick="newElement(); count_input(); modal.style.display = 'none';"
+														class="addBtn">추가 및 닫기</span>
+												</div>
+											</div>
+										</div>
+									</div>
 
-  for (i = 0; i < close1.length; i++) {
-    close1[i].onclick = function() {
-      var div = this.parentElement;
-      div.remove();
-    }
-  }
-}
-	
-	var modal = document.getElementById("modalw");
-	var btn = document.getElementById("modalbt");
-	var span = document.getElementsByClassName("close2")[0]; 
-	btn.onclick = function() {
-	  modal.style.display = "block";
-	}
-	  span.onclick = function() {
-	  	  modal.style.display = "none";
-	  	}
-	  
-	function myFunction() {
-		  var element = document.getElementById("checkthis");
-		  element.classList.add("checklocation");
+									<ul id="locaul">
+										<li class="lii" id="lii">w</li>
+									</ul>
+								</div>
+						</div>
+
+						<div class="col-3">
+							<input type="submit" class="btn btn-block btn-primary btn-md"
+								value="완료">
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- footer -->
+		<th:block th:replace="fragments/footer :: footerFragment">
+		</th:block>
+	</div>
+	<script>
+		function count_input() {
+			var ele = document.getElementById('locaul');
+			var eleCount = ele.childElementCount;
+
+			if (eleCount == 3) {
+				$("#modalbt").hide();
+			} else {
+				$("#modalbt").show();
+			}
 		}
-	
-</script>
-  </body>
+
+		var myNodelist = document.getElementsByClassName("lii");
+		var i;
+		for (i = 0; i < myNodelist.length; i++) {
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close1";
+			span.appendChild(txt);
+
+			//$(".close1").click(count_input);		????
+			//span.on('click', '.close1', handleClick); 안대애
+
+			myNodelist[i].appendChild(span);
+		}
+
+		var close1 = document.getElementsByClassName("close1");
+		var i;
+		for (i = 0; i < close1.length; i++) {
+			close1[i].onclick = function() {
+				var div = this.parentElement;
+				div.style.display = "none";
+			}
+		}
+
+		function newElement() {
+			var li = document.createElement("li");
+			var inputValue = document.getElementById("addthis").innerHTML;
+			var t = document.createTextNode(inputValue);
+
+			li.appendChild(t);
+			if (inputValue === '') {
+				alert("'인증하기' 버튼을 눌러주세요!");
+			} else {
+				document.getElementById("locaul").appendChild(li);
+			}
+
+			document.getElementById("addthis").value = "";
+
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close1";
+			span.appendChild(txt);
+			li.appendChild(span);
+
+			for (i = 0; i < close1.length; i++) {
+				close1[i].onclick = function() {
+					var div = this.parentElement;
+					div.remove();
+				}
+			}
+		}
+
+		var modal = document.getElementById("modalw");
+		var btn = document.getElementById("modalbt");
+		var span = document.getElementsByClassName("close2")[0];
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		function myFunction() {
+			var element = document.getElementById("checkthis");
+			element.classList.add("checklocation");
+		}
+		function isSame(){ 
+			$("input").keyup(function(){ 
+				var password=$("#password").val(); 
+				var repassword=$("#repassword").val(); 
+				if(password != "" || repassword != ""){ 
+					if(password == repassword){ 
+						$("#alert-success").show(); 
+						$("#alert-danger").hide(); 
+						$("#submit").removeAttr("disabled"); 
+					}else{ 
+						$("#alert-success").hide(); 
+						$("#alert-danger").show(); 
+						$("#submit").attr("disabled", "disabled"); 
+					} 
+				}
+			}); 
+		}
+
+	</script>
+</body>
 </html>
