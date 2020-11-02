@@ -6,7 +6,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <th:block th:replace="fragments/config :: configFragment"></th:block>
 <link rel="stylesheet" th:href="@{/css/chat.css}">
-
+<script>
+	var sStatus = null;
+	var oStatus = null;
+</script>
 <style> 
 .blind {
 	 position: absolute;
@@ -152,8 +155,22 @@
 						box.style.textAlign = "right";
 						box.style.borderColor = "#69bb66";
 					</script>
-					<i th:if="${c.senderId} != ${#authentication.name}" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
-					<span th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></span>
+					<script th:inline="javascript" th:if="${c.content == null}">
+						var index = /*[[ ${i.index} ]]*/;
+						var box = document.getElementsByClassName("chat-message")[index];
+						box.style.display = "none";
+					</script>
+					<script th:inline="javascript">
+						var sellerStatus = /*[[ ${c.sellerStatus} ]]*/;
+						var opponentStatus = /*[[ ${c.opponentStatus} ]]*/;
+						
+						if(sellerStatus == "done" && opponentStatus == "done") {
+							sStatus = sellerStatus;
+							oStatus = opponentStatus;
+					    }
+					</script>
+					<i th:if="${c.senderId != #authentication.name}" class="chat-avatar" th:text="${#strings.substring(c.senderId,0,1)}"></i>
+					<span th:if="${c.senderId != #authentication.name}" th:text="${c.senderId}"></span>
 					<p th:text="${c.content}"></p>
 					<p th:text="${#dates.format(c.sendDttm,'yyyy-MM-dd HH:mm')}" style="color:gray; font-size:8px;"></p>
 					<script th:inline="javascript" th:if="${c.senderId} != ${#authentication.name}">
@@ -247,6 +264,16 @@
 	</div>
 	<script th:src="@{/js/chat.js}"></script>
 	<script>
+		$(document).ready(function() {
+			connect();
+			
+			var modal = document.getElementById("starmodal");
+			console.log(modal);
+			if(sStatus == "done" && oStatus == "done") {
+				modal.style.display = "block";	
+			}
+		});
+	
 		function myFunction() {
 		  document.getElementById("myDropdown").classList.toggle("show");
 		}
@@ -266,10 +293,7 @@
 		
 		function asking() {
 			if(confirm("상품 거래가 끝났나요? 두 사람 모두 거래 완료를 누르면 서로에게 평점, 후기를 작성합니다.")) {
-				var modal = document.getElementById("starmodal");
-				var btn = document.getElementById("openstar");
-				var span = document.getElementsByClassName("close4")[0];
-				modal.style.display = "block";
+				changeStatus();
 			}
 		}
 		

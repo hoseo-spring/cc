@@ -52,6 +52,44 @@ public class MypageController {
 		productRepo.findByUserId(user.getId(), PageRequest.of(0, 5));
 		mm.put("user", user);
 		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
+
+		List<ChatMessage> chatsAll = chatRepo.findBySenderIdOrReceiverId(user.getId(), user.getId());
+		List<String> wss = new ArrayList<>();
+		List<ChatMessage> chats = new ArrayList<>();
+		if(!chatsAll.isEmpty()) {
+			for(ChatMessage chat : chatsAll) {
+				if(wss.isEmpty()) {
+					wss.add(chat.getWs());
+					ChatMessage c = null;
+					int i = 0;
+					boolean added = false;
+					while(!added) {
+						c = chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(i);
+						i++;
+						if(c.getContent() != null) {
+							chats.add(c);
+							added = true;
+						}
+					}
+				} else {
+					if(!wss.contains(chat.getWs())) {
+						wss.add(chat.getWs());
+						ChatMessage c = null;
+						int i = 0;
+						boolean added = false;
+						while(!added) {
+							c = chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(i);
+							i++;
+							if(c.getContent() != null) {
+								chats.add(c);
+								added = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		mm.put("chats", chats);
 		return "mypage";
 	}
 	
