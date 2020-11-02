@@ -65,8 +65,8 @@
             </div>
             
             <div class="p-4 mb-3 bg-white" th:each="p : ${product}" >
-              <p class="mb-0 font-weight-bold" th:text="|${p.name}|"></p>
-              <p class="mb-4" th:text="|${p.description}|"></p>
+              <p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
+              <p class="mb-4 descp" th:text="|${p.description}|"></p>
             </div>
 
 </div>
@@ -109,7 +109,7 @@
 	</table>
 	<table class="startb">
 		<tr>
-			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
+			<td rowspan="2"><a href=""><img src="images/p2.jpg" width="64px"></a></td>
 			<td>name</td><td class="stars">★★★★★</td>
 		</tr>
 		
@@ -175,7 +175,7 @@
   </div>
   
 <script>
-function openTab(evt, cityName) {
+function openTab(evt, tabname) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -185,7 +185,7 @@ function openTab(evt, cityName) {
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-  document.getElementById(cityName).style.display = "block";
+  document.getElementById(tabname).style.display = "block";
   evt.currentTarget.className += " active";
 }
 

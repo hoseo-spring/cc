@@ -46,19 +46,15 @@
             <h2 class="section-title mb-2" style="color:#fff">물건 목록</h2>
           </div>
         </div>
-        
-        <div class="dropdown" style="float:left; margin-right:20px;">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    정렬 &#5121;
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">가격순</a>
-		    <a class="dropdown-item" href="#">최신순</a>
-		    <a class="dropdown-item" href="#">회원 평점순</a>
-		    <a class="dropdown-item" href="#">인기순</a>
-		    <a class="dropdown-item" href="#">거리순</a>
-		  </div>
-		</div>
+        <div class="dropdown" style="float:left; margin-right:20px;background-color:white; border-radius:5px;">
+         <select class="selectpicker border rounded" data-style="btn-black" data-width="105px" title="정렬&nbsp;&#5121;">
+                      <option>최신순</option>
+                      <option>가격순</option>
+                      <option>회원평점순</option>
+                      <option>인기순</option>
+                      <option>거리순</option>
+                    </select>
+        </div>
 		
 		<div class="input-group-prepend">
 		    <label>
@@ -103,11 +99,11 @@
             <nav>
 			  <ul class="pagination">
 			    <li class="page-item"><a class="page-link" href="#">Pre</a></li>
-			    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-			    <li class="page-item"><a class="page-link" href="#">2</a></li>
-			    <li class="page-item"><a class="page-link" href="#">3</a></li>
-			    <li class="page-item"><a class="page-link" href="#">4</a></li>
-			    <li class="page-item"><a class="page-link" href="#">5</a></li>
+			    <li class="page-item active"><a class="page-link" href="/list?page=0">1</a></li>
+			    <li class="page-item"><a class="page-link" href="/list?page=1">2</a></li>
+			    <li class="page-item"><a class="page-link" href="/list?page=2">3</a></li>
+			    <li class="page-item"><a class="page-link" href="/list?page=3">4</a></li>
+			    <li class="page-item"><a class="page-link" href="/list?page=4">5</a></li>
 			    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 			  </ul>
 			</nav>
