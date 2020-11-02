@@ -13,13 +13,19 @@ var sellerId = null;
 var myId = null;
 var opponentId = null;
 var stompClient = null;
+var sellerStatus = null;
+var opponentStatus = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-function connect(event) {
+var modal = document.getElementById("starmodal");
+var btn = document.getElementById("openstar");
+var span = document.getElementsByClassName("close4")[0];
+
+function connect() {
 	productId = document.querySelector('#productID').value.trim();
 	sellerId = document.querySelector('#sellerID').value.trim();
     myId = document.querySelector('#myID').value.trim();
@@ -34,7 +40,6 @@ function connect(event) {
 
         stompClient.connect({}, onConnected, onError);
     }
-    event.preventDefault();
 }
 
 
@@ -64,12 +69,15 @@ function onError(error) {
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     var channel = (sellerId != myId) ? myId : opponentId;
+    
     if(messageContent && stompClient) {
         var chatMessage = {
             productId: productId,
             senderId : myId,
             receiverId : opponentId,
-            content: messageInput.value
+            content: messageInput.value,
+            sellerStatus : sellerStatus,
+            opponentStatus : opponentStatus
         };
         stompClient.send("/app/chat/send/" + productId + "." + channel, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
@@ -78,52 +86,86 @@ function sendMessage(event) {
 }
 
 
+function changeStatus() {
+	var channel = (sellerId != myId) ? myId : opponentId;
+	if(sellerId == myId) {
+		sellerStatus = "done";
+	} else {
+		opponentStatus = "done";
+	}
+    if(stompClient) {
+        var chatMessage = {
+            productId: productId,
+            senderId : myId,
+            receiverId : opponentId,
+            sellerStatus : sellerStatus,
+            opponentStatus : opponentStatus
+        };
+        stompClient.send("/app/chat/send/" + productId + "." + channel, {}, JSON.stringify(chatMessage));
+    }
+}
+
+
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
-
-    var messageElement = document.createElement('li');
-
-    messageElement.classList.add('chat-message');
-    
-    if(message.senderId == myId) {
-    	messageElement.style.borderRadius = "50px 0px 0px 50px";
-    	messageElement.style.textAlign = "right";
-    	messageElement.style.borderColor = "#69bb66";
-    } else {
-    	var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(message.senderId[0]);
-        avatarElement.appendChild(avatarText);
-        avatarElement.style['background-color'] = getAvatarColor(message.senderId);
-
-        messageElement.appendChild(avatarElement);
-        
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.senderId);
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
+    sellerStatus = message.sellerStatus;
+	opponentStatus = message.opponentStatus;
+	
+    if(sellerStatus == "done" && sellerId == myId) {
+    	btn.className = "secondary";
+    } else if(opponentStatus == "done" && sellerId != myId) {
+    	btn.className = "secondary";
     }
     
-    var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
-    
-    var dateElement = document.createElement('p');
-    var dateConvert = function(date) {
-    	var yyyymmdd = date.substring(0,10);
-    	var hh = Number(date.substring(11,13)) + 9;
-    	var mm = date.substring(14,16);
-    	return yyyymmdd + " " + hh + ":" + mm;
+    if(message.sellerStatus == "done" && message.opponentStatus == "done") {
+    	modal.style.display = "block";
     }
-    var dateText = document.createTextNode(dateConvert(message.sendDttm));
-    dateElement.appendChild(dateText);
-    dateElement.style.color = "gray";
-    dateElement.style.fontSize = "8px";
-
-    messageElement.appendChild(textElement);
-    messageElement.appendChild(dateElement);
-
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+    
+    if(message.content != null) {
+		var messageElement = document.createElement('li');
+	
+	    messageElement.classList.add('chat-message');
+	    
+	    if(message.senderId == myId) {
+	    	messageElement.style.borderRadius = "50px 0px 0px 50px";
+	    	messageElement.style.textAlign = "right";
+	    	messageElement.style.borderColor = "#69bb66";
+	    } else {
+	    	var avatarElement = document.createElement('i');
+	        var avatarText = document.createTextNode(message.senderId[0]);
+	        avatarElement.appendChild(avatarText);
+	        avatarElement.style['background-color'] = getAvatarColor(message.senderId);
+	
+	        messageElement.appendChild(avatarElement);
+	        
+	        var usernameElement = document.createElement('span');
+	        var usernameText = document.createTextNode(message.senderId);
+	        usernameElement.appendChild(usernameText);
+	        messageElement.appendChild(usernameElement);
+	    }
+	    
+	    var textElement = document.createElement('p');
+	    var messageText = document.createTextNode(message.content);
+	    textElement.appendChild(messageText);
+	    
+	    var dateElement = document.createElement('p');
+	    var dateConvert = function(date) {
+	    	var yyyymmdd = date.substring(0,10);
+	    	var hh = Number(date.substring(11,13)) + 9;
+	    	var mm = date.substring(14,16);
+	    	return yyyymmdd + " " + hh + ":" + mm;
+	    }
+	    var dateText = document.createTextNode(dateConvert(message.sendDttm));
+	    dateElement.appendChild(dateText);
+	    dateElement.style.color = "gray";
+	    dateElement.style.fontSize = "8px";
+	
+	    messageElement.appendChild(textElement);
+	    messageElement.appendChild(dateElement);
+	
+	    messageArea.appendChild(messageElement);
+	    messageArea.scrollTop = messageArea.scrollHeight;
+    }
 }
 
 

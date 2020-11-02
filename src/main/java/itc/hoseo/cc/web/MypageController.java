@@ -50,11 +50,31 @@ public class MypageController {
 			for(ChatMessage chat : chatsAll) {
 				if(wss.isEmpty()) {
 					wss.add(chat.getWs());
-					chats.add(chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(0));
+					ChatMessage c = null;
+					int i = 0;
+					boolean added = false;
+					while(!added) {
+						c = chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(i);
+						i++;
+						if(c.getContent() != null) {
+							chats.add(c);
+							added = true;
+						}
+					}
 				} else {
 					if(!wss.contains(chat.getWs())) {
 						wss.add(chat.getWs());
-						chats.add(chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(0));
+						ChatMessage c = null;
+						int i = 0;
+						boolean added = false;
+						while(!added) {
+							c = chatRepo.findByWsOrderBySendDttmDesc(chat.getWs()).get(i);
+							i++;
+							if(c.getContent() != null) {
+								chats.add(c);
+								added = true;
+							}
+						}
 					}
 				}
 			}

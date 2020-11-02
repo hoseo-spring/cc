@@ -27,7 +27,8 @@ public class ChatMessage {
 	private String content;
 	private String ws;
 	
-	private String type;
+	private String sellerStatus;
+	private String opponentStatus;
 	
 	private String productName;
 	private String sellerId;
