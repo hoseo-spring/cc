@@ -70,6 +70,7 @@ public class Product {
 	@Column
 	private Date soldDate;
 	
-	@Column
-	private String image;
+	@OneToMany
+	@JoinColumn(name="product_id")
+	private List<UploadFile> images;
 }

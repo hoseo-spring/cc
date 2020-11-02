@@ -74,7 +74,8 @@
           
             <a th:href="|/content?product_id=*{p.id}|"></a>
             <div class="job-listing-logo">
-              <img src="images/job_logo_1.jpg" alt="Image" class="img-fluid">
+              <img th:src="${p.images !=null and p.images.isEmpty() == false} ? |upload/product/${p.images[0].storedFileName}| : 'upload/product/nothing.jpg' " src="images/job_logo_1.jpg" alt="Image" class="img-fluid">
+
             </div>
 
             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">

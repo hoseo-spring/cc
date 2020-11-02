@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			.antMatchers("/mypage").access("hasRole('USER')")
 			.antMatchers("/chat").access("hasRole('USER')")
+			.antMatchers("/edit").access("hasRole('USER')")
 			.anyRequest().permitAll()
 			.and()
 			.logout()
