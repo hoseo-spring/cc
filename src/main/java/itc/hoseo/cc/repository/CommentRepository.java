@@ -12,6 +12,7 @@ import itc.hoseo.cc.domain.User;
 
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 	List<Comment> findBySendUserId(String sendUserId, Pageable page);
+	List<Comment> findByReceiveUserId(String receiveUserId, Pageable page);
 	List<Comment> findByProductIdAndReceiveUserId(String productId, String receiveUserId, Pageable page);
 	List<Comment> findByProductIdAndReceiveUserId(String productId, String receiveUserId);
 }

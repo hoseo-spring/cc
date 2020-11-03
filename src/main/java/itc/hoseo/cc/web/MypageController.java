@@ -26,6 +26,7 @@ import itc.hoseo.cc.domain.ChatMessage;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.ChatRepository;
+import itc.hoseo.cc.repository.CommentRepository;
 import itc.hoseo.cc.repository.FileRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
@@ -50,6 +51,9 @@ public class MypageController {
 	ChatRepository chatRepo;
 	
 	@Autowired
+	CommentRepository commentRepo;
+	
+	@Autowired
 	private Environment env;
 	
 	@RequestMapping(path = "/mypage", method = RequestMethod.GET) 
@@ -58,6 +62,8 @@ public class MypageController {
 		productRepo.findByUserId(user.getId(), PageRequest.of(0, 5));
 		mm.put("user", user);
 		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
+		
+		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
 
 		List<ChatMessage> chatsAll = chatRepo.findBySenderIdOrReceiverId(user.getId(), user.getId());
 		List<String> wss = new ArrayList<>();
