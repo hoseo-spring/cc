@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style>
+
 </style>
 </head>
 <div th:fragment="navbar" class="container-fluid">
@@ -13,19 +13,33 @@
 		<div class="site-logo col-4">
 			<a href="/">당근나라</a>
 		</div>
+		
+		<div class="col-12" style="margin-left:13vw;">
 		<nav class="site-navigation col-6">
 			<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-				<li><a href="/list?page=0">모든 물건</a></li>
-				<li><a href="/login">로그인</a></li>
+				<li><a href="/list?page=0">모든 물건</a></li>		
 			</ul>
 		</nav>
-		<nav sec:authorize="isAuthenticated()"
-			class="site-navigation col-3">
+		<nav sec:authorize="isAuthenticated()" class="site-navigation col-3">
 			<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
 				<li><a href="/mypage">내 정보</a></li>
-				<li><a href="/logout">로그아웃</a></li>
 			</ul>
 		</nav>
+
+<!--
+			<nav class="site-navigation col-6">
+				<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+					<li><a href="/login">로그인</a></li>
+				</ul>
+			</nav>
+			<nav sec:authorize="isAuthenticated()" class="site-navigation col-3">
+				<ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+					<li><a href="/logout">로그아웃</a></li>
+				</ul>
+			</nav>
+ -->
+
+		</div>
 		<div class="right-cta-menu text-right d-flex aligin-items-center col-6">
 			<div class="ml-auto">
 				<a sec:authorize="isAuthenticated()" 

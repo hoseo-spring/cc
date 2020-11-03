@@ -1,4 +1,5 @@
 <!Doctype html>
+<html>
 <head>
 <title>당근나라</title>
 <meta charset="utf-8">
@@ -53,9 +54,9 @@
 			<div class="container">
 				<div class="p-4 p-md-5 border rounded">
 
+					<form method="post" action="edit" name="edit" enctype="multipart/form-data">
 					<div class="row mb-5">
 						<div class="col-lg-12">
-							<form method="post" action="edit" name="edit" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="company-website-tw d-block">프로필 사진 업로드</label> <br>
 									<label class="btn btn-primary btn-md btn-file"> 사진 등록
@@ -80,7 +81,7 @@
 								 
 								<div class="form-group">
 									<label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label> <br>
-									<input type="button" id="modalbt" value="지역 인증하기1">
+									<input type="button" id="modalbt" value="지역 인증하기">
 									<div id="modalw" class="modal1">
 
 										<div class="modal-content1">
@@ -89,7 +90,7 @@
 												<h2>지역을 인증하세요</h2>
 											</div>
 											<div class="modal-body1">
-												<button onclick="myFunction()">인증하기</button>
+												<button onclick="myFunction()" class="checklocation">인증하기</button>
 
 												<div id="checkthis">
 													<p id="addthis">주소:</p>

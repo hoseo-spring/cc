@@ -12,10 +12,18 @@ body {
   .site-navbar .container-fluid {
     padding-left: 7rem;
     padding-right: 7rem; }
+    
+    @media (max-width: 1199.98px) {
+        .rightnav{
+	color:red;	
+}
+    }
+
     @media (max-width: 1199.98px) {
       .site-navbar .container-fluid {
         padding-left: 15px;
         padding-right: 15px; } }
+
   .site-navbar .site-logo {
     position: absolute;
     left: 5%; }
