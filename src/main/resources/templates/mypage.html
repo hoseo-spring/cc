@@ -60,11 +60,18 @@
 </div>
 
 <div id="sold" class="tabcontent">
-    <div class="card cards" onclick="location.href = 'detail.html'">
+	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0;">판매한 물건이 없습니다.</p>
+    <div class="card cards" th:if="${product.size() != 0}">
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
-            <div class="p-4 mb-3 bg-white" th:each="p : ${product}" >
+            <div class="p-4 mb-3 bg-white" th:each="p, i : ${product}" >
+            <script th:inline="javascript">
+	            var index = /*[[ ${i.index} ]]*/;
+				var box = document.getElementsByClassName("card cards")[index];
+				var link = "/content?product_id=" + /*[[ ${p.id} ]]*/;
+				box.addEventListener("click", function(){location.href = link});
+            </script>
               <p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
               <p class="mb-4 descp" th:text="|${p.description}|"></p>
             </div>
@@ -76,49 +83,31 @@
 
 <div id="star" class="tabcontent">
 
-	<table class="startb">
+	<p th:if="${comments.size() == 0}" style="text-align:center; padding:15% 0;">받은 평가 및 후기가 없습니다.</p>
+
+	<table class="startb" th:if="${comments.size() != 0}" th:each="c : ${comments}">
 		<tr>
 			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
-			<td>name</td><td class="stars">★★★★★</td>
+			<td th:text="${c.sendUserId}"></td>
+			<td th:if="${c.rate} == 0.5" class="stars">☆</td>
+			<td th:if="${c.rate} == 1.0" class="stars">★</td>
+			<td th:if="${c.rate} == 1.5" class="stars">★☆</td>
+			<td th:if="${c.rate} == 2.0" class="stars">★★</td>
+			<td th:if="${c.rate} == 2.5" class="stars">★★☆</td>
+			<td th:if="${c.rate} == 3.0" class="stars">★★★</td>
+			<td th:if="${c.rate} == 3.5" class="stars">★★★☆</td>
+			<td th:if="${c.rate} == 4.0" class="stars">★★★★</td>
+			<td th:if="${c.rate} == 4.5" class="stars">★★★★☆</td>
+			<td th:if="${c.rate} == 5.0" class="stars">★★★★★</td>
 		</tr>
 		
 		<tr>
-			<td class="starc">넘친절~</td>
+			<td class="starc" th:text="${c.content}"></td>
 		</tr>
 	</table>
 	
-		<table class="startb">
-		<tr>
-			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
-			<td>name</td><td class="stars">★★★★☆</td>
-		</tr>
-		
-		<tr>
-			<td class="starc">물건이 깨끗하고 좋아요</td>
-		</tr>
-	</table>
-	<table class="startb">
-		<tr>
-			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
-			<td>name</td><td class="stars">★★★★★</td>
-		</tr>
-		
-		<tr>
-			<td class="starc">제가좀 늦음 ㅎㅎㅈㅅ</td>
-		</tr>
-	</table>
-	<table class="startb">
-		<tr>
-			<td rowspan="2"><a href=""><img src="images/p2.jpg" width="64px"></a></td>
-			<td>name</td><td class="stars">★★★★★</td>
-		</tr>
-		
-		<tr>
-			<td class="starc">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ~</td>
-		</tr>
-	</table>
 	
-				</div>
+</div>
 				
 				
 <div id="chat" class="tabcontent">

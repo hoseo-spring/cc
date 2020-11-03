@@ -2,7 +2,10 @@ package itc.hoseo.cc.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,13 +23,9 @@ import lombok.NoArgsConstructor;
 @Table
 public class Locations {
 	@Id
-	private String id;
-	
-	// 위도
-	private Double latitude;
-	
-	// 경도
-	private Double longitude;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "locationsId")
+	private Long id;
 	
 	@OneToOne
 	private User user;
