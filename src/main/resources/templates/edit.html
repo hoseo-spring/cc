@@ -111,8 +111,11 @@
 									</div>
 
 									<ul id="locaul">
-										<li class="lii" id="lii">w</li>
+										<li th:if="${locations} != null" th:each="l : ${locations}" class="lii" id="lii"><p th:text="|*{l.state} *{l.city}|"></p></li>
 									</ul>
+									<input type="hidden" name="address0" id="address0" value="-">
+									<input type="hidden" name="address1" id="address1" value="-">
+									<input type="hidden" name="address2" id="address2" value="-">
 								</div>
 						</div>
 
@@ -139,6 +142,21 @@
 				$("#modalbt").attr('disabled', true);
 			} else {
 				$("#modalbt").attr('disabled', false);
+			}
+			
+			for (i = 0; i < 3; i++) {
+				var hidden = document.getElementById("address"+i);
+				hidden.value = "-";
+				console.log("hidden changed");
+			}
+			
+			for (i = 0; i < close1.length; i++) {
+				var hidden = document.getElementById("address"+i);
+				var lii = document.getElementsByClassName("lii");
+				if(lii.length != 0) {
+					hidden.value = lii[i].children[0].textContent;
+					console.log("hidden changed");
+				}
 			}
 		}
 
@@ -168,10 +186,13 @@
 
 		function newElement() {
 			var li = document.createElement("li");
+			li.className = "lii";
+			var p = document.createElement("p");
+			li.appendChild(p);
 			var inputValue = address.split(" ")[0] + " " + address.split(" ")[1];
 			var t = document.createTextNode(inputValue);
 
-			li.appendChild(t);
+			p.appendChild(t);
 			if (inputValue === '') {
 				alert("'인증하기' 버튼을 눌러주세요!");
 			} else {
@@ -317,6 +338,8 @@
 		 });
 		 
 		 mapping(37.566826, 126.9786567);
+		 
+		 count_input();
 		});
 		
 		function geoFindMe() {
