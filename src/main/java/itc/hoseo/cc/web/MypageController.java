@@ -3,6 +3,7 @@ package itc.hoseo.cc.web;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import itc.hoseo.cc.domain.ChatMessage;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.domain.User;
+import itc.hoseo.cc.repository.ChatRepository;
 import itc.hoseo.cc.repository.FileRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
@@ -42,6 +45,9 @@ public class MypageController {
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	ChatRepository chatRepo;
 	
 	@Autowired
 	private Environment env;
