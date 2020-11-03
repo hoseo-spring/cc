@@ -92,19 +92,18 @@
 												<p>현재 지역을 골라주세요. 지금 위치와 선택한 지역이 일치하면, 내 지역으로 추가할 수 있습니다.</p>
 												<select class="form-control region" name="sido2" id="sido2"></select>
     											<select class="form-control region" name="gugun2" id="gugun2"></select>
+    											<input type="hidden" name="verified" id="verified" value="false" />
 												<br>
-												<input type="button" id="find-me" class="btn btn-primary float-right location" style="background:#a3c554; border-color:#a3c554;" onclick="myFunction()" value="인증하기">
+												<input type="button" id="find-me" class="btn btn-primary float-right location" style="background:#a3c554; border-color:#a3c554;" value="인증하기">
 												<br><br>
 												<div id="map" style="width:100%; height:300px;">지도</div>
 												<div id="checkthis" style="text-align:center;">
-													<p id="addthis">
-														<p id = "status"></p>
-														<a id = "map-link" target="_blank" style="color:white;"></a><br>
-													</p>
+													<p id = "status"></p>
+													<a id = "map-link" target="_blank" style="color:white;"></a><br>
 												</div>
 												<br>
 												<span
-														onclick="newElement(); count_input(); modal.style.display = 'none';"
+														onclick="addLocation()"
 														class="btn btn-primary btn-lg float-right addBtn">지역 추가</span>
 												<br>
 											</div>
@@ -169,7 +168,7 @@
 
 		function newElement() {
 			var li = document.createElement("li");
-			var inputValue = document.getElementById("addthis").innerHTML;
+			var inputValue = address.split(" ")[0] + " " + address.split(" ")[1];
 			var t = document.createTextNode(inputValue);
 
 			li.appendChild(t);
@@ -178,8 +177,6 @@
 			} else {
 				document.getElementById("locaul").appendChild(li);
 			}
-
-			document.getElementById("addthis").value = "";
 
 			var span = document.createElement("span");
 			var txt = document.createTextNode("\u00D7");
@@ -229,10 +226,20 @@
 				}
 			}); 
 		}
-
+		function addLocation() {
+			if(document.getElementById("verified").value == "true") {
+				document.getElementById("verified").value = "false";
+				newElement(); 
+				count_input(); 
+				modal.style.display = 'none';
+			} else {
+				alert("먼저 지역을 인증해주세요.");
+			}
+		}
 	</script>
 	<script type="text/javascript">
 		var map = null;
+		var address = null;
 		function mapping(latitude, longitude) {
 			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		    var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -253,9 +260,13 @@
 		
 		function callback(result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
+				const mapLink = document.querySelector('#map-link');
 		
 		        console.log('지역 명칭 : ' + result[0].address_name);
 		        console.log('행정구역 코드 : ' + result[0].code);
+		        
+		        address = result[0].address_name;
+		        mapLink.textContent = address;
 		    }
 		};
 		
@@ -319,12 +330,22 @@
 		  function success(position) {
 		    const latitude  = position.coords.latitude;
 		    const longitude = position.coords.longitude;
+
+		    mapping(latitude, longitude);
 		
 		    status.textContent = '';
 		    mapLink.href = 'https://map.kakao.com/link/map/내위치,${latitude}/,${longitude}';
-		    mapLink.textContent = `위도: ${latitude} °, 경도: ${longitude} °`;
+		    mapLink.textContent = address;
 		    
-		    mapping(latitude, longitude);
+
+	        var addressSplit = address.split(" ")[0] + " " + address.split(" ")[1];
+	        var selected = document.getElementById("sido2").value + " " + document.getElementById("gugun2").value;
+	        if(addressSplit == selected) {
+	        	alert("인증되었습니다. 지역 추가 버튼을 눌러 " + selected + "를 추가하세요.");
+	        	document.getElementById("verified").value = "true";
+	        } else {
+	        	alert("선택한 지역과 현재 지역이 다릅니다. 다시 확인해주세요.");
+	        }
 		  }
 		
 		  function error() {
@@ -340,7 +361,18 @@
 		  
 		}
 		
-		document.querySelector('#find-me').addEventListener('click', geoFindMe);
+		function geoCheck() {
+			var sido = document.getElementById("sido2");
+			if(sido.value == "시/도를 선택하세요") {
+				alert("현재 지역을 선택해주세요.");
+				return false;
+			} else {
+				geoFindMe();
+				myFunction();
+			}
+		}
+		
+		document.querySelector('#find-me').addEventListener('click', geoCheck);
 	</script>
 </body>
 </html>
