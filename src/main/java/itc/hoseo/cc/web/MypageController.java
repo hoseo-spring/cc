@@ -148,10 +148,14 @@ public class MypageController {
 					
 					return uf;
 				}).collect(Collectors.toList());
-		fileRepo.saveAll(profile);
-
-		curUser.setImages(profile);
-		userRepo.save(curUser);
+		for(UploadFile p : profile) {
+			System.out.println(p);
+			if(!p.getFileName().equals("")) {
+				fileRepo.save(p);
+				curUser.setImages(profile);
+				userRepo.save(curUser);
+			}
+		}
 		
 		locaRepo.deleteAll(locaRepo.findByUser(curUser));
 		String[] address = {address0, address1, address2};
