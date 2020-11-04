@@ -129,8 +129,7 @@
 			<div class="chat-header">
 			<img src="../images/nin.jpg">
 			<div class="dropdown">
-			  <button th:if="${commentSize} == '0'" onclick="asking()" id="openstar" class="primary">거래 완료</button>
-			  <button th:if="${commentSize} != '0'" onclick="asking()" id="openstar" class="secondary" disabled>거래 완료</button>
+			  <button onclick="asking()" id="openstar" class="primary">거래 완료</button>
 			</div>
 			
 <!--						
@@ -161,7 +160,7 @@
 						var box = document.getElementsByClassName("chat-message")[index];
 						box.style.display = "none";
 					</script>
-					<script th:inline="javascript" th:if="${commentSize} == '0'">
+					<script th:inline="javascript">
 						var sellerStatus = /*[[ ${c.sellerStatus} ]]*/;
 						var opponentStatus = /*[[ ${c.opponentStatus} ]]*/;
 						

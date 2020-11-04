@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <meta name="keywords" content="" />
     <meta name="author" content="Free-Template.co" />
     <link rel="shortcut icon" href="ftco-32x32.png">
@@ -42,11 +43,7 @@
         <div class="row">
           <div class="col-md-7">
             <h1 class="text-white font-weight-bold" th:text="${product.name}"></h1>
-            <div class="custom-breadcrumbs">
-              <a href="/">메인 화면</a> <span class="mx-2 slash">/</span>
-              <a href="/list">모든 물건</a> <span class="mx-2 slash">/</span>
-              <span class="text-white"><strong th:text="${product.name}"></strong></span>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -78,11 +75,15 @@
               <figure class="mb-5"><img src="images/job_single_img_1.jpg" alt="Image" class="img-fluid rounded"></figure>
               </a>
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>물건 정보</h3>
-              <p th:text="| *{product.category} / *{product.location} / *{product.price}원|"></p>
-              <p th:text="${product.description}"></p>
+              <p style="font-size:1.1rem;" th:text="|카테고리 : *{product.category}|"></p>
+              <p style="font-size:1.1rem;" th:text="|가격 : *{product.price}원|"></p>
+              <p style="font-size:1.1rem;" th:text="|지역 : *{product.location}|"></p><hr>
+              <pre style="font-size:1rem;font-family: 'Nanum Gothic', sans-serif;" th:text="${product.description}"></pre>
             </div>
           </div>
-          <div class="col-lg-4">
+          
+          
+          <div class="col-lg-4" style="position:sticky;">
             <div class="bg-light p-3 border rounded mb-4">
               <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">판매자 정보</h3>
               <ul class="list-unstyled pl-3 mb-0">
@@ -99,8 +100,9 @@
 				<a th:if="${product.user.id} == ${#authentication.name}" class="btn btn-block btn-secondary btn-md" style="color:#bdbdbd;">채팅하기</a>
               </div>
             </div>
-
           </div>
+          
+          
         </div>
       </div>
     </section>
