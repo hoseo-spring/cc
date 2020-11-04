@@ -69,10 +69,11 @@
           <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
           
             <a th:href="|/content?product_id=*{p.id}|"></a>
-            <div class="job-listing-logo">
-              <img th:src="${p.images !=null and p.images.isEmpty() == false} ? |upload/product/${p.images[0].storedFileName}| : 'upload/product/nothing.jpg' " src="images/job_logo_1.jpg" alt="Image" class="img-fluid">
-
+             <div class="job-listing-logo listThumb">
+        
             </div>
+
+              
 
             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
               <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
