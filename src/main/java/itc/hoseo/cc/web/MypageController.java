@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import itc.hoseo.cc.domain.ChatMessage;
+import itc.hoseo.cc.domain.Locations;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.ChatRepository;
 import itc.hoseo.cc.repository.FileRepository;
+import itc.hoseo.cc.repository.LocationsRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
 import itc.hoseo.cc.service.SpringSecurityUserContext;
@@ -48,6 +50,9 @@ public class MypageController {
 	
 	@Autowired
 	ChatRepository chatRepo;
+	
+	@Autowired
+	LocationsRepository locaRepo;
 	
 	@Autowired
 	private Environment env;
@@ -108,7 +113,7 @@ public class MypageController {
 	
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.POST)
-	public String editPost(Model mm, @Valid User user, @RequestParam("img") List<MultipartFile> files) {
+	public String editPost(Model mm, @Valid User user, @RequestParam("img") List<MultipartFile> files, String address0, String address1, String address2) {
 		User curUser = userContext.getCurrentUser(); 
 		curUser.setPassword(user.getPassword());
 		curUser.setNickname(user.getNickname());
