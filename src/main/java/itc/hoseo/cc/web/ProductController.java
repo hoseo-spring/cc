@@ -43,12 +43,26 @@ public class ProductController {
 	
 	@RequestMapping(path = "/list", method = RequestMethod.GET) 
 	public String listGet(ModelMap mm, int page) {
-		mm.put("products", productRepo.findAll(PageRequest.of(page, 7)));
+		mm.put("products", productRepo.findAll(PageRequest.of(page, 5)));
+		int wholePage = (int)(productRepo.count()/5);
+		int prev = (page < 5) ? 0 : (page - 5);
+		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
+		mm.put("prev", prev);
+		mm.put("next", next);
+		mm.put("wholePage", wholePage);
+		mm.put("startPage", ((int)(page/5)*5));
 		return "list";
 	}
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
 	public String listPost(ModelMap mm, int page, String condition) {
-		mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition, PageRequest.of(page, 7)));
+		mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition, PageRequest.of(page, 5)));
+		int wholePage = (int)(productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition).size()/5);
+		int prev = (page < 5) ? 0 : (page - 5);
+		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
+		mm.put("prev", prev);
+		mm.put("next", next);
+		mm.put("wholePage", wholePage);
+		mm.put("startPage", ((int)(page/5)*5));
 		return "list";
 	}
 	

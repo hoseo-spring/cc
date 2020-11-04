@@ -147,7 +147,6 @@
 			for (i = 0; i < 3; i++) {
 				var hidden = document.getElementById("address"+i);
 				hidden.value = "-";
-				console.log("hidden changed");
 			}
 			
 			for (i = 0; i < close1.length; i++) {
@@ -155,7 +154,6 @@
 				var lii = document.getElementsByClassName("lii");
 				if(lii.length != 0) {
 					hidden.value = lii[i].children[0].textContent;
-					console.log("hidden changed");
 				}
 			}
 		}

@@ -84,8 +84,8 @@
                 <span class="icon-room"></span> <span th:text="${p.location}"></span>
               </div>
               <div class="job-listing-meta">
-                <span class="badge badge-success">판매중</span>
-                <span class="badge badge-default">판매됨</span>
+                <span th:if="${p.soldDate == null}" class="badge badge-success">판매중</span>
+                <span th:if="${p.soldDate != null}" class="badge badge-danger">판매됨</span>
               </div>
             </div>
             
@@ -94,20 +94,20 @@
 
         <div class="row pagination-wrap">
           <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-            <span></span>
-          </div>
-          <div class="col-md-6 text-center text-md-right">
             <nav>
 			  <ul class="pagination">
-			    <li class="page-item"><a class="page-link" href="#">Pre</a></li>
-			    <li class="page-item active"><a class="page-link" href="/list?page=0">1</a></li>
-			    <li class="page-item"><a class="page-link" href="/list?page=1">2</a></li>
-			    <li class="page-item"><a class="page-link" href="/list?page=2">3</a></li>
-			    <li class="page-item"><a class="page-link" href="/list?page=3">4</a></li>
-			    <li class="page-item"><a class="page-link" href="/list?page=4">5</a></li>
-			    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{prev}|">Pre</a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+1}"><a class="page-link" th:href="|/list?page=*{startPage}|" th:text="${startPage+1}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+2}"><a class="page-link" th:href="|/list?page=*{startPage+1}|" th:text="${startPage+2}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+3}"><a class="page-link" th:href="|/list?page=*{startPage+2}|" th:text="${startPage+3}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+4}"><a class="page-link" th:href="|/list?page=*{startPage+3}|" th:text="${startPage+4}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+5}"><a class="page-link" th:href="|/list?page=*{startPage+4}|" th:text="${startPage+5}"></a></li>
+			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{next}|">Next</a></li>
 			  </ul>
 			</nav>
+          </div>
+          <div class="col-md-6 text-center text-md-right">
+            <span></span>
           </div>
         </div>
 

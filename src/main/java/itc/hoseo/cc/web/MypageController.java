@@ -137,10 +137,29 @@ public class MypageController {
 					
 					return uf;
 				}).collect(Collectors.toList());
-		fileRepo.saveAll(profile);
-
-		curUser.setImages(profile);
-		userRepo.save(curUser);
+		for(UploadFile p : profile) {
+			System.out.println(p);
+			if(!p.getFileName().equals("")) {
+				fileRepo.save(p);
+				curUser.setImages(profile);
+				userRepo.save(curUser);
+			}
+		}
+		
+		locaRepo.deleteAll(locaRepo.findByUser(curUser));
+		String[] address = {address0, address1, address2};
+		for(int i = 0; i < address.length; i++) {
+			if(!address[i].equals("-")) {
+				Locations location = Locations.
+						builder().
+						state(address[i].split(" ")[0]).
+						city(address[i].split(" ")[1]).
+						user(curUser).
+						build();
+				locaRepo.save(location);
+			}
+		}
+		
 		return "redirect:/mypage";
 	}
 }

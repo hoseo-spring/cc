@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import itc.hoseo.cc.domain.ChatMessage;
 import itc.hoseo.cc.domain.Comment;
+import itc.hoseo.cc.domain.Product;
 import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.ChatRepository;
 import itc.hoseo.cc.repository.CommentRepository;
@@ -65,6 +66,9 @@ public class ChatController {
 		commentRepo.save(
 					Comment.builder().rate(Double.parseDouble(star)).content(content).sendUserId(sendUserId).receiveUserId(receiveUserId).productId(productId).uploadDate(new Date()).build()
 				);
+		Product product = productRepo.findById(Long.parseLong(productId)).get();
+		product.setSoldDate(new Date());
+		productRepo.save(product);
 		return "redirect:/chat?product_id="+productId+"&seller_id="+sellerId+"&opponent_id="+receiveUserId;
 	}
 }
