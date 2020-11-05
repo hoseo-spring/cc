@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <meta name="keywords" content="" />
     <meta name="author" content="Free-Template.co" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link rel="shortcut icon" href="ftco-32x32.png">
 	<th:block th:replace="fragments/config :: configFragment"></th:block>
 	    
@@ -62,8 +64,8 @@
                 <div>
                 <span class="m-2" th:text="${product.category}"><span class="icon-room mr-2"></span></span>
                   <span class="m-2" th:text="${product.location}"><span class="icon-room mr-2"></span></span>
-                  <span class="m-2" th:if="${product.soldDate} == null">판매 중</span>
-                  <span class="m-2" th:if="${product.soldDate} != null">판매 완료</span>
+                  <span class="m-2" th:if="${product.soldDate} == null" style="background-color:#89ba16; color:white; padding:5px; border-radius:10px;">판매 중</span>
+                  <span class="m-2" th:if="${product.soldDate} != null" style="background-color:#adadad; color:white; padding:5px; border-radius:10px;">판매 완료</span>
                 </div>
               </div>
             </div>
@@ -72,19 +74,44 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="mb-5">
-              <a target="_blank" href="images/job_single_img_1.jpg">
-              <figure class="mb-5"><img src="images/job_single_img_1.jpg" alt="Image" class="img-fluid rounded"></figure>
-              </a>
+              
+              <!-- <a target="_blank" href="images/job_single_img_1.jpg"> -->
+              
+        <figure class="mb-5">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="images/job_single_img_1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="images/job_single_img_1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="images/job_single_img_1.jpg">
+					</div>
+				</div>
+
+				<div class="swiper-pagination" style="color:white; text-shadow:2px 2px 5px black;"></div>
+
+				<div class="swiper-button-next" style="color:white; text-shadow:5px 5px 5px black;"></div>
+				<div class="swiper-button-prev" style="color:white; text-shadow:5px 5px 5px black;"></div>
+			</div>
+		</figure>
+	          
+              <!-- </a> -->
+              
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>물건 정보</h3>
               <p style="font-size:1.1rem;" th:text="|카테고리 : *{product.category}|"></p>
               <p style="font-size:1.1rem;" th:text="|가격 : *{#numbers.formatInteger(product.price, 0, 'COMMA')}원|"></p>
               <p style="font-size:1.1rem;" th:text="|지역 : *{product.location}|"></p><hr>
               <pre style="font-size:1rem;font-family: 'Nanum Gothic', sans-serif;" th:text="${product.description}"></pre>
             </div>
+            
+            
           </div>
           
-          
-          <div class="col-lg-4" style="position:sticky;">
+          <table style="position:sticky; top:30px;"><tr><td>
+          <div id="navbar" style="width:300px;">
             <div class="bg-light p-3 border rounded mb-4">
               <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">판매자 정보</h3>
               <ul class="list-unstyled pl-3 mb-0">
@@ -100,9 +127,14 @@
 				<a th:if="${product.user.id} != ${#authentication.name}" th:href="|/chat?product_id=*{product.id}&seller_id=*{product.user.id}&opponent_id=*{product.user.id}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
 				<a th:if="${product.user.id} == ${#authentication.name}" class="btn btn-block btn-secondary btn-md" style="color:#bdbdbd;">채팅하기</a>
               </div>
+              <div>
             </div>
+            </div>
+          <br>
+            <a href="/revise" class="btn btn-block btn-info btn-sm">수정하기</a>
+            <p onclick="removeCheck()" class="btn btn-block btn-info btn-sm">삭제하기</p>
           </div>
-          
+        </td></tr></table>
           
         </div>
       </div>
@@ -111,5 +143,26 @@
 		<th:block th:replace="fragments/footer :: footerFragment"></th:block>
   
   </div>
+<script>
+function removeCheck() {
+	 if (confirm("글을 삭제하시겠습니까?") == true){
+	     document.remove.submit();
+	     document.location.href="/list?page=0";
+	 }else{
+	     return false;
+	 }
+	}
+	
+var swiper = new Swiper('.swiper-container', {
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
   </body>
 </html>

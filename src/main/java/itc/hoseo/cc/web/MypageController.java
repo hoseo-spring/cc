@@ -73,6 +73,12 @@ public class MypageController {
 			Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(5.0).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
 		);
 		commentRepo.save(
+				Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(4.0).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
+			);
+		commentRepo.save(
+				Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(2.5).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
+			);
+		commentRepo.save(
 			Comment.builder().productId("8").content("좋았어요").rate(4.5).receiveUserId("rlacjswo").sendUserId("test").uploadDate(new Date()).build()
 		);
 	}
