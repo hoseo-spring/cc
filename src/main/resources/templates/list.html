@@ -116,8 +116,9 @@
           <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
           
             <a th:href="|/content?product_id=*{p.id}|"></a>
-             <div class="job-listing-logo listThumb">
+             <div class="job-listing-logo listThumb" style="overflow:hidden; ">
         
+<img th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' " style="display:inline; margin:auto;">
             </div>
 
               

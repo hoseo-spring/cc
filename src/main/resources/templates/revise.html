@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="utf-8">
   <head>
     <title>당근나라</title>
     <meta charset="utf-8">
@@ -37,7 +37,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">물건 등록하기</h1>
+            <h1 class="text-white font-weight-bold">물건 수정하기</h1>
           </div>
         </div>
       </div>
@@ -57,18 +57,12 @@
 						<label for="file">업로드</label> <input type="file" id="file" multiple>
 						<input class="upload-name" value="파일선택" disabled>
 					</div>
-				<!-- 
-                <label class="btn btn-primary btn-md btn-file">
-                  	파일 등록
-                  	
-                  	<input type="file" name="img" id="img">
-                </label>
-                 -->
+	
               </div>
 		
               <div class="form-group">
                 <label for="name">제목</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="물건 정보">
+                <input type="text" th:value="${product.name}" class="form-control" id="name" name="name" placeholder="물건 정보">
               </div>
               <div class="form-group">
                 <label for="category">카테고리</label>
@@ -85,7 +79,7 @@
               </div>
               <div class="form-group">
                 <label for="price">가격</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="가격 (숫자만 입력)">
+                <input type="text" th:value="${product.price}" class="form-control" id="price" name="price" placeholder="가격 (숫자만 입력)">
               </div>
               <div class="form-group">
                 <label for="location">지역</label>
@@ -93,16 +87,14 @@
                       <option th:each="l : ${locations}" th:value="|*{l.state} *{l.city}|" th:text="|*{l.state} *{l.city}|"></option>
                 </select>
               </div>
-              
+              </div>
               <div class="form-group">
-                <label for="description">상세 설명</label>
-                <textarea name="description" id="description1" rows="10" style="width:100%; resize: none;"></textarea>
+                <label for="description">상세 설명</label><br>
+                <textarea name="description" id="description1" rows="10" style="width:100%; resize: none;">th:text="${product.description}"</textarea>
               </div>
-              </div>
-              
           </div>
          <div class="col-6">
-                <input type="submit" id="savebt" class="btn btn-block btn-primary btn-md" value="등록">
+                <input type="submit" class="btn btn-block btn-primary btn-md" value="등록">
               </div>
         </div>
         </form>
@@ -149,15 +141,6 @@
 		      this.selectionEnd = start + 1;
 		  }
 		});
-	
-    var checkUnload = true;
-    $(window).on("beforeunload", function(){
-        if(checkUnload) return "이 페이지를 벗어나면 작성중이던 내용을 잃습니다.";
-    });
-    
-    $("#savebt").on("click", function(){
-        checkUnload = false;
-    });
 	</script>
   </body>
 </html>
