@@ -42,8 +42,34 @@ public class ProductController {
 	private Environment env;
 	
 	@RequestMapping(path = "/list", method = RequestMethod.GET) 
-	public String listGet(ModelMap mm, int page) {
-		mm.put("products", productRepo.findAll(PageRequest.of(page, 5)));
+	public String listGet(ModelMap mm, int page, String sort, String soldCheck) {
+		Boolean showSold = false;
+		if(soldCheck.equals("true")) {
+			showSold = false;
+		} else {
+			showSold = true;
+		}
+		
+		if(sort.equals("latest")) {
+			if(showSold) {
+				mm.put("products", productRepo.findAll(PageRequest.of(page, 5)));
+			} else {
+				mm.put("products", productRepo.findBySoldDateNull(PageRequest.of(page, 5)));
+			}
+		} else if(sort.equals("priceAsc")) {
+			if(showSold) {
+				mm.put("product", productRepo.findByOrderByPrice(PageRequest.of(page, 5)));
+			} else {
+				mm.put("products", productRepo.findBySoldDateNullOrderByPrice(PageRequest.of(page, 5)));
+			}
+		} else if(sort.equals("priceDesc")) {
+			if(showSold) {
+				mm.put("product", productRepo.findByOrderByPriceDesc(PageRequest.of(page, 5)));
+			} else {
+				mm.put("products", productRepo.findBySoldDateNullOrderByPriceDesc(PageRequest.of(page, 5)));
+			}
+		}
+		
 		int wholePage = (int)(productRepo.count()/5);
 		int prev = (page < 5) ? 0 : (page - 5);
 		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
@@ -119,7 +145,7 @@ public class ProductController {
 //						.uploadDate(new Date())
 //						.user(userContext.getCurrentUser())
 //						.build());
-		return "redirect:list?page=0";
+		return "redirect:list?page=0&sort=latest&soldCheck=false";
 	}
 	
 	@RequestMapping(path = "/content", method = RequestMethod.GET) 

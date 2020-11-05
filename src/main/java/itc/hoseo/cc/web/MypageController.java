@@ -27,6 +27,7 @@ import itc.hoseo.cc.domain.Locations;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.domain.User;
 import itc.hoseo.cc.repository.ChatRepository;
+import itc.hoseo.cc.repository.CommentRepository;
 import itc.hoseo.cc.repository.FileRepository;
 import itc.hoseo.cc.repository.LocationsRepository;
 import itc.hoseo.cc.repository.ProductRepository;
@@ -50,6 +51,9 @@ public class MypageController {
 	
 	@Autowired
 	ChatRepository chatRepo;
+
+	@Autowired
+	CommentRepository commentRepo;
 	
 	@Autowired
 	LocationsRepository locaRepo;
@@ -63,6 +67,8 @@ public class MypageController {
 		productRepo.findByUserId(user.getId(), PageRequest.of(0, 5));
 		mm.put("user", user);
 		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
+		
+		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
 
 		List<ChatMessage> chatsAll = chatRepo.findBySenderIdOrReceiverId(user.getId(), user.getId());
 		List<String> wss = new ArrayList<>();
@@ -108,6 +114,7 @@ public class MypageController {
 	@RequestMapping(path="/edit",  method = RequestMethod.GET)
 	public String editGet(ModelMap mm) {
 		mm.put("user", userContext.getCurrentUser());
+		mm.put("locations", locaRepo.findByUser(userContext.getCurrentUser()));
 		return "edit";
 	}
 	
@@ -117,7 +124,6 @@ public class MypageController {
 		User curUser = userContext.getCurrentUser(); 
 		curUser.setPassword(user.getPassword());
 		curUser.setNickname(user.getNickname());
-		userRepo.save(curUser);
 		
 		final String uploadDir = env.getProperty("cc.uploaddir.profile");
 		

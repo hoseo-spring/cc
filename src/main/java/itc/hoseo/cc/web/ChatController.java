@@ -58,6 +58,7 @@ public class ChatController {
 		} else {
 			mm.put("chats", chatRepo.findByWs(product_id+"."+principal.getName()));
 		}
+		mm.put("commentSize", commentRepo.findByProductIdAndReceiveUserId(product_id, opponent_id).size());
 		return "chat";
 	}
 	

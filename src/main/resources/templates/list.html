@@ -48,20 +48,40 @@
         </div>
         <div class="dropdown" style="float:left; margin-right:20px;background-color:white; border-radius:5px;">
          <select class="selectpicker border rounded" data-style="btn-black" data-width="105px" title="정렬&nbsp;&#5121;">
-                      <option>최신순</option>
-                      <option>가격순</option>
-                      <option>회원평점순</option>
-                      <option>인기순</option>
-                      <option>거리순</option>
+                      <option id="latest" value="latest">최신순</option>
+                      <option id="priceAsc" value="priceAsc">가격낮은순</option>
+                      <option id="priceDesc" value="priceDesc">가격높은순</option>
                     </select>
+          <script th:inline="javascript">
+          	var sort = document.getElementsByClassName("selectpicker border rounded")[0];
+          	var link1 = "/list?page=" + /*[[ ${param.page[0]} ]]*/ 
+			+ "&soldCheck=" + /*[[ ${param.soldCheck[0]} ]]*/
+			+ "&sort=";
+          	sort.addEventListener("change", function(){location.href=link1+event.target.value});
+		  </script>
         </div>
 		
 		<div class="input-group-prepend">
-		    <label>
+		    <label id="soldCheckLabel">
+		    <script th:inline="javascript">
+			    var soldCheck = /*[[ ${param.soldCheck[0]} ]]*/;
+			    if(soldCheck == "true") {
+			    	soldCheck = "false";
+			    } else {
+			    	soldCheck = "true";
+			    }
+				var label = document.getElementById("soldCheckLabel");
+				var link2 = "/list?page=" + /*[[ ${param.page[0]} ]]*/ 
+						+ "&sort=" + /*[[ ${param.sort[0]} ]]*/ 
+						+ "&soldCheck=" + soldCheck;
+				label.addEventListener("click", function(){location.href = link2});
+		    </script>
 		    <div class="input-group-text">
-		      <input type="checkbox" checked="checked">&nbsp;거래 완료된 물건 제외
-		      </div></label>
-		    
+		      <input type="checkbox" name="soldCheck" id="soldCheck" th:if="${param.soldCheck[0]} == 'true'" checked="checked">
+		      <input type="checkbox" name="soldCheck" id="soldCheck" th:if="${param.soldCheck[0]} == 'false'">
+		      &nbsp;거래 완료된 물건 제외
+		    </div>
+		    </label>
 		  </div>
 		<br>
         
