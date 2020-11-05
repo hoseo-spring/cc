@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,28 +50,35 @@ public class ProductController {
 		} else {
 			showSold = true;
 		}
+		int count = 0;
 		
 		if(sort.equals("latest")) {
 			if(showSold) {
-				mm.put("products", productRepo.findAll(PageRequest.of(page, 5)));
+				count = productRepo.findAll().size();
+				mm.put("products", productRepo.findByOrderByIdDesc(PageRequest.of(page, 5)));
 			} else {
-				mm.put("products", productRepo.findBySoldDateNull(PageRequest.of(page, 5)));
+				count = productRepo.findBySoldDateNull().size();
+				mm.put("products", productRepo.findBySoldDateNullOrderByIdDesc(PageRequest.of(page, 5)));
 			}
 		} else if(sort.equals("priceAsc")) {
 			if(showSold) {
-				mm.put("product", productRepo.findByOrderByPrice(PageRequest.of(page, 5)));
+				count = productRepo.findAll().size();
+				mm.put("products", productRepo.findByOrderByPrice(PageRequest.of(page, 5)));
 			} else {
+				count = productRepo.findBySoldDateNull().size();
 				mm.put("products", productRepo.findBySoldDateNullOrderByPrice(PageRequest.of(page, 5)));
 			}
 		} else if(sort.equals("priceDesc")) {
 			if(showSold) {
-				mm.put("product", productRepo.findByOrderByPriceDesc(PageRequest.of(page, 5)));
+				count = productRepo.findAll().size();
+				mm.put("products", productRepo.findByOrderByPriceDesc(PageRequest.of(page, 5)));
 			} else {
+				count = productRepo.findBySoldDateNull().size();
 				mm.put("products", productRepo.findBySoldDateNullOrderByPriceDesc(PageRequest.of(page, 5)));
 			}
 		}
-		
-		int wholePage = (int)(productRepo.count()/5);
+
+		int wholePage = ((count % 5) == 0) ? (count / 5) : ((int)(count / 5)) + 1;
 		int prev = (page < 5) ? 0 : (page - 5);
 		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
 		mm.put("prev", prev);
@@ -80,9 +88,41 @@ public class ProductController {
 		return "list";
 	}
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
-	public String listPost(ModelMap mm, int page, String condition) {
-		mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition, PageRequest.of(page, 5)));
-		int wholePage = (int)(productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition).size()/5);
+	public String listPost(ModelMap mm, int page, String condition, String sort, String soldCheck) {
+		Boolean showSold = false;
+		if(soldCheck.equals("true")) {
+			showSold = false;
+		} else {
+			showSold = true;
+		}
+		int count = 0;
+		
+		if(sort.equals("latest")) {
+			if(showSold) {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsOrderByIdDesc(condition, condition, condition, PageRequest.of(page, 5)));
+			} else {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNull(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNullOrderByIdDesc(condition, condition, condition, PageRequest.of(page, 5)));
+			}
+		} else if(sort.equals("priceAsc")) {
+			if(showSold) {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsOrderByPrice(condition, condition, condition, PageRequest.of(page, 5)));
+			} else {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNull(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNullOrderByPrice(condition, condition, condition, PageRequest.of(page, 5)));
+			}
+		} else if(sort.equals("priceDesc")) {
+			if(showSold) {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContains(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsOrderByPriceDesc(condition, condition, condition, PageRequest.of(page, 5)));
+			} else {
+				count = productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNull(condition, condition, condition).size();
+				mm.put("products", productRepo.findByNameContainsOrLocationContainsOrCategoryContainsAndSoldDateNullOrderByPriceDesc(condition, condition, condition, PageRequest.of(page, 5)));
+			}
+		}
+		int wholePage = ((count % 5) == 0) ? (count / 5) : ((int)(count / 5)) + 1;
 		int prev = (page < 5) ? 0 : (page - 5);
 		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
 		mm.put("prev", prev);

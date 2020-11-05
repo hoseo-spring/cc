@@ -47,23 +47,36 @@
           </div>
         </div>
         <div class="dropdown" style="float:left; margin-right:20px;background-color:white; border-radius:5px;">
+         <form name="search" method="post" action="/list">
+         	<input type="hidden" name="page" />
+         	<input type="hidden" name="sort" />
+         	<input type="hidden" name="soldCheck" />
+         	<input type="hidden" name="condition" />
+         </form>
          <select class="selectpicker border rounded" data-style="btn-black" data-width="105px" title="정렬&nbsp;&#5121;">
                       <option id="latest" value="latest">최신순</option>
                       <option id="priceAsc" value="priceAsc">가격낮은순</option>
                       <option id="priceDesc" value="priceDesc">가격높은순</option>
                     </select>
-          <script th:inline="javascript">
+          <script th:inline="javascript" th:if="${param.condition == null}">
           	var sort = document.getElementsByClassName("selectpicker border rounded")[0];
           	var link1 = "/list?page=" + /*[[ ${param.page[0]} ]]*/ 
 			+ "&soldCheck=" + /*[[ ${param.soldCheck[0]} ]]*/
 			+ "&sort=";
           	sort.addEventListener("change", function(){location.href=link1+event.target.value});
 		  </script>
+		  <script th:inline="javascript" th:if="${param.condition != null}">
+		  	var sort = document.getElementsByClassName("selectpicker border rounded")[0];
+		  	document.search.page.value = /*[[ ${param.page[0]} ]]*/;
+		  	document.search.soldCheck.value = /*[[ ${param.soldCheck[0]} ]]*/;
+		  	document.search.condition.value = /*[[ ${param.condition[0]} ]]*/;
+		  	sort.addEventListener("change", function(){document.search.sort.value = event.target.value; document.search.submit();});
+		  </script>
         </div>
 		
 		<div class="input-group-prepend">
 		    <label id="soldCheckLabel">
-		    <script th:inline="javascript">
+		    <script th:inline="javascript" th:if="${param.condition == null}">
 			    var soldCheck = /*[[ ${param.soldCheck[0]} ]]*/;
 			    if(soldCheck == "true") {
 			    	soldCheck = "false";
@@ -76,6 +89,20 @@
 						+ "&soldCheck=" + soldCheck;
 				label.addEventListener("click", function(){location.href = link2});
 		    </script>
+		    <script th:inline="javascript" th:if="${param.condition != null}">
+		    	var soldCheck = /*[[ ${param.soldCheck[0]} ]]*/;
+		    	if(soldCheck == "true") {
+			    	soldCheck = "false";
+			    } else {
+			    	soldCheck = "true";
+			    }
+				var label = document.getElementById("soldCheckLabel");
+			  	document.search.page.value = /*[[ ${param.page[0]} ]]*/;
+			  	document.search.sort.value = /*[[ ${param.sort[0]} ]]*/;
+			  	document.search.soldCheck.value = soldCheck;
+			  	document.search.condition.value = /*[[ ${param.condition[0]} ]]*/;
+			  	label.addEventListener("click", function(){document.search.submit();});
+		  	</script>
 		    <div class="input-group-text">
 		      <input type="checkbox" name="soldCheck" id="soldCheck" th:if="${param.soldCheck[0]} == 'true'" checked="checked">
 		      <input type="checkbox" name="soldCheck" id="soldCheck" th:if="${param.soldCheck[0]} == 'false'">
@@ -117,11 +144,11 @@
             <nav>
 			  <ul class="pagination">
 			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{prev}|">Pre</a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+1}"><a class="page-link" th:href="|/list?page=*{startPage}|" th:text="${startPage+1}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+2}"><a class="page-link" th:href="|/list?page=*{startPage+1}|" th:text="${startPage+2}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+3}"><a class="page-link" th:href="|/list?page=*{startPage+2}|" th:text="${startPage+3}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+4}"><a class="page-link" th:href="|/list?page=*{startPage+3}|" th:text="${startPage+4}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+5}"><a class="page-link" th:href="|/list?page=*{startPage+4}|" th:text="${startPage+5}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+1}"><a class="page-link" th:href="|/list?page=*{startPage}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+1}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+2}"><a class="page-link" th:href="|/list?page=*{startPage+1}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+2}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+3}"><a class="page-link" th:href="|/list?page=*{startPage+2}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+3}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+4}"><a class="page-link" th:href="|/list?page=*{startPage+3}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+4}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+5}"><a class="page-link" th:href="|/list?page=*{startPage+4}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+5}"></a></li>
 			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{next}|">Next</a></li>
 			  </ul>
 			</nav>
