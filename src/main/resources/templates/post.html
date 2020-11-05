@@ -54,7 +54,7 @@
               <div class="form-group">
                 <label for="company-website-tw d-block">이미지 업로드</label> <br/>
 					<div class="filebox">
-						<label for="file">업로드</label> <input type="file" id="file" multiple>
+						<label for="file">업로드</label> <input type="file" id="file" accept="image/*" multiple>
 						<input class="upload-name" value="파일선택" disabled>
 					</div>
 				<!-- 
@@ -101,7 +101,7 @@
               </div>
               
           </div>
-         <div class="col-6">
+         <div class="col-12">
                 <input type="submit" id="savebt" class="btn btn-block btn-primary btn-md" value="등록">
               </div>
         </div>
@@ -158,6 +158,7 @@
     $("#savebt").on("click", function(){
         checkUnload = false;
     });
+    
 	</script>
   </body>
 </html>
