@@ -62,7 +62,8 @@
                 <div>
                 <span class="m-2" th:text="${product.category}"><span class="icon-room mr-2"></span></span>
                   <span class="m-2" th:text="${product.location}"><span class="icon-room mr-2"></span></span>
-                  <span class="m-2">판매 중</span>
+                  <span class="m-2" th:if="${product.soldDate} == null">판매 중</span>
+                  <span class="m-2" th:if="${product.soldDate} != null">판매 완료</span>
                 </div>
               </div>
             </div>

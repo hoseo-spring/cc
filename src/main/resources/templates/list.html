@@ -143,13 +143,13 @@
           <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
             <nav>
 			  <ul class="pagination">
-			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{prev}|">Pre</a></li>
+			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{prev}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|">Pre</a></li>
 			    <li class="page-item" th:if="${wholePage} >= ${startPage+1}"><a class="page-link" th:href="|/list?page=*{startPage}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+1}"></a></li>
 			    <li class="page-item" th:if="${wholePage} >= ${startPage+2}"><a class="page-link" th:href="|/list?page=*{startPage+1}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+2}"></a></li>
 			    <li class="page-item" th:if="${wholePage} >= ${startPage+3}"><a class="page-link" th:href="|/list?page=*{startPage+2}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+3}"></a></li>
 			    <li class="page-item" th:if="${wholePage} >= ${startPage+4}"><a class="page-link" th:href="|/list?page=*{startPage+3}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+4}"></a></li>
 			    <li class="page-item" th:if="${wholePage} >= ${startPage+5}"><a class="page-link" th:href="|/list?page=*{startPage+4}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+5}"></a></li>
-			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{next}|">Next</a></li>
+			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{next}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|">Next</a></li>
 			  </ul>
 			</nav>
           </div>

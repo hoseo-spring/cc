@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import itc.hoseo.cc.domain.Product;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.repository.FileRepository;
+import itc.hoseo.cc.repository.LocationsRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.service.SpringSecurityUserContext;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,9 @@ public class ProductController {
 	
 	@Autowired
 	private FileRepository fileRepo;
+	
+	@Autowired
+	private LocationsRepository locaRepo;
 	
 	@Autowired
 	private SpringSecurityUserContext userContext;
@@ -134,6 +138,12 @@ public class ProductController {
 	
 	@RequestMapping(path = "/post", method = RequestMethod.GET) 
 	public String postGet(ModelMap mm) {
+		System.out.println(locaRepo.findByUser(userContext.getCurrentUser()));
+		if(!locaRepo.findByUser(userContext.getCurrentUser()).isEmpty()) {
+			mm.put("locations", locaRepo.findByUser(userContext.getCurrentUser()));
+		} else {
+			return "postNoLocations";
+		}
 		return "post";
 	}
 
@@ -165,7 +175,7 @@ public class ProductController {
 				}).collect(Collectors.toList());
 		
 		fileRepo.saveAll(images);
-				
+		
 		product.setImages(images);
 		product.setUploadDate(new Date());
 		product.setUser(userContext.getCurrentUser());

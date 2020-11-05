@@ -43,15 +43,19 @@ public class MainController {
 		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
-				new Date(), null, userRepo.findByNickname("김천재"), "서울",  null, null);
+				new Date(), null, userRepo.findByNickname("김천재"), "서울특별시 송파구",  null, null);
 		Product p2 = new Product(null, "파이썬 책", "도서", 7000, "중고감 약간 있는 파이썬 책 팝니다",
-				new Date(), null, userRepo.findByNickname("테스트"), "서울",  null, null);
+				new Date(), null, userRepo.findByNickname("테스트"), "서울특별시 영등포구",  null, null);
 		Product p3 = new Product(null, "닌텐도 스위치 포켓몬스터 소드", "전자/가전", 25000, "별로 안썼구요 케이스 포함입니다",
-				new Date(), null, userRepo.findByNickname("테스트"), "경기", null, null);
+				new Date(), null, userRepo.findByNickname("테스트"), "경기도 안양시", null, null);
 		Product p4 = new Product(null, "링피트", "전자/가전", 100000, "링, 게임팩만 팝니다. 본체 X",
-				new Date(), null, userRepo.findByNickname("테스트"), "경기", null, null);
-		Product p5 = Product.builder().name("청바지").category("의류").price(7000).description("인터넷으로 산 청바지입니다. 사이즈가 안맞아 팝니다. 사이즈 28입니다.")
-				.uploadDate(new Date()).user(userRepo.findByNickname("닉네임")).location("부산").build();
+				new Date(), null, userRepo.findByNickname("테스트"), "경기도 안산시", null, null);
+		Product p5 = Product.builder().name("청바지").category("의류").price(5000).description("인터넷으로 산 청바지입니다. 사이즈가 안맞아 팝니다. 사이즈 28입니다.")
+				.uploadDate(new Date()).user(userRepo.findByNickname("닉네임")).location("부산광역시 서구").build();
+		Product p6 = Product.builder().name("짐볼").category("스포츠/레저").price(6000).description("사놓고 한 번도 안써서 팝니다~")
+				.uploadDate(new Date()).user(userRepo.findByNickname("닉네임")).location("부산광역시 서구").build();
+		Product p7 = Product.builder().name("트램펄린").category("스포츠/레저").price(15000).description("재밌어요")
+				.uploadDate(new Date()).user(userRepo.findByNickname("김천재")).location("서울특별시 송파구").soldDate(new Date()).build();
 		
 		List<UploadFile> p1Imgs = new ArrayList<>();
 		p1Imgs.add(UploadFile.builder().fileName("switch.png").storedFileName("switch.png").build());
@@ -60,12 +64,12 @@ public class MainController {
 		
 		p1.setImages(p1Imgs);
 		productRepo.save(p1);
-		
-		
 		productRepo.save(p2);
 		productRepo.save(p3);
 		productRepo.save(p4);
 		productRepo.save(p5);
+		productRepo.save(p6);
+		productRepo.save(p7);
 	}
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET) 

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.PostLoad;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import itc.hoseo.cc.domain.ChatMessage;
+import itc.hoseo.cc.domain.Comment;
 import itc.hoseo.cc.domain.Locations;
 import itc.hoseo.cc.domain.UploadFile;
 import itc.hoseo.cc.domain.User;
@@ -60,6 +63,19 @@ public class MypageController {
 	
 	@Autowired
 	private Environment env;
+	
+	@PostConstruct
+	public void init() {
+		locaRepo.save(
+			Locations.builder().city("송파구").state("서울특별시").user(userRepo.findByNickname("테스트")).build()
+		);
+		commentRepo.save(
+			Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(5.0).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
+		);
+		commentRepo.save(
+			Comment.builder().productId("8").content("좋았어요").rate(4.5).receiveUserId("rlacjswo").sendUserId("test").uploadDate(new Date()).build()
+		);
+	}
 	
 	@RequestMapping(path = "/mypage", method = RequestMethod.GET) 
 	public String mypageGet(ModelMap mm) {
@@ -121,8 +137,10 @@ public class MypageController {
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.POST)
 	public String editPost(Model mm, @Valid User user, @RequestParam("img") List<MultipartFile> files, String address0, String address1, String address2) {
-		User curUser = userContext.getCurrentUser(); 
-		curUser.setPassword(user.getPassword());
+		User curUser = userContext.getCurrentUser();
+		if(!user.getPassword().equals("")) {
+			curUser.setPassword(user.getPassword());
+		}
 		curUser.setNickname(user.getNickname());
 		
 		final String uploadDir = env.getProperty("cc.uploaddir.profile");
