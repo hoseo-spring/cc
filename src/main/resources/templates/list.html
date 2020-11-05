@@ -125,7 +125,7 @@
             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
               <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
                 <h2 th:text="${p.name}"></h2>
-                <strong th:text="|*{p.category}, *{p.price}원|"></strong>
+                <strong th:text="|*{p.category}, *{#numbers.formatInteger(p.price, 0, 'COMMA')}원|"></strong>
               </div>
               <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                 <span class="icon-room"></span> <span th:text="${p.location}"></span>

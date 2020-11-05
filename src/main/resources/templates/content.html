@@ -77,7 +77,7 @@
               </a>
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>물건 정보</h3>
               <p style="font-size:1.1rem;" th:text="|카테고리 : *{product.category}|"></p>
-              <p style="font-size:1.1rem;" th:text="|가격 : *{product.price}원|"></p>
+              <p style="font-size:1.1rem;" th:text="|가격 : *{#numbers.formatInteger(product.price, 0, 'COMMA')}원|"></p>
               <p style="font-size:1.1rem;" th:text="|지역 : *{product.location}|"></p><hr>
               <pre style="font-size:1rem;font-family: 'Nanum Gothic', sans-serif;" th:text="${product.description}"></pre>
             </div>
