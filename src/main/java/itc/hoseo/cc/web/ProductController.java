@@ -209,6 +209,12 @@ public class ProductController {
 		return "revise";
 	}	
 	
+	@RequestMapping(path = "/revise", method = RequestMethod.POST) 
+	public String revisePost(ModelMap mm, Long product_id) {
+		
+		return "revise";
+	}
+	
 	@RequestMapping(path = "/remove", method = RequestMethod.GET) 
 	public String removeGet(ModelMap mm, Long product_id) {
 		productRepo.deleteById(product_id);
