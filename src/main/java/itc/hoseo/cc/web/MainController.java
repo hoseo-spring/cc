@@ -58,11 +58,41 @@ public class MainController {
 				.uploadDate(new Date()).user(userRepo.findByNickname("김천재")).location("서울특별시 송파구").soldDate(new Date()).build();
 		
 		List<UploadFile> p1Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("switch.png").storedFileName("switch.png").build());
+		p1Imgs.add(UploadFile.builder().fileName("switch.jpg").storedFileName("switch.jpg").build());
+		
+		List<UploadFile> p2Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("python.jpg").storedFileName("python.jpg").build());
+		
+		List<UploadFile> p3Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("nin.jpg").storedFileName("nin.jpg").build());
+		
+		List<UploadFile> p4Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("ring.jpg").storedFileName("ring.jpg").build());
+		
+		List<UploadFile> p5Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("pants.jpg").storedFileName("pants.jpg").build());
+		
+		List<UploadFile> p6Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("ball.jpg").storedFileName("ball.jpg").build());
+		
+		List<UploadFile> p7Imgs = new ArrayList<>();
+		p1Imgs.add(UploadFile.builder().fileName("ddiyong.jpeg").storedFileName("ddiyong.jpeg").build());
 		
 		fileRepo.saveAll(p1Imgs);
+		fileRepo.saveAll(p2Imgs);
+		fileRepo.saveAll(p3Imgs);
+		fileRepo.saveAll(p4Imgs);
+		fileRepo.saveAll(p5Imgs);
+		fileRepo.saveAll(p6Imgs);
+		fileRepo.saveAll(p7Imgs);
 		
 		p1.setImages(p1Imgs);
+		p2.setImages(p2Imgs);
+		p3.setImages(p3Imgs);
+		p4.setImages(p4Imgs);
+		p5.setImages(p5Imgs);
+		p6.setImages(p6Imgs);
+		p7.setImages(p7Imgs);
 		productRepo.save(p1);
 		productRepo.save(p2);
 		productRepo.save(p3);
@@ -81,6 +111,11 @@ public class MainController {
 	@RequestMapping(path = "/sign", method = RequestMethod.GET) 
 	public String signGet(ModelMap mm) {
 		return "sign";
+	}
+
+	@RequestMapping(path = "/revise", method = RequestMethod.GET) 
+	public String reviseGet(ModelMap mm) {
+		return "revise";
 	}
 
 
