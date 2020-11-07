@@ -6,7 +6,7 @@ body {
 }
 .site-navbar {
   margin-bottom: 0px;
-  z-index: 1999;
+  z-index: 3;
   position: absolute;
   width: 100%;
   top: 2rem; }
@@ -738,8 +738,10 @@ h1, h2, h3, h4 {
       -webkit-transition: .3s all ease;
       -o-transition: .3s all ease;
       transition: .3s all ease; }
+      
       .job-listings .job-listing a:hover {
-        border-left: 7px solid #43c128; }
+        border-left: 7px solid #ccc; }
+        
         /* .job-listings .job-listing a:hover {
         border-left: 7px solid #888888; }*/
     .job-listings .job-listing .job-listing-logo {

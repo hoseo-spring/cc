@@ -118,7 +118,8 @@
             <a th:href="|/content?product_id=*{p.id}|"></a>
              <div class="job-listing-logo listThumb" style="overflow:hidden; ">
         
-<img th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' " style="display:inline; margin:auto;">
+<img height="149px" th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/null.png' " style="display:inline; margin:auto;">
+
             </div>
 
               

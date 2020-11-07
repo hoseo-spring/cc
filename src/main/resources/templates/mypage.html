@@ -39,7 +39,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 col-2">
-          	<img th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
+          	<img style="height:160px; width:160px;" th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
           </div> 
           <div class="col-md-7 col-10">          	
             <h1 class="text-white font-weight-bold" th:text="|${user.nickname}님|"></h1>
@@ -61,8 +61,8 @@
 </div>
 
 <div id="sold" class="tabcontent">
-	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0;">판매한 물건이 없습니다.</p>
-    <div class="card cards" th:if="${product.size() != 0}">
+	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0; ">판매한 물건이 없습니다.</p>
+    <div class="card cards" th:if="${product.size() != 0}" style="border: 0px;">
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
@@ -73,9 +73,28 @@
 				var link = "/content?product_id=" + /*[[ ${p.id} ]]*/;
 				box.addEventListener("click", function(){location.href = link});
             </script>
-              <p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
-              <p class="mb-4 descp" th:text="|${p.description}|"></p>
-            </div>
+							<table>
+								<tr>
+									<td rowspan="2">
+									<div class="listThumb2" style="overflow:hidden; ">
+									<img th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' "
+										style="display: inline; margin: auto;">
+										</div></td>
+									<td>
+										<p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
+										<p>
+											<span th:if="${p.soldDate == null}" class="badge badge-success" style="color:white; font-weight:1;">판매중</span> <span
+												th:if="${p.soldDate != null}" class="badge badge-default" style="color:white; font-weight:1;">판매됨</span>
+										</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p class="mb-4 descp" th:text="|${p.description}|"></p>
+									</td>
+								</tr>
+							</table>
+						</div>
 
 </div>
 
