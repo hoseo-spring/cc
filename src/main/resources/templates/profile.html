@@ -39,14 +39,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 col-2">
-          	<img style="height:160px; width:160px;" th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
+          	<img th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
           </div> 
           <div class="col-md-7 col-10">          	
             <h1 class="text-white font-weight-bold" th:text="|${user.nickname}님|"></h1>
             <h5 class="text-white" th:if="${avgRate == 0}">아직 받은 평점이 없습니다.</h5>
             <h4 class="text-white" th:if="${avgRate != 0}" th:text="|*{#numbers.formatDecimal(avgRate,1,1)} / 5점|"></h4>
             <div class="custom-breadcrumbs">
-              	<a href="/edit">내 정보 수정	</a>
             </div>
           </div>
         </div>
@@ -58,12 +57,11 @@
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'sold')" id="defaultOpen">판매 내역</button>
   <button class="tablinks" onclick="openTab(event, 'star')">평점 및 후기</button>
-  <button class="tablinks" onclick="openTab(event, 'chat')">채팅방</button>
 </div>
 
 <div id="sold" class="tabcontent">
-	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0; ">판매한 물건이 없습니다.</p>
-    <div class="card cards" th:if="${product.size() != 0}" style="border: 0px;">
+	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0;">판매한 물건이 없습니다.</p>
+    <div class="card cards" th:if="${product.size() != 0}">
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
@@ -74,28 +72,9 @@
 				var link = "/content?product_id=" + /*[[ ${p.id} ]]*/;
 				box.addEventListener("click", function(){location.href = link});
             </script>
-							<table>
-								<tr>
-									<td rowspan="2">
-									<div class="listThumb2" style="overflow:hidden; ">
-									<img th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' "
-										style="display: inline; margin: auto;">
-										</div></td>
-									<td>
-										<p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
-										<p>
-											<span th:if="${p.soldDate == null}" class="badge badge-success" style="color:white; font-weight:1;">판매중</span> <span
-												th:if="${p.soldDate != null}" class="badge badge-default" style="color:white; font-weight:1;">판매됨</span>
-										</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p class="mb-4 descp" th:text="|${p.description}|"></p>
-									</td>
-								</tr>
-							</table>
-						</div>
+              <p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
+              <p class="mb-4 descp" th:text="|${p.description}|"></p>
+            </div>
 
 </div>
 
@@ -108,11 +87,7 @@
 
 	<table class="startb" th:if="${comments.size() != 0}" th:each="c : ${comments}">
 		<tr>
-			<td rowspan="2">
-				<a th:href="|/profile?user_id=*{c.sendUserId}|">
-				<img src="images/p2.jpg" width="64px">
-				</a>
-			</td>
+			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
 			<td th:text="${c.sendUserId}"></td>
 			<td th:if="${c.rate} == 0.5" class="stars">☆</td>
 			<td th:if="${c.rate} == 1.0" class="stars">★</td>
@@ -133,48 +108,6 @@
 	
 	
 </div>
-				
-				
-<div id="chat" class="tabcontent">
-<p th:if="${chats.size() == 0}" style="text-align:center; padding:15% 0;">진행 중인 채팅이 없습니다.</p>
-
-<table class="chattb" th:if="${chats}" th:each="c : ${chats}">
-	<tr>
-		<th width="85%" th:text="${c.productName}"></th>
-		<td width="15%" style="text-align: right;">
-			<p th:text="${#dates.format(c.sendDttm,'yyyy-MM-dd')}"></p>
-			<p th:text="${#dates.format(c.sendDttm,'hh:mm')}"></p>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<table width="98%">
-				<tr>
-					<td width="70px"><img src="images/p1.jpg" width="64px"></td>
-					<td>
-					<a th:if="${c.senderId} == ${#authentication.name}" th:href="|/chat?product_id=*{c.productId}&seller_id=*{c.sellerId}&opponent_id=*{c.receiverId}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;">
-					<div class="speech-bubble">
-							<p th:if="${c.senderId} == ${#authentication.name}" th:text="${c.receiverId}"></p>
-							<p th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></p>
-							<p th:text="${c.content}"></p>
-						</div>
-					</a>
-					<a th:if="${c.senderId} != ${#authentication.name}" th:href="|/chat?product_id=*{c.productId}&seller_id=*{c.sellerId}&opponent_id=*{c.senderId}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;">
-						<div class="speech-bubble">
-							<p th:if="${c.senderId} == ${#authentication.name}" th:text="${c.receiverId}"></p>
-							<p th:if="${c.senderId} != ${#authentication.name}" th:text="${c.senderId}"></p>
-							<p th:text="${c.content}"></p>
-						</div>
-					</a>
-					</td>
-				</tr>
-			</table>
-		</td>
-		<td></td>
-	</tr>
-</table>
-</div>
-
 
 </div>
 </div>

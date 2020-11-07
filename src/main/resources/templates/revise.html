@@ -87,10 +87,10 @@
                       <option th:each="l : ${locations}" th:value="|*{l.state} *{l.city}|" th:text="|*{l.state} *{l.city}|"></option>
                 </select>
               </div>
-              </div>
               <div class="form-group">
                 <label for="description">상세 설명</label><br>
-                <textarea name="description" id="description1" rows="10" style="width:100%; resize: none;">th:text="${product.description}"</textarea>
+                <textarea name="description" id="description1" rows="10" style="width:100%; resize: none;" th:text="${product.description}"></textarea>
+              </div>
               </div>
           </div>
          <div class="col-6">

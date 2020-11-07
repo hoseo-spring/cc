@@ -138,7 +138,6 @@ public class ProductController {
 	
 	@RequestMapping(path = "/post", method = RequestMethod.GET) 
 	public String postGet(ModelMap mm) {
-		System.out.println(locaRepo.findByUser(userContext.getCurrentUser()));
 		if(!locaRepo.findByUser(userContext.getCurrentUser()).isEmpty()) {
 			mm.put("locations", locaRepo.findByUser(userContext.getCurrentUser()));
 		} else {
@@ -195,13 +194,31 @@ public class ProductController {
 //						.uploadDate(new Date())
 //						.user(userContext.getCurrentUser())
 //						.build());
-		return "redirect:list?page=0&sort=latest&soldCheck=false";
+		return "redirect:list?page=0&sort=latest&soldCheck=true";
 	}
 	
 	@RequestMapping(path = "/content", method = RequestMethod.GET) 
 	public String contentGet(ModelMap mm, Long product_id) {
 		mm.put("product", productRepo.findById(product_id).get());
 		return "content";
+	}
+
+	@RequestMapping(path = "/revise", method = RequestMethod.GET) 
+	public String reviseGet(ModelMap mm, Long product_id) {
+		mm.put("product", productRepo.findById(product_id).get());
+		return "revise";
+	}	
+	
+	@RequestMapping(path = "/revise", method = RequestMethod.POST) 
+	public String revisePost(ModelMap mm, Long product_id) {
+		
+		return "revise";
+	}
+	
+	@RequestMapping(path = "/remove", method = RequestMethod.GET) 
+	public String removeGet(ModelMap mm, Long product_id) {
+		productRepo.deleteById(product_id);
+		return "redirect:list?page=0&sort=latest&soldCheck=true";
 	}
 	
 }
