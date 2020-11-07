@@ -83,10 +83,5 @@ public class MainController {
 		return "sign";
 	}
 
-	@RequestMapping(path = "/revise", method = RequestMethod.GET) 
-	public String reviseGet(ModelMap mm) {
-		return "revise";
-	}	
-
 
 }

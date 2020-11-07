@@ -118,21 +118,21 @@
                 <li class="mb-2"><strong class="text-black">ID: </strong><span th:text="${product.user.id}"></span></li>
                 <li class="mb-2"><strong class="text-black">닉네임: </strong><span th:text="${product.user.nickname}"></span></li>
               </ul>
-              <a href="/mypage" class="btn btn-block btn-primary btn-md">자세히</a>
+              <a th:href="|/profile?user_id=*{product.user.id}|" class="btn btn-block btn-primary btn-md">자세히</a>
             </div>
 
             <div class="bg-light p-3 border rounded">
             <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">연락하기</h3>
               <div class="px-3">
-				<a th:if="${product.user.id} != ${#authentication.name}" th:href="|/chat?product_id=*{product.id}&seller_id=*{product.user.id}&opponent_id=*{product.user.id}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
-				<a th:if="${product.user.id} == ${#authentication.name}" class="btn btn-block btn-secondary btn-md" style="color:#bdbdbd;">채팅하기</a>
+				<a th:if="${product.user.id} != ${#authentication.name} and ${#authentication.name} != 'anonymousUser'" th:href="|/chat?product_id=*{product.id}&seller_id=*{product.user.id}&opponent_id=*{product.user.id}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;" class="btn btn-block btn-primary btn-md">채팅하기</a>
+				<a th:if="${product.user.id} == ${#authentication.name} or ${#authentication.name} == 'anonymousUser'" class="btn btn-block btn-secondary btn-md" style="color:#bdbdbd;">채팅하기</a>
               </div>
               <div>
             </div>
             </div>
           <br>
-            <a href="/revise" class="btn btn-block btn-info btn-sm">수정하기</a>
-            <p onclick="removeCheck()" class="btn btn-block btn-info btn-sm">삭제하기</p>
+            <a th:href="|/revise?product_id=*{product.id}|" class="btn btn-block btn-info btn-sm" th:if="${product.user.id} == ${#authentication.name}">수정하기</a>
+            <p onclick="removeCheck()" class="btn btn-block btn-info btn-sm" th:if="${product.user.id} == ${#authentication.name}">삭제하기</p>
           </div>
         </td></tr></table>
           
@@ -143,11 +143,11 @@
 		<th:block th:replace="fragments/footer :: footerFragment"></th:block>
   
   </div>
-<script>
+<script th:inline="javascript">
 function removeCheck() {
 	 if (confirm("글을 삭제하시겠습니까?") == true){
-	     document.remove.submit();
-	     document.location.href="/list?page=0";
+		 var productId = /*[[ ${product.id} ]]*/
+	     document.location.href = "/remove?product_id=" + productId;
 	 }else{
 	     return false;
 	 }

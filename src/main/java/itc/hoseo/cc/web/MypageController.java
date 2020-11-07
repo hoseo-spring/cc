@@ -89,7 +89,6 @@ public class MypageController {
 		productRepo.findByUserId(user.getId(), PageRequest.of(0, 5));
 		mm.put("user", user);
 		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
-		
 		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
 
 		List<ChatMessage> chatsAll = chatRepo.findBySenderIdOrReceiverId(user.getId(), user.getId());
@@ -129,6 +128,21 @@ public class MypageController {
 			}
 		}
 		mm.put("chats", chats);
+		
+		List<Comment> comments = commentRepo.findByReceiveUserId(user.getId());
+		double avgRate = 0;
+		int count = 0;
+		if(!comments.isEmpty()) {
+			for(Comment c : comments) {
+				if(count == 0) {
+					avgRate = c.getRate();
+				} else {
+					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
+				}
+				count++;
+			}
+		}
+		mm.put("avgRate", avgRate);
 		return "mypage";
 	}
 	
@@ -196,5 +210,29 @@ public class MypageController {
 		}
 		
 		return "redirect:/mypage";
+	}
+	
+	@RequestMapping(path = "/profile", method = RequestMethod.GET) 
+	public String profileGet(ModelMap mm, String user_id) {
+		User user = userRepo.findById(user_id).get();
+		mm.put("user", user);
+		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
+		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
+		
+		List<Comment> comments = commentRepo.findByReceiveUserId(user.getId());
+		double avgRate = 0;
+		int count = 0;
+		if(!comments.isEmpty()) {
+			for(Comment c : comments) {
+				if(count == 0) {
+					avgRate = c.getRate();
+				} else {
+					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
+				}
+				count++;
+			}
+		}
+		mm.put("avgRate", avgRate);
+		return "profile";
 	}
 }
