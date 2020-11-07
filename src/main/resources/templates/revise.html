@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>당근나라</title>
     <meta charset="utf-8">
@@ -46,7 +46,7 @@
     
     <section class="site-section">
       <div class="container">
-        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" name="post" action="post">
+        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" name="revise" action="revise">
         <div class="row mb-5">
           <div class="col-lg-12">
               <h3 class="text-black mb-5 border-bottom pb-2">물건 정보</h3>
@@ -54,7 +54,7 @@
               <div class="form-group">
                 <label for="company-website-tw d-block">이미지 업로드</label> <br/>
 					<div class="filebox">
-						<label for="file">업로드</label> <input type="file" id="file" multiple>
+						<label for="file">업로드</label> <input type="file" id="file" name="img" accept="image/*" multiple>
 						<input class="upload-name" value="파일선택" disabled>
 					</div>
 	
@@ -62,29 +62,32 @@
 		
               <div class="form-group">
                 <label for="name">제목</label>
+                <input type="hidden" name="id" th:value="${product.id}" />
                 <input type="text" th:value="${product.name}" class="form-control" id="name" name="name" placeholder="물건 정보">
               </div>
               <div class="form-group">
                 <label for="category">카테고리</label>
-                <select class="selectpicker border rounded" id="category" name="category" data-style="btn-black" data-width="100%" data-live-search="true" title="카테고리 선택">
-                      <option value="의류">의류</option>
-                      <option value="가구/생활">가구/생활</option>
-                      <option value="전자/가전">전자/가전</option>
-                      <option value="뷰티/잡화">뷰티/잡화</option>
-                      <option value="완구/취미">완구/취미</option>
-                      <option value="스포츠/레저">스포츠/레저</option>
-                      <option value="도서">도서</option>
-                      <option value="기타">기타</option>
+                <select class="selectpicker border rounded" id="category" name="category" data-style="btn-black" data-width="100%" data-live-search="true" title="카테고리를 선택해주세요.">
+                	  <option th:value="${product.category}" th:text="${product.category}" selected></option>
+                      <option th:if="${product.category} != '의류'" value="의류">의류</option>
+                      <option th:if="${product.category} != '가구/생활'"  value="가구/생활">가구/생활</option>
+                      <option th:if="${product.category} != '전자/가전'"  value="전자/가전">전자/가전</option>
+                      <option th:if="${product.category} != '뷰티/잡화'"  value="뷰티/잡화">뷰티/잡화</option>
+                      <option th:if="${product.category} != '완구/취미'"  value="완구/취미">완구/취미</option>
+                      <option th:if="${product.category} != '스포츠/레저'"  value="스포츠/레저">스포츠/레저</option>
+                      <option th:if="${product.category} != '도서'"  value="도서">도서</option>
+                      <option th:if="${product.category} != '기타'"  value="기타">기타</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="price">가격</label>
-                <input type="text" th:value="${product.price}" class="form-control" id="price" name="price" placeholder="가격 (숫자만 입력)">
+                <input type="text" th:value="${#numbers.formatInteger(product.price, 0, 'COMMA')}" class="form-control" id="price" name="price" placeholder="가격 (숫자만 입력)">
               </div>
               <div class="form-group">
                 <label for="location">지역</label>
-                <select class="selectpicker border rounded" id="location" name="location" data-style="btn-black" data-width="100%" data-live-search="true" title="카테고리 선택">
-                      <option th:each="l : ${locations}" th:value="|*{l.state} *{l.city}|" th:text="|*{l.state} *{l.city}|"></option>
+                <select class="selectpicker border rounded" id="location" name="location" data-style="btn-black" data-width="100%" data-live-search="true" th:title="지역">
+                      <option th:value="${product.location}" th:text="${product.location}" selected></option>
+                      <option th:each="l : ${locations}" th:if="${not #strings.contains(product.location, l.city)}" th:value="|*{l.state} *{l.city}|" th:text="|*{l.state} *{l.city}|"></option>
                 </select>
               </div>
               <div class="form-group">

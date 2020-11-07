@@ -67,35 +67,29 @@
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
-            <div class="p-4 mb-3 bg-white" th:each="p, i : ${product}" >
-            <script th:inline="javascript">
-	            var index = /*[[ ${i.index} ]]*/;
-				var box = document.getElementsByClassName("card cards")[index];
-				var link = "/content?product_id=" + /*[[ ${p.id} ]]*/;
-				box.addEventListener("click", function(){location.href = link});
-            </script>
-							<table>
-								<tr>
-									<td rowspan="2">
-									<div class="listThumb2" style="overflow:hidden; ">
-									<img th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' "
-										style="display: inline; margin: auto;">
-										</div></td>
-									<td>
-										<p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
-										<p>
-											<span th:if="${p.soldDate == null}" class="badge badge-success" style="color:white; font-weight:1;">판매중</span> <span
-												th:if="${p.soldDate != null}" class="badge badge-default" style="color:white; font-weight:1;">판매됨</span>
-										</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p class="mb-4 descp" th:text="|${p.description}|"></p>
-									</td>
-								</tr>
-							</table>
-						</div>
+            <div class="p-4 mb-3 bg-white" th:each="p : ${product}">
+				<table th:onclick="|location.href='/content?product_id=*{p.id}'|">
+					<tr>
+						<td rowspan="2">
+						<div class="listThumb2" style="overflow:hidden; ">
+						<img height="149px" th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' "
+							style="display: inline; margin: auto;">
+							</div></td>
+						<td>
+							<p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
+							<p>
+								<span th:if="${p.soldDate == null}" class="badge badge-success" style="color:white; font-weight:1;">판매중</span> <span
+									th:if="${p.soldDate != null}" class="badge badge-default" style="color:white; font-weight:1;">판매됨</span>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="mb-4 descp" th:text="|${p.description}|"></p>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 </div>
 

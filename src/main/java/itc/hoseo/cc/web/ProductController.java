@@ -206,13 +206,54 @@ public class ProductController {
 	@RequestMapping(path = "/revise", method = RequestMethod.GET) 
 	public String reviseGet(ModelMap mm, Long product_id) {
 		mm.put("product", productRepo.findById(product_id).get());
+		if(!locaRepo.findByUser(userContext.getCurrentUser()).isEmpty()) {
+			mm.put("locations", locaRepo.findByUser(userContext.getCurrentUser()));
+		} else {
+			return "postNoLocations";
+		}
 		return "revise";
 	}	
 	
 	@RequestMapping(path = "/revise", method = RequestMethod.POST) 
-	public String revisePost(ModelMap mm, Long product_id) {
+	public String revisePost(Product product, @RequestParam("img") List<MultipartFile> files) {
+		Product curProduct = productRepo.findById(product.getId()).get();
+		curProduct.setName(product.getName());
+		curProduct.setCategory(product.getCategory());
+		curProduct.setLocation(product.getLocation());
+		curProduct.setPrice(product.getPrice());
+		curProduct.setDescription(product.getDescription());
 		
-		return "revise";
+		final String uploadDir = env.getProperty("cc.uploaddir.product");
+		
+		List<UploadFile> images = files.stream()
+				.map(f -> {
+					UploadFile uf = new UploadFile();
+					uf.setFileName(f.getOriginalFilename());
+					
+					String storedFileName = UUID.randomUUID().toString();
+									
+					while(Files.exists(Paths.get(uploadDir, storedFileName))) {
+						storedFileName = UUID.randomUUID().toString();
+					}
+					
+					uf.setStoredFileName(storedFileName);
+					
+					try {
+						f.transferTo(Paths.get(uploadDir, storedFileName));
+					} catch (IllegalStateException | IOException e) {
+						throw new RuntimeException("파일업로드중 예외 발생", e);
+					}
+					
+					return uf;
+				}).collect(Collectors.toList());
+		
+		fileRepo.saveAll(images);
+		
+		curProduct.setImages(images);
+		
+		curProduct.setUpdateDate(new Date());
+		productRepo.save(curProduct);
+		return "redirect:content?product_id=" + product.getId();
 	}
 	
 	@RequestMapping(path = "/remove", method = RequestMethod.GET) 

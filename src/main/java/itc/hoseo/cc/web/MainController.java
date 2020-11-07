@@ -61,22 +61,22 @@ public class MainController {
 		p1Imgs.add(UploadFile.builder().fileName("switch.jpg").storedFileName("switch.jpg").build());
 		
 		List<UploadFile> p2Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("python.jpg").storedFileName("python.jpg").build());
+		p2Imgs.add(UploadFile.builder().fileName("python.jpg").storedFileName("python.jpg").build());
 		
 		List<UploadFile> p3Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("nin.jpg").storedFileName("nin.jpg").build());
+		p3Imgs.add(UploadFile.builder().fileName("nin.jpg").storedFileName("nin.jpg").build());
 		
 		List<UploadFile> p4Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("ring.jpg").storedFileName("ring.jpg").build());
+		p4Imgs.add(UploadFile.builder().fileName("ring.jpg").storedFileName("ring.jpg").build());
 		
 		List<UploadFile> p5Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("pants.jpg").storedFileName("pants.jpg").build());
+		p5Imgs.add(UploadFile.builder().fileName("pants.jpg").storedFileName("pants.jpg").build());
 		
 		List<UploadFile> p6Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("ball.jpg").storedFileName("ball.jpg").build());
+		p6Imgs.add(UploadFile.builder().fileName("ball.jpg").storedFileName("ball.jpg").build());
 		
 		List<UploadFile> p7Imgs = new ArrayList<>();
-		p1Imgs.add(UploadFile.builder().fileName("ddiyong.jpeg").storedFileName("ddiyong.jpeg").build());
+		p7Imgs.add(UploadFile.builder().fileName("ddiyong.jpeg").storedFileName("ddiyong.jpeg").build());
 		
 		fileRepo.saveAll(p1Imgs);
 		fileRepo.saveAll(p2Imgs);
@@ -112,11 +112,4 @@ public class MainController {
 	public String signGet(ModelMap mm) {
 		return "sign";
 	}
-
-	@RequestMapping(path = "/revise", method = RequestMethod.GET) 
-	public String reviseGet(ModelMap mm) {
-		return "revise";
-	}
-
-
 }

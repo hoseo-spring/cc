@@ -54,7 +54,7 @@
               <div class="form-group">
                 <label for="company-website-tw d-block">이미지 업로드</label> <br/>
 					<div class="filebox">
-						<label for="file">업로드</label> <input type="file" id="file" accept="image/*" multiple>
+						<label for="file">업로드</label> <input type="file" id="file" name="img" accept="image/*" multiple>
 						<input class="upload-name" value="파일선택" disabled>
 					</div>
 				<!-- 
@@ -89,7 +89,7 @@
               </div>
               <div class="form-group">
                 <label for="location">지역</label>
-                <select class="selectpicker border rounded" id="location" name="location" data-style="btn-black" data-width="100%" data-live-search="true" title="카테고리 선택">
+                <select class="selectpicker border rounded" id="location" name="location" data-style="btn-black" data-width="100%" data-live-search="true" title="지역">
                       <option th:each="l : ${locations}" th:value="|*{l.state} *{l.city}|" th:text="|*{l.state} *{l.city}|"></option>
                 </select>
               </div>
