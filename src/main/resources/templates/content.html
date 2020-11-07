@@ -56,8 +56,8 @@
         <div class="row align-items-center mb-5">
           <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="d-flex align-items-center">
-              <div class="border p-2 d-inline-block mr-3 rounded">
-                <img src="images/job_logo_5.jpg" alt="Image">
+              <div class="p-2 d-inline-block mr-3 rounded">
+                <img style="height:160px; width:160px;" th:src="${product.user.images !=null and product.user.images.isEmpty() == false} ? |upload/profile/${product.user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left">
               </div>
               <div>
                 <h2 th:text="${product.name}"></h2>
@@ -80,14 +80,8 @@
         <figure class="mb-5">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="images/job_single_img_1.jpg">
-					</div>
-					<div class="swiper-slide">
-						<img src="images/job_single_img_1.jpg">
-					</div>
-					<div class="swiper-slide">
-						<img src="images/job_single_img_1.jpg">
+					<div class="swiper-slide" th:each="i : ${product.images}">
+						<img width="100%" th:src="${product.images != null and product.images.isEmpty() == false} ? | upload/product/*{i.storedFileName} | : 'images/nothing.jpg'" >
 					</div>
 				</div>
 

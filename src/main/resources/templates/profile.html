@@ -61,20 +61,33 @@
 
 <div id="sold" class="tabcontent">
 	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0;">판매한 물건이 없습니다.</p>
-    <div class="card cards" th:if="${product.size() != 0}">
+    <div class="card cards" th:if="${product.size() != 0}" style="border: none;">
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
-            <div class="p-4 mb-3 bg-white" th:each="p, i : ${product}" >
-            <script th:inline="javascript">
-	            var index = /*[[ ${i.index} ]]*/;
-				var box = document.getElementsByClassName("card cards")[index];
-				var link = "/content?product_id=" + /*[[ ${p.id} ]]*/;
-				box.addEventListener("click", function(){location.href = link});
-            </script>
-              <p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
-              <p class="mb-4 descp" th:text="|${p.description}|"></p>
-            </div>
+            <div class="p-4 mb-3 bg-white" th:each="p : ${product}">
+				<table th:onclick="|location.href='/content?product_id=*{p.id}'|">
+					<tr>
+						<td rowspan="2">
+						<div class="listThumb2" style="overflow:hidden; ">
+						<img height="149px" th:src="${p.images !=null and p.images.isEmpty() == false} ? | upload/product/${p.images[0].storedFileName} | : 'images/nothing.jpg' "
+							style="display: inline; margin: auto;">
+							</div></td>
+						<td>
+							<p class="mb-0 font-weight-bold descp" th:text="|${p.name}|"></p>
+							<p>
+								<span th:if="${p.soldDate == null}" class="badge badge-success" style="color:white; font-weight:1;">판매중</span> <span
+									th:if="${p.soldDate != null}" class="badge badge-default" style="color:white; font-weight:1;">판매됨</span>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="mb-4 descp" th:text="|${p.description}|"></p>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 </div>
 
@@ -87,7 +100,11 @@
 
 	<table class="startb" th:if="${comments.size() != 0}" th:each="c : ${comments}">
 		<tr>
-			<td rowspan="2"><img src="images/p2.jpg" width="64px"></td>
+			<td rowspan="2">
+				<a th:href="|/profile?user_id=*{c.sendUserId}|">
+				<img th:src="${commentImages !=null and commentImages.isEmpty() == false} ? |upload/profile/${commentImages[i].storedFileName}| : 'images/profile.png'" width="64px">
+				</a>
+			</td>
 			<td th:text="${c.sendUserId}"></td>
 			<td th:if="${c.rate} == 0.5" class="stars">☆</td>
 			<td th:if="${c.rate} == 1.0" class="stars">★</td>

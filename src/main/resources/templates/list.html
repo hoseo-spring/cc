@@ -146,11 +146,36 @@
             <nav>
 			  <ul class="pagination">
 			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{prev}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|">Pre</a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+1}"><a class="page-link" th:href="|/list?page=*{startPage}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+1}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+2}"><a class="page-link" th:href="|/list?page=*{startPage+1}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+2}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+3}"><a class="page-link" th:href="|/list?page=*{startPage+2}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+3}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+4}"><a class="page-link" th:href="|/list?page=*{startPage+3}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+4}"></a></li>
-			    <li class="page-item" th:if="${wholePage} >= ${startPage+5}"><a class="page-link" th:href="|/list?page=*{startPage+4}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+5}"></a></li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+1} and ${#strings.equals(param.page[0], startPage)} == false">
+			    	<a class="page-link" th:href="|/list?page=*{startPage}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+1}"></a>
+			    </li>
+			    <li class="page-item active" th:if="${wholePage} >= ${startPage+1} and ${#strings.equals(param.page[0], startPage)}">
+			    	<a class="page-link" th:href="|/list?page=*{startPage}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+1}"></a>
+			    </li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+2} and ${#strings.equals(param.page[0], #strings.toString(startPage+1))} == false">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+1}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+2}"></a>
+			    </li>
+			    <li class="page-item active" th:if="${wholePage} >= ${startPage+2} and ${#strings.equals(param.page[0], #strings.toString(startPage+1))}">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+1}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+2}"></a>
+			    </li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+3} and ${#strings.equals(param.page[0], #strings.toString(startPage+2))} == false">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+2}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+3}"></a>
+			    </li>
+			    <li class="page-item active" th:if="${wholePage} >= ${startPage+3} and ${#strings.equals(param.page[0], #strings.toString(startPage+2))}">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+2}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+3}"></a>
+			    </li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+4} and ${#strings.equals(param.page[0], #strings.toString(startPage+3))} == false">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+3}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+4}"></a>
+			    </li>
+			    <li class="page-item active" th:if="${wholePage} >= ${startPage+4} and ${#strings.equals(param.page[0], #strings.toString(startPage+3))}">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+3}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+4}"></a>
+			    </li>
+			    <li class="page-item" th:if="${wholePage} >= ${startPage+5} and ${#strings.equals(param.page[0], #strings.toString(startPage+4))} == false">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+4}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+5}"></a>
+			    </li>
+			    <li class="page-item active" th:if="${wholePage} >= ${startPage+5} and ${#strings.equals(param.page[0], #strings.toString(startPage+4))}">
+			    	<a class="page-link" th:href="|/list?page=*{startPage+4}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|" th:text="${startPage+5}"></a>
+			    </li>
 			    <li class="page-item"><a class="page-link" th:href="|/list?page=*{next}&sort=*{param.sort[0]}&soldCheck=*{param.soldCheck[0]}|">Next</a></li>
 			  </ul>
 			</nav>

@@ -127,7 +127,7 @@
 	
 		<div class="chat-container">
 			<div class="chat-header">
-			<img src="../images/nin.jpg">
+			<img th:src="${product.images !=null and product.images.isEmpty() == false} ? | upload/product/${product.images[0].storedFileName} | : 'images/null.png' ">
 			<div class="dropdown">
 			  <button th:if="${commentSize} == '0'" onclick="asking()" id="openstar" class="primary">거래 완료</button>
 			  <button th:if="${commentSize} != '0'" onclick="asking()" id="openstar" class="secondary" disabled>거래 완료</button>

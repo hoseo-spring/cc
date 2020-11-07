@@ -36,6 +36,7 @@ import itc.hoseo.cc.repository.LocationsRepository;
 import itc.hoseo.cc.repository.ProductRepository;
 import itc.hoseo.cc.repository.UserRepository;
 import itc.hoseo.cc.service.SpringSecurityUserContext;
+import itc.hoseo.cc.service.UserContext;
 
 @Controller
 public class MypageController {
@@ -130,6 +131,7 @@ public class MypageController {
 		mm.put("chats", chats);
 		
 		List<Comment> comments = commentRepo.findByReceiveUserId(user.getId());
+		List<UploadFile> commentImages = new ArrayList<>();
 		double avgRate = 0;
 		int count = 0;
 		if(!comments.isEmpty()) {
@@ -139,10 +141,25 @@ public class MypageController {
 				} else {
 					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
 				}
+				commentImages.addAll(userRepo.findById(c.getSendUserId()).get().getImages());
 				count++;
 			}
 		}
 		mm.put("avgRate", avgRate);
+		mm.put("commentImages", commentImages);
+		
+		List<UploadFile> chatImages = new ArrayList<>();
+		if(!chats.isEmpty()) {
+			for(ChatMessage c : chats) {
+				if(c.getReceiverId().equals(user.getId())) {
+					chatImages.addAll(userRepo.findById(c.getSenderId()).get().getImages());
+				} else {
+					chatImages.addAll(userRepo.findById(c.getReceiverId()).get().getImages());
+				}
+			}
+		}
+		
+		mm.put("chatImages", chatImages);
 		return "mypage";
 	}
 	
@@ -220,6 +237,7 @@ public class MypageController {
 		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
 		
 		List<Comment> comments = commentRepo.findByReceiveUserId(user.getId());
+		List<UploadFile> images = new ArrayList<>();
 		double avgRate = 0;
 		int count = 0;
 		if(!comments.isEmpty()) {
@@ -229,10 +247,12 @@ public class MypageController {
 				} else {
 					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
 				}
+				images.addAll(userRepo.findById(c.getSendUserId()).get().getImages());
 				count++;
 			}
 		}
 		mm.put("avgRate", avgRate);
+		mm.put("commentImages", images);
 		return "profile";
 	}
 }
