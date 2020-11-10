@@ -82,6 +82,10 @@ public class MypageController {
 		commentRepo.save(
 			Comment.builder().productId("8").content("좋았어요").rate(4.5).receiveUserId("rlacjswo").sendUserId("test").uploadDate(new Date()).build()
 		);
+		
+		commentRepo.save(
+				Comment.builder().productId("17").content("맛있게 먹을게요!!").rate(5.0).receiveUserId("rlawkddl").sendUserId("ajdajddl").uploadDate(new Date()).build()
+			);
 	}
 	
 	@RequestMapping(path = "/mypage", method = RequestMethod.GET) 
