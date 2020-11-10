@@ -79,7 +79,7 @@
               
         <figure class="mb-5">
 			<div class="swiper-container">
-				<div class="swiper-wrapper">
+				<div class="swiper-wrapper thumb">
 					<div class="swiper-slide" th:each="i : ${product.images}">
 						<img width="100%" th:src="${product.images != null and product.images.isEmpty() == false} ? | upload/product/*{i.storedFileName} | : 'images/nothing.jpg'" >
 					</div>

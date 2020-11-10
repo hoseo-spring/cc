@@ -36,16 +36,90 @@ public class MainController {
 	
 	@PostConstruct
 	public void init() {
-		userService.createUser(User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("test2").password("1234").nickname("기매미").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("jammin").password("1234").nickname("잼민이").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("ajdajddl").password("1234").nickname("멍멍이").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("zjazjadl").password("1234").nickname("컴컴이").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("rlawkddl").password("1234").nickname("김장이").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("ahrlqkrauf").password("1234").nickname("모기박멸").registeredDate(new Date()).build());
-		userService.createUser(User.builder().id("qkrcjswo").password("1234").nickname("이천재").registeredDate(new Date()).build());
+		
+
+		List<UploadFile> u1Imgs = new ArrayList<>();
+		u1Imgs.add(UploadFile.builder().fileName("baby.jpg").storedFileName("baby.jpg").build());
+		List<UploadFile> u2Imgs = new ArrayList<>();
+		u2Imgs.add(UploadFile.builder().fileName("com.jpg").storedFileName("com.jpg").build());
+		List<UploadFile> u3Imgs = new ArrayList<>();
+		u3Imgs.add(UploadFile.builder().fileName("carrot.png").storedFileName("carrot.png").build());
+		List<UploadFile> u4Imgs = new ArrayList<>();
+		u4Imgs.add(UploadFile.builder().fileName("p1.jpg").storedFileName("p1.jpg").build());
+		List<UploadFile> u5Imgs = new ArrayList<>();
+		u5Imgs.add(UploadFile.builder().fileName("cjswo.jpg").storedFileName("cjswo.jpg").build());
+		List<UploadFile> u6Imgs = new ArrayList<>();
+		u6Imgs.add(UploadFile.builder().fileName("aoal.jpeg").storedFileName("aoal.jpeg").build());
+		List<UploadFile> u7Imgs = new ArrayList<>();
+		u7Imgs.add(UploadFile.builder().fileName("jammin.png").storedFileName("jammin.png").build());
+		List<UploadFile> u8Imgs = new ArrayList<>();
+		u8Imgs.add(UploadFile.builder().fileName("dog.jpg").storedFileName("dog.jpg").build());
+		List<UploadFile> u9Imgs = new ArrayList<>();
+		u9Imgs.add(UploadFile.builder().fileName("flower.jpg").storedFileName("flower.jpg").build());
+		List<UploadFile> u10Imgs = new ArrayList<>();
+		u10Imgs.add(UploadFile.builder().fileName("vkqmfm.jpg").storedFileName("vkqmfm.jpg").build());
+		
+		List<UploadFile> u11Imgs = new ArrayList<>();
+		u11Imgs.add(UploadFile.builder().fileName("duck.jpg").storedFileName("duck.jpg").build());
+		List<UploadFile> u12Imgs = new ArrayList<>();
+		u12Imgs.add(UploadFile.builder().fileName("cat.jpeg").storedFileName("cat.jpeg").build());
+		List<UploadFile> u13Imgs = new ArrayList<>();
+		u13Imgs.add(UploadFile.builder().fileName("wow.jpg").storedFileName("wow.jpg").build());
+		List<UploadFile> u14Imgs = new ArrayList<>();
+		u14Imgs.add(UploadFile.builder().fileName("treasure.jpg").storedFileName("treasure.jpg").build());
+		List<UploadFile> u15Imgs = new ArrayList<>();
+		u15Imgs.add(UploadFile.builder().fileName("mermaid.png").storedFileName("mermaid.png").build());
+		List<UploadFile> u16Imgs = new ArrayList<>();
+		u16Imgs.add(UploadFile.builder().fileName("bald.jpg").storedFileName("bald.jpg").build());
+		List<UploadFile> u17Imgs = new ArrayList<>();
+		u17Imgs.add(UploadFile.builder().fileName("Qnfldzmf.png").storedFileName("Qnfldzmf.png").build());
+		List<UploadFile> u18Imgs = new ArrayList<>();
+		u18Imgs.add(UploadFile.builder().fileName("beam.jpeg").storedFileName("beam.jpeg").build());
+		List<UploadFile> u19Imgs = new ArrayList<>();
+		u19Imgs.add(UploadFile.builder().fileName("gang.png").storedFileName("gang.png").build());
+		List<UploadFile> u20Imgs = new ArrayList<>();
+		u20Imgs.add(UploadFile.builder().fileName("pepero.jpeg").storedFileName("pepero.jpeg").build());
+		fileRepo.saveAll(u1Imgs);
+		fileRepo.saveAll(u2Imgs);
+		fileRepo.saveAll(u3Imgs);
+		fileRepo.saveAll(u4Imgs);
+		fileRepo.saveAll(u5Imgs);
+		fileRepo.saveAll(u6Imgs);
+		fileRepo.saveAll(u7Imgs);
+		fileRepo.saveAll(u8Imgs);
+		fileRepo.saveAll(u9Imgs);
+		fileRepo.saveAll(u10Imgs);
+		fileRepo.saveAll(u11Imgs);
+		fileRepo.saveAll(u12Imgs);
+		fileRepo.saveAll(u13Imgs);
+		fileRepo.saveAll(u14Imgs);
+		fileRepo.saveAll(u15Imgs);
+		fileRepo.saveAll(u16Imgs);
+		fileRepo.saveAll(u17Imgs);
+		fileRepo.saveAll(u18Imgs);
+		fileRepo.saveAll(u19Imgs);
+		fileRepo.saveAll(u20Imgs);
+		
+		userService.createUser(User.builder().id("test").password("1234").nickname("당근이").registeredDate(new Date()).images(u3Imgs).build());
+		userService.createUser(User.builder().id("asdf1234").password("789").nickname("nick").registeredDate(new Date()).images(u4Imgs).build());
+		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).images(u5Imgs).build());
+		userService.createUser(User.builder().id("test2").password("1234").nickname("기매미").registeredDate(new Date()).images(u6Imgs).build());
+		userService.createUser(User.builder().id("jammin").password("1234").nickname("잼민이").registeredDate(new Date()).images(u7Imgs).build());
+		userService.createUser(User.builder().id("ajdajddl").password("1234").nickname("멍멍이").registeredDate(new Date()).images(u8Imgs).build());
+		userService.createUser(User.builder().id("zjazjadl").password("1234").nickname("컴컴이").registeredDate(new Date()).images(u2Imgs).build());
+		userService.createUser(User.builder().id("rlawkddl").password("1234").nickname("김장이").registeredDate(new Date()).images(u9Imgs).build());
+		userService.createUser(User.builder().id("ahrlqkrauf").password("1234").nickname("모기박멸").registeredDate(new Date()).images(u10Imgs).build());
+		userService.createUser(User.builder().id("qkrcjswo").password("1234").nickname("이천재").registeredDate(new Date()).images(u11Imgs).build());
+		userService.createUser(User.builder().id("akqjqrhdiddl").password("1234").nickname("마법고양이").registeredDate(new Date()).images(u12Imgs).build());
+		userService.createUser(User.builder().id("djacjdsksqkwl").password("1234").nickname("엄청난바지").registeredDate(new Date()).images(u13Imgs).build());
+		userService.createUser(User.builder().id("qhanfrhqmffls").password("1234").nickname("보물고블린").registeredDate(new Date()).images(u14Imgs).build());
+		userService.createUser(User.builder().id("dlsdjrhdwn").password("1234").nickname("인어공주").registeredDate(new Date()).images(u15Imgs).build());
+		userService.createUser(User.builder().id("alsajfl").password("1234").nickname("민머리").registeredDate(new Date()).images(u16Imgs).build());
+		userService.createUser(User.builder().id("Qnfldzmf").password("1234").nickname("뿌링클").registeredDate(new Date()).images(u17Imgs).build());
+		userService.createUser(User.builder().id("dortusqla").password("1234").nickname("액션빔").registeredDate(new Date()).images(u18Imgs).build());
+		userService.createUser(User.builder().id("rkdxorhd2").password("1234").nickname("강태공2").registeredDate(new Date()).images(u19Imgs).build());
+		userService.createUser(User.builder().id("QOQOfh").password("1234").nickname("뺴뺴로").registeredDate(new Date()).images(u20Imgs).build());
+		userService.createUser(User.builder().id("dkrlehowl").password("1234").nickname("아기돼지").registeredDate(new Date()).images(u1Imgs).build());
 		
 		
 		Product p1 = new Product(null, "스위치 네온 구형", "전자/가전", 200000, "옛날에 사두고 두어번 쓰고 안 쓴 제품입니다.",
@@ -82,6 +156,29 @@ public class MainController {
 				.uploadDate(new Date()).user(userRepo.findByNickname("컴컴이")).location("경상북도 경산시").build();
 		Product p17 = Product.builder().name("김장김치 무료 나눔~~").category("기타").price(100).description("이번에 본가 가서 김장한거 무료나눔해요~~~ ^,,,^")
 				.uploadDate(new Date()).user(userRepo.findByNickname("김장이")).location("대구광역시 남구").soldDate(new Date()).build();
+		Product p18 = Product.builder().name("제가 초3때 쓴 일기장입니다").category("완구/취미").price(10000).description("열심히 썼고요, 어제 읽어봤는데 짱 재밌음")
+		.uploadDate(new Date()).user(userRepo.findByNickname("마법고양이")).location("대구광역시 북구").build();
+		Product p19 = Product.builder().name("접히는 키보드").category("전자/가전").price(7000).description("신기해서 샀는데…. 쓸일이 없네요….\n제발 사주세요 ㅠㅠㅠㅠㅠ")
+				.uploadDate(new Date()).user(userRepo.findByNickname("엄청난바지")).location("경기도 군포시").build();
+		Product p20 = Product.builder().name("손수 뜨개질한 목도리!").category("의류").price(12000).description("3개월만의 결과랍니다~~ \n너무 따뜻하고 부드러운데 특별히 팔아요!")
+				.uploadDate(new Date()).user(userRepo.findByNickname("보물고블린")).location("인천광역시 중구").build();
+		Product p21 = Product.builder().name("물고기 분양해요").category("기타").price(20000).description("그저께 태어난 아기물고기예요~ 대략 20마리정도고요/n저희집 어항이 너무 좁아서 분양해요")
+				.uploadDate(new Date()).user(userRepo.findByNickname("인어공주")).location("전라북도 전주시").build();
+		Product p22 = Product.builder().name("미용실 쿠폰").category("기타").price(3000).description("이벤트 당첨됐는데 제가 대머리라서.. 미용실 갈 일이 없네요…")
+				.uploadDate(new Date()).user(userRepo.findByNickname("민머리")).location("강원도 태백시").build();
+		Product p23 = Product.builder().name("치킨 쿠폰 팝니다").category("기타").price(7000).description("2번만 더 시켜드시면 후라이드 한마리 드실수 있어요!")
+				.uploadDate(new Date()).user(userRepo.findByNickname("뿌링클")).location("경상북도 문경시").build();
+		Product p24 = Product.builder().name("휴대용 빔프로젝터").category("전자/가전").price(20000).description("성능 정말 좋아요~\n근데 생각보다 안써서 다른분이 알차게 써주셨음 해요!")
+				.uploadDate(new Date()).user(userRepo.findByNickname("액션빔")).location("충청남도 보령시").build();
+		Product p25 = Product.builder().name("낚싯대").category("완구/취미").price(60000).description("이젠 낚시보다 골프가 재밌더라구요!! 물고기 엄청 잘 잡히는겁니다!!!")
+				.uploadDate(new Date()).user(userRepo.findByNickname("강태공2")).location("울산 울주군").build();
+		Product p26 = Product.builder().name("직접 만든 빼빼로").category("기타").price(1111).description("빼빼로 못받을거 같은사람 있냐? ㅋㅋ직접 정성을 담아 만들었으니 받고싶으면 톡하던지말던지 ㅋㅋㅋ")
+				.uploadDate(new Date()).user(userRepo.findByNickname("뺴뺴로")).location("서울특별시 동작구").build();
+		Product p27 = Product.builder().name("노트북 팔아요").category("전자/가전").price(400000).description("좀 느린편이고 살짝 고장나고 기스좀 있어요.\n그래도 이정도면 싼편이죠?")
+				.uploadDate(new Date()).user(userRepo.findByNickname("컴컴이")).location("경상북도 경산시").build();
+		Product p28 = Product.builder().name("아기 뽁뽁이 신발").category("의류").price(10000).description("아기가 안신으려해서~ 팔아용\n몇번 안신었고 귀여워요~~ 사이즈는 쪼끄매용~!")
+				.uploadDate(new Date()).user(userRepo.findByNickname("아기돼지")).location("경상남도 진해시").build();
+
 		
 		List<UploadFile> p1Imgs = new ArrayList<>();
 		p1Imgs.add(UploadFile.builder().fileName("switch.jpg").storedFileName("switch.jpg").build());
@@ -117,6 +214,32 @@ public class MainController {
 		p16Imgs.add(UploadFile.builder().fileName("com.jpg").storedFileName("com.jpg").build());
 		List<UploadFile> p17Imgs = new ArrayList<>();
 		p17Imgs.add(UploadFile.builder().fileName("kimchi.jpeg").storedFileName("kimchi.jpeg").build());
+		List<UploadFile> p18Imgs = new ArrayList<>();
+		p18Imgs.add(UploadFile.builder().fileName("diary.jpg").storedFileName("diary.jpg").build());
+		List<UploadFile> p19Imgs = new ArrayList<>();
+		p19Imgs.add(UploadFile.builder().fileName("key.jpg").storedFileName("key.jpg").build());
+		List<UploadFile> p20Imgs = new ArrayList<>();
+		p20Imgs.add(UploadFile.builder().fileName("mok.jpg").storedFileName("mok.jpg").build());
+		List<UploadFile> p21Imgs = new ArrayList<>();
+		p21Imgs.add(UploadFile.builder().fileName("fish.png").storedFileName("fish.png").build());
+		List<UploadFile> p22Imgs = new ArrayList<>();
+		p22Imgs.add(UploadFile.builder().fileName("coupon.jpg").storedFileName("coupon.jpg").build());
+		List<UploadFile> p23Imgs = new ArrayList<>();
+		p23Imgs.add(UploadFile.builder().fileName("chicken.jpg").storedFileName("chicken.jpg").build());
+		List<UploadFile> p24Imgs = new ArrayList<>();
+		p24Imgs.add(UploadFile.builder().fileName("beam.jpeg").storedFileName("beam.jpeg").build());
+		p24Imgs.add(UploadFile.builder().fileName("beam2.jpg").storedFileName("beam2.jpg").build());
+		List<UploadFile> p25Imgs = new ArrayList<>();
+		p25Imgs.add(UploadFile.builder().fileName("rod.jpg").storedFileName("rod.jpg").build());
+		p25Imgs.add(UploadFile.builder().fileName("rod2.jpg").storedFileName("rod2.jpg").build());
+		List<UploadFile> p26Imgs = new ArrayList<>();
+		p26Imgs.add(UploadFile.builder().fileName("pepero1.jpg").storedFileName("pepero1.jpg").build());
+		p26Imgs.add(UploadFile.builder().fileName("pepero2.jpg").storedFileName("pepero2.jpg").build());
+		p26Imgs.add(UploadFile.builder().fileName("pepero3.jpg").storedFileName("pepero3.jpg").build());
+		List<UploadFile> p27Imgs = new ArrayList<>();
+		p27Imgs.add(UploadFile.builder().fileName("note.jpg").storedFileName("note.jpg").build());
+		List<UploadFile> p28Imgs = new ArrayList<>();
+		p28Imgs.add(UploadFile.builder().fileName("shoes.jpeg").storedFileName("shoes.jpeg").build());
 		
 		fileRepo.saveAll(p1Imgs);
 		fileRepo.saveAll(p2Imgs);
@@ -135,6 +258,17 @@ public class MainController {
 		fileRepo.saveAll(p15Imgs);
 		fileRepo.saveAll(p16Imgs);
 		fileRepo.saveAll(p17Imgs);
+		fileRepo.saveAll(p18Imgs);
+		fileRepo.saveAll(p19Imgs);
+		fileRepo.saveAll(p20Imgs);
+		fileRepo.saveAll(p21Imgs);
+		fileRepo.saveAll(p22Imgs);
+		fileRepo.saveAll(p23Imgs);
+		fileRepo.saveAll(p24Imgs);
+		fileRepo.saveAll(p25Imgs);
+		fileRepo.saveAll(p26Imgs);
+		fileRepo.saveAll(p27Imgs);
+		fileRepo.saveAll(p28Imgs);
 		
 		p1.setImages(p1Imgs);
 		p2.setImages(p2Imgs);
@@ -153,6 +287,19 @@ public class MainController {
 		p15.setImages(p15Imgs);
 		p16.setImages(p16Imgs);
 		p17.setImages(p17Imgs);
+		p18.setImages(p18Imgs);
+		p19.setImages(p19Imgs);
+		p20.setImages(p20Imgs);
+		p21.setImages(p21Imgs);
+		p22.setImages(p22Imgs);
+		p23.setImages(p23Imgs);
+		p24.setImages(p24Imgs);
+		p25.setImages(p25Imgs);
+		p26.setImages(p26Imgs);
+		p27.setImages(p27Imgs);
+		p28.setImages(p28Imgs);
+
+
 		productRepo.save(p1);
 		productRepo.save(p2);
 		productRepo.save(p3);
@@ -170,6 +317,18 @@ public class MainController {
 		productRepo.save(p15);
 		productRepo.save(p16);
 		productRepo.save(p17);
+		productRepo.save(p18);
+		productRepo.save(p19);
+		productRepo.save(p20);
+		productRepo.save(p21);
+		productRepo.save(p22);
+		productRepo.save(p23);
+		productRepo.save(p24);
+		productRepo.save(p25);
+		productRepo.save(p26);
+		productRepo.save(p27);
+		productRepo.save(p28);
+
 	}
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET) 

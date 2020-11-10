@@ -38,8 +38,8 @@
     <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
       <div class="container">
         <div class="row">
-          <div class="col-md-2 col-2">
-          	<img th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
+          <div class="col-md-2 col-2 thumb1">
+          	<img style="height:160px;" th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
           </div> 
           <div class="col-md-7 col-10">          	
             <h1 class="text-white font-weight-bold" th:text="|${user.nickname}님|"></h1>
@@ -61,7 +61,7 @@
 
 <div id="sold" class="tabcontent">
 	<p th:if="${product.size() == 0}" style="text-align:center; padding:15% 0;">판매한 물건이 없습니다.</p>
-    <div class="card cards" th:if="${product.size() != 0}" style="border: none;">
+    <div class="card cards cursor1" th:if="${product.size() != 0}" style="border: none;">
             <div class="cardimg" style="background-image:url('img/cc.jpg');">
             </div>
             
