@@ -39,7 +39,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 col-2">
-          	<img style="height:160px;" th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
+          	<img style="height:160px; width:160px;" th:src="${user.images !=null and user.images.isEmpty() == false} ? |upload/profile/${user.images[0].storedFileName}| : 'images/profile.png'" class="img-thumbnail rounded-circle float-left" alt="...">
           </div>
           <div class="col-md-7 col-10">          	
             <h1 class="text-white font-weight-bold" th:text="|${user.nickname}님|"></h1>
