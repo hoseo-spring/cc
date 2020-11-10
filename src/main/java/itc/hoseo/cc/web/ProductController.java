@@ -62,6 +62,7 @@ public class ProductController {
 				mm.put("products", productRepo.findByOrderByIdDesc(PageRequest.of(page, 5)));
 			} else {
 				count = productRepo.findBySoldDateNull().size();
+				System.out.println(count);
 				mm.put("products", productRepo.findBySoldDateNullOrderByIdDesc(PageRequest.of(page, 5)));
 			}
 		} else if(sort.equals("priceAsc")) {
@@ -84,7 +85,7 @@ public class ProductController {
 
 		int wholePage = ((count % 5) == 0) ? (count / 5) : ((int)(count / 5)) + 1;
 		int prev = (page < 5) ? 0 : (page - 5);
-		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
+		int next = (page >= (wholePage - 5)) ? wholePage-1 : (page + 5);
 		mm.put("prev", prev);
 		mm.put("next", next);
 		mm.put("wholePage", wholePage);

@@ -100,11 +100,11 @@
 
 	<p th:if="${comments.size() == 0}" style="text-align:center; padding:15% 0;">받은 평가 및 후기가 없습니다.</p>
 
-	<table class="startb" th:if="${comments.size() != 0}" th:each="c, i : ${comments}">
+	<table class="startb" th:if="${comments != null}" th:each="c, i : ${comments}">
 		<tr>
 			<td rowspan="2">
 				<a th:href="|/profile?user_id=*{c.sendUserId}|">
-				<img th:src="${commentImages !=null and commentImages.isEmpty() == false} ? |upload/profile/${commentImages[i].storedFileName}| : 'images/profile.png'" width="64px">
+				<img th:src="${commentImages !=null and commentImages.isEmpty() == false} ? |upload/profile/*{commentImages[i.index].storedFileName}| : 'images/profile.png'" width="64px" height="64px">
 				</a>
 			</td>
 			<td th:text="${c.sendUserId}"></td>

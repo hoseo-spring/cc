@@ -60,14 +60,14 @@
                     </select>
           <script th:inline="javascript" th:if="${param.condition == null}">
           	var sort = document.getElementsByClassName("selectpicker border rounded")[0];
-          	var link1 = "/list?page=" + /*[[ ${param.page[0]} ]]*/ 
+          	var link1 = "/list?page=0" 
 			+ "&soldCheck=" + /*[[ ${param.soldCheck[0]} ]]*/
 			+ "&sort=";
           	sort.addEventListener("change", function(){location.href=link1+event.target.value});
 		  </script>
 		  <script th:inline="javascript" th:if="${param.condition != null}">
 		  	var sort = document.getElementsByClassName("selectpicker border rounded")[0];
-		  	document.search.page.value = /*[[ ${param.page[0]} ]]*/;
+		  	document.search.page.value = 0;
 		  	document.search.soldCheck.value = /*[[ ${param.soldCheck[0]} ]]*/;
 		  	document.search.condition.value = /*[[ ${param.condition[0]} ]]*/;
 		  	sort.addEventListener("change", function(){document.search.sort.value = event.target.value; document.search.submit();});
@@ -84,7 +84,7 @@
 			    	soldCheck = "true";
 			    }
 				var label = document.getElementById("soldCheckLabel");
-				var link2 = "/list?page=" + /*[[ ${param.page[0]} ]]*/ 
+				var link2 = "/list?page=0" 
 						+ "&sort=" + /*[[ ${param.sort[0]} ]]*/ 
 						+ "&soldCheck=" + soldCheck;
 				label.addEventListener("click", function(){location.href = link2});
@@ -97,7 +97,7 @@
 			    	soldCheck = "true";
 			    }
 				var label = document.getElementById("soldCheckLabel");
-			  	document.search.page.value = /*[[ ${param.page[0]} ]]*/;
+			  	document.search.page.value = 0;
 			  	document.search.sort.value = /*[[ ${param.sort[0]} ]]*/;
 			  	document.search.soldCheck.value = soldCheck;
 			  	document.search.condition.value = /*[[ ${param.condition[0]} ]]*/;

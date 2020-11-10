@@ -100,8 +100,8 @@ public class MainController {
 		fileRepo.saveAll(u19Imgs);
 		fileRepo.saveAll(u20Imgs);
 		
-		userService.createUser(User.builder().id("test").password("1234").nickname("당근이").registeredDate(new Date()).images(u3Imgs).build());
-		userService.createUser(User.builder().id("asdf1234").password("789").nickname("nick").registeredDate(new Date()).images(u4Imgs).build());
+		userService.createUser(User.builder().id("test").password("1234").nickname("테스트").registeredDate(new Date()).images(u3Imgs).build());
+		userService.createUser(User.builder().id("asdf1234").password("789").nickname("닉네임").registeredDate(new Date()).images(u4Imgs).build());
 		userService.createUser(User.builder().id("rlacjswo").password("12345").nickname("김천재").registeredDate(new Date()).images(u5Imgs).build());
 		userService.createUser(User.builder().id("test2").password("1234").nickname("기매미").registeredDate(new Date()).images(u6Imgs).build());
 		userService.createUser(User.builder().id("jammin").password("1234").nickname("잼민이").registeredDate(new Date()).images(u7Imgs).build());

@@ -71,20 +71,22 @@ public class MypageController {
 			Locations.builder().city("송파구").state("서울특별시").user(userRepo.findByNickname("테스트")).build()
 		);
 		commentRepo.save(
-			Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(5.0).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
+			Comment.builder().productId("59").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(5.0).receiveUserId("rlacjswo").sendUserId("test").uploadDate(new Date()).build()
 		);
 		commentRepo.save(
-				Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(4.0).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
+				Comment.builder().productId("59").content("시간도 잘 지켜주시고 좋아요~").rate(4.5).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
 			);
 		commentRepo.save(
-				Comment.builder().productId("8").content("너무 친절하셔서 기분 좋게 거래했습니다.").rate(2.5).receiveUserId("test").sendUserId("rlacjswo").uploadDate(new Date()).build()
-			);
-		commentRepo.save(
-			Comment.builder().productId("8").content("좋았어요").rate(4.5).receiveUserId("rlacjswo").sendUserId("test").uploadDate(new Date()).build()
+			Comment.builder().productId("64").content("좋았어요").rate(4.5).receiveUserId("ahrlqkrauf").sendUserId("test").uploadDate(new Date()).build()
 		);
-		
 		commentRepo.save(
-				Comment.builder().productId("17").content("맛있게 먹을게요!!").rate(5.0).receiveUserId("rlawkddl").sendUserId("ajdajddl").uploadDate(new Date()).build()
+				Comment.builder().productId("64").content("좋아요").rate(4.0).receiveUserId("test").sendUserId("ahrlqkrauf").uploadDate(new Date()).build()
+			);
+		commentRepo.save(
+				Comment.builder().productId("69").content("맛있게 먹을게요!!").rate(5.0).receiveUserId("rlawkddl").sendUserId("test").uploadDate(new Date()).build()
+			);
+		commentRepo.save(
+				Comment.builder().productId("69").content("조금 늦으셨어요").rate(3.0).receiveUserId("test").sendUserId("rlawkddl").uploadDate(new Date()).build()
 			);
 	}
 	
@@ -146,6 +148,7 @@ public class MypageController {
 					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
 				}
 				commentImages.addAll(userRepo.findById(c.getSendUserId()).get().getImages());
+				System.out.println(userRepo.findById(c.getSendUserId()).get().getImages().get(0).getStoredFileName());
 				count++;
 			}
 		}
