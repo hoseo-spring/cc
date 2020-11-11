@@ -92,6 +92,7 @@
 	          <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
 	            <nav>
 				  <ul class="pagination">
+				  	<li style="display:none;" th:text="${param.user_id}"></li>
 				    <li class="page-item"><a class="page-link" th:href="|/profile?user_id=*{param.user_id}&productPage=*{pPrev}|">Pre</a></li>
 				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+1} and ${#strings.equals(pPage, pStartPage)} == false">
 				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id}&productPage=*{pStartPage}|" th:text="${pStartPage+1}"></a>
