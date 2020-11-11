@@ -20,6 +20,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	List<Product> findBySoldDateNullOrderByPrice(Pageable page);
 	List<Product> findBySoldDateNullOrderByPriceDesc(Pageable page);
 	
+	List<Product> findByUserId(String userId);
 	List<Product> findByCategory(String category, Pageable page);
 	List<Product> findByUserId(String userId, Pageable page);
 	List<Product> findByLocation(String location, Pageable page);

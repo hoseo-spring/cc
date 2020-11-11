@@ -129,7 +129,7 @@ public class ProductController {
 		}
 		int wholePage = ((count % 5) == 0) ? (count / 5) : ((int)(count / 5)) + 1;
 		int prev = (page < 5) ? 0 : (page - 5);
-		int next = (page > (wholePage - 5)) ? wholePage-1 : (page + 5);
+		int next = (page >= (wholePage - 5)) ? wholePage-1 : (page + 5);
 		mm.put("prev", prev);
 		mm.put("next", next);
 		mm.put("wholePage", wholePage);
