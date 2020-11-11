@@ -88,8 +88,47 @@
 					</tr>
 				</table>
 			</div>
-
-</div>
+			<div class="row pagination-wrap">
+	          <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+	            <nav>
+				  <ul class="pagination">
+				    <li class="page-item"><a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pPrev}|">Pre</a></li>
+				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+1} and ${#strings.equals(pPage, pStartPage)} == false">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+1}"></a>
+				    </li>
+				    <li class="page-item active" th:if="${pWholePage} >= ${pStartPage+1} and ${#strings.equals(pPage, pStartPage)}">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+1}"></a>
+				    </li>
+				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+2} and ${#strings.equals(pPage, pStartPage)} == false">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+2}"></a>
+				    </li>
+				    <li class="page-item active" th:if="${pWholePage} >= ${pStartPage+2} and ${#strings.equals(pPage, pStartPage)}">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+2}"></a>
+				    </li>
+				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+3} and ${#strings.equals(pPage, pStartPage)} == false">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+3}"></a>
+				    </li>
+				    <li class="page-item active" th:if="${pWholePage} >= ${pStartPage+3} and ${#strings.equals(pPage, pStartPage)}">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+3}"></a>
+				    </li>
+				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+4} and ${#strings.equals(pPage, pStartPage)} == false">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+4}"></a>
+				    </li>
+				    <li class="page-item active" th:if="${pWholePage} >= ${pStartPage+4} and ${#strings.equals(pPage, pStartPage)}">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+4}"></a>
+				    </li>
+				    <li class="page-item" th:if="${pWholePage} >= ${pStartPage+5} and ${#strings.equals(pPage, pStartPage)} == false">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+5}"></a>
+				    </li>
+				    <li class="page-item active" th:if="${pWholePage} >= ${pStartPage+5} and ${#strings.equals(pPage, pStartPage)}">
+				    	<a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pStartPage}|" th:text="${pStartPage+5}"></a>
+				    </li>
+				    <li class="page-item"><a class="page-link" th:href="|/profile?user_id=*{param.user_id[0]}&productPage=*{pNext}|">Next</a></li>
+				  </ul>
+				</nav>
+	          </div>
+        	</div>
+		</div>
 
 </div>
 

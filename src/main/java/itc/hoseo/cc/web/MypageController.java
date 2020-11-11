@@ -91,12 +91,30 @@ public class MypageController {
 	}
 	
 	@RequestMapping(path = "/mypage", method = RequestMethod.GET) 
-	public String mypageGet(ModelMap mm) {
+	public String mypageGet(ModelMap mm, @RequestParam(required = false) String productPage, @RequestParam(required = false) String commentPage) {
 		User user = userContext.getCurrentUser();
 		productRepo.findByUserId(user.getId(), PageRequest.of(0, 5));
 		mm.put("user", user);
-		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
-		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
+		if(productPage == null) {
+			productPage = "0";
+		}
+		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(Integer.parseInt(productPage), 5)));
+		if(commentPage == null) {
+			commentPage = "0";
+		}
+		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(Integer.parseInt(productPage), 20)));
+		
+		int productCount = productRepo.findByUserId(user.getId()).size();
+		int pPage = Integer.parseInt(productPage);
+		
+		int productWholePage = ((productCount % 5) == 0) ? (productCount / 5) : ((int)(productCount / 5)) + 1;
+		int productPrev = (pPage < 5) ? 0 : (pPage - 5);
+		int productNext = (pPage >= (productWholePage - 5)) ? productWholePage - 1 : (pPage + 5);
+		mm.put("pPrev", productPrev);
+		mm.put("pNext", productNext);
+		mm.put("pWholePage", productWholePage);
+		mm.put("pStartPage", ((int)(pPage/5)*5));
+		mm.put("pPage", pPage);
 
 		List<ChatMessage> chatsAll = chatRepo.findBySenderIdOrReceiverId(user.getId(), user.getId());
 		List<String> wss = new ArrayList<>();
@@ -148,7 +166,6 @@ public class MypageController {
 					avgRate = ((avgRate * count) + c.getRate()) / (count + 1);
 				}
 				commentImages.addAll(userRepo.findById(c.getSendUserId()).get().getImages());
-				System.out.println(userRepo.findById(c.getSendUserId()).get().getImages().get(0).getStoredFileName());
 				count++;
 			}
 		}
@@ -237,11 +254,29 @@ public class MypageController {
 	}
 	
 	@RequestMapping(path = "/profile", method = RequestMethod.GET) 
-	public String profileGet(ModelMap mm, String user_id) {
+	public String profileGet(ModelMap mm, String user_id, @RequestParam(required = false) String productPage, @RequestParam(required = false) String commentPage) {
 		User user = userRepo.findById(user_id).get();
 		mm.put("user", user);
-		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(0, 5)));
-		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(0, 5)));
+		if(productPage == null) {
+			productPage = "0";
+		}
+		mm.put("product", productRepo.findByUserId(user.getId(), PageRequest.of(Integer.parseInt(productPage), 5)));
+		if(commentPage == null) {
+			commentPage = "0";
+		}
+		mm.put("comments", commentRepo.findByReceiveUserId(user.getId(), PageRequest.of(Integer.parseInt(productPage), 5)));
+		
+		int productCount = productRepo.findByUserId(user.getId()).size();
+		int pPage = Integer.parseInt(productPage);
+		
+		int productWholePage = ((productCount % 5) == 0) ? (productCount / 5) : ((int)(productCount / 5)) + 1;
+		int productPrev = (pPage < 5) ? 0 : (pPage - 5);
+		int productNext = (pPage >= (productWholePage - 5)) ? productWholePage - 1 : (pPage + 5);
+		mm.put("pPrev", productPrev);
+		mm.put("pNext", productNext);
+		mm.put("pWholePage", productWholePage);
+		mm.put("pStartPage", ((int)(pPage/5)*5));
+		mm.put("pPage", pPage);
 		
 		List<Comment> comments = commentRepo.findByReceiveUserId(user.getId());
 		List<UploadFile> images = new ArrayList<>();
