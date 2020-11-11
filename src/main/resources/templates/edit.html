@@ -59,9 +59,11 @@
 						<div class="col-lg-12">
 								<div class="form-group">
 									<label for="company-website-tw d-block">프로필 사진 업로드</label> <br>
-									<label class="btn btn-primary btn-md btn-file"> 사진 등록
-										<input type="file" name="img">
-									</label>
+									<div class="filebox">
+										<label for="file">업로드</label> <input type="file" id="file"
+											name="img" accept="image/*" multiple> <input
+											class="upload-name" value="파일선택" disabled>
+									</div>
 								</div>
 
 								<div class="form-group">
@@ -81,30 +83,30 @@
 								 
 								<div class="form-group">
 									<label for="location">지역 추가 및 삭제 / 3개까지 등록가능</label> <br>
-									<input type="button" id="modalbt" value="지역 인증하기" class="btn btn-primary" style="background:#ffd09a; border-color:#ffd09a;">
+									<input type="button" id="modalbt" value="지역 인증하기" class="btn btn-primary" style="background:#a3c554; border-color:#a3c554;">
 									<div id="modalw" class="modal1" style="padding-top:20px;">
 										<div class="modal-content1">
 											<div class="modal-header1" style="padding:20px; z-index:10000;">
 												<span class="close2">&times;</span>
-												<h2>지역을 인증하세요.</h2>
+												<h2 style="color:white;">지역을 인증하세요</h2>
 											</div>
-											<div class="modal-body1" style="padding:20px;">
+											<div class="modal-body1" style="padding:20px; margin-bottom: 15px;">
 												<p>현재 지역을 골라주세요. 지금 위치와 선택한 지역이 일치하면, 내 지역으로 추가할 수 있습니다.</p>
-												<select class="form-control region" name="sido2" id="sido2"></select>
+												<select style="margin-bottom:10px;"class="form-control region" name="sido2" id="sido2"></select>
     											<select class="form-control region" name="gugun2" id="gugun2"></select>
     											<input type="hidden" name="verified" id="verified" value="false" />
 												<br>
 												<input type="button" id="find-me" class="btn btn-primary float-right location" style="background:#a3c554; border-color:#a3c554;" value="인증하기">
 												<br><br>
-												<div id="map" style="width:100%; height:300px;">지도</div>
-												<div id="checkthis" style="text-align:center;">
+												<div id="map" style="width:100%; height:300px; margin-bottom:10px;">지도</div>
+												<div id="checkthis" style="text-align:center; vertical-align: middle;">
 													<p id = "status"></p>
-													<a id = "map-link" target="_blank" style="color:white;"></a><br>
+													<a id = "map-link" target="_blank" style="color:white;top: -10px; position: relative;"></a><br>
 												</div>
 												<br>
 												<span
 														onclick="addLocation()"
-														class="btn btn-primary btn-lg float-right addBtn">지역 추가</span>
+														class="btn btn-primary btn-lg float-right addBtn" style="margin-bottom:10px;">지역 추가</span>
 												<br>
 											</div>
 										</div>
