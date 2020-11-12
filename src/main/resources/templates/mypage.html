@@ -183,7 +183,7 @@
 			<table width="98%">
 				<tr>
 					<td width="70px">
-						<img th:src="${chatImages !=null and chatImages.isEmpty() == false} ? |upload/profile/${chatImages[i.index].storedFileName}| : 'images/profile.png'" width="64px">
+						<img th:src="${chatImages !=null and chatImages.isEmpty() == false} ? |upload/profile/${chatImages[i.index].storedFileName}| : 'images/profile.png'" width="64px" height="64px">
 					</td>
 					<td>
 					<a th:if="${c.senderId} == ${#authentication.name}" th:href="|/chat?product_id=*{c.productId}&seller_id=*{c.sellerId}&opponent_id=*{c.receiverId}|" target="_blink" onclick="window.open(this.href, '', 'width=800, height=600'); return false;">

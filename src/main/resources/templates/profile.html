@@ -44,7 +44,7 @@
           <div class="col-md-7 col-10">          	
             <h1 class="text-white font-weight-bold" th:text="|${user.nickname}님|"></h1>
             <h5 class="text-white" th:if="${avgRate == 0}">아직 받은 평점이 없습니다.</h5>
-            <h4 class="text-white" th:if="${avgRate != 0}" th:text="|*{#numbers.formatDecimal(avgRate,1,1)} / 5점|"></h4>
+            <h4 class="text-white" th:if="${avgRate != 0}" th:text="|*{#numbers.formatDecimal(avgRate,1,1)} / 5.0점|"></h4>
             <div class="custom-breadcrumbs">
             </div>
           </div>
@@ -142,7 +142,7 @@
 		<tr>
 			<td rowspan="2">
 				<a th:href="|/profile?user_id=*{c.sendUserId}|">
-				<img th:src="${commentImages !=null and commentImages.isEmpty() == false} ? |upload/profile/${commentImages[i.index].storedFileName}| : 'images/profile.png'" width="64px">
+				<img th:src="${commentImages !=null and commentImages.isEmpty() == false} ? |upload/profile/${commentImages[i.index].storedFileName}| : 'images/profile.png'" width="64px" height="64px">
 				</a>
 			</td>
 			<td th:text="${c.sendUserId}"></td>
