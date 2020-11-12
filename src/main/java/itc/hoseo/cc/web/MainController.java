@@ -70,7 +70,7 @@ public class MainController {
 		List<UploadFile> u15Imgs = new ArrayList<>();
 		u15Imgs.add(UploadFile.builder().fileName("mermaid.png").storedFileName("mermaid.png").build());
 		List<UploadFile> u16Imgs = new ArrayList<>();
-		u16Imgs.add(UploadFile.builder().fileName("bald.jpg").storedFileName("bald.jpg").build());
+		u16Imgs.add(UploadFile.builder().fileName("baldhair.jpg").storedFileName("baldhair.jpg").build());
 		List<UploadFile> u17Imgs = new ArrayList<>();
 		u17Imgs.add(UploadFile.builder().fileName("Qnfld.png").storedFileName("Qnfld.png").build());
 		List<UploadFile> u18Imgs = new ArrayList<>();
