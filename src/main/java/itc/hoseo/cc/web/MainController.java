@@ -148,7 +148,7 @@ public class MainController {
 				.uploadDate(new Date()).user(userRepo.findByNickname("잼민이")).location("부산광역시 서구").soldDate(new Date()).build();
 		Product p13 = Product.builder().name("먼나라 이웃나라 전권 판매").category("도서").price(30000).description("재밌어요")
 				.uploadDate(new Date()).user(userRepo.findByNickname("닉네임")).location("서울특별시 서초구").soldDate(new Date()).build();
-		Product p14 = Product.builder().name("복권 판매").category("기타").price(2000).description("수동이고요 돼지꿈 꿨습니다")
+		Product p14 = Product.builder().name("복권 판매").category("기타").price(10000).description("수동5개고요 돼지꿈 꿨습니다")
 				.uploadDate(new Date()).user(userRepo.findByNickname("김천재")).location("충청남도 계룡시").build();
 		Product p15 = Product.builder().name("강아지").category("기타").price(1000000000).description("그냥 자랑하려고 올립니다. 감탄하고 가세요!")
 				.uploadDate(new Date()).user(userRepo.findByNickname("멍멍이")).location("경기도 고양시").build();
